@@ -97,7 +97,7 @@ if (!usuario) {
 try {
 
     const resposta = await fetch(
-        "http://192.168.0.165:8081/entrarClube",
+        "http://https://litelab-backend-novo.onrender.com/entrarClube",
         {
             method: "POST",
             headers: {
@@ -160,7 +160,7 @@ try {
     
         try {
     
-            const resposta = await fetch("http://192.168.0.165:8081/clubes");
+            const resposta = await fetch("http://https://litelab-backend-novo.onrender.com/clubes");
             const clubes = await resposta.json();
     
             lista.innerHTML = "";

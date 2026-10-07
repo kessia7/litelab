@@ -443,7 +443,7 @@ console.log("CLUBE:", clubeId);
 async function carregarEventos() {
 
 const resposta = await fetch(
-    "http://192.168.0.165:8081/eventos?clube_id=" + clubeId
+    "http://https://litelab-backend-novo.onrender.com/eventos?clube_id=" + clubeId
 );
 
 const eventos = await resposta.json();
@@ -493,7 +493,7 @@ if(!evento || !data){
 }
 
 const resposta = await fetch(
-    "http://192.168.0.165:8081/criarEvento",
+    "http://https://litelab-backend-novo.onrender.com/criarEvento",
     {
         method: "POST",
         headers: {
@@ -585,7 +585,7 @@ const dataBanco =
     partes[0];
 
 const resposta = await fetch(
-    "http://192.168.0.165:8081/editarEvento",
+    "http://https://litelab-backend-novo.onrender.com/editarEvento",
     {
         method: "POST",
 
@@ -656,7 +656,7 @@ if(!confirmar){
 }
 
 const resposta = await fetch(
-    "http://192.168.0.165:8081/excluirEvento",
+    "http://https://litelab-backend-novo.onrender.com/excluirEvento",
     {
         method: "POST",
         headers: {

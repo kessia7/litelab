@@ -377,7 +377,7 @@
         if (usuario) {
 
             fetch(
-                "http://192.168.0.165:8081/favoritos?usuario="
+                "http://https://litelab-backend-novo.onrender.com/favoritos?usuario="
                 + encodeURIComponent(usuario)
             )
 
@@ -534,7 +534,7 @@
 
                             const resposta =
                                 await fetch(
-                                    "http://192.168.0.165:8081/desfavoritar",
+                                    "http://https://litelab-backend-novo.onrender.com/desfavoritar",
                                     {
                                         method: "POST",
 
@@ -608,7 +608,7 @@
 
                         const resposta =
                             await fetch(
-                                "http://192.168.0.165:8081/favoritar",
+                                "http://https://litelab-backend-novo.onrender.com/favoritar",
                                 {
                                     method: "POST",
 

@@ -239,7 +239,14 @@
 
       <button onclick="logout()">
         Logout
-    </button>
+      </button>
+      
+      <br>
+      <br>
+      
+      <button onclick="excluirConta()" class="botao-excluir">
+        Excluir minha conta
+      </button>
 
 
     </div>
@@ -940,6 +947,76 @@ localStorage.removeItem("nomeUsuario");
 window.location.href = "index.html";
 }
 
+async function excluirConta() {
+
+if (!nomeUsuario) {
+    alert("Usuário não identificado.");
+    return;
+}
+
+const confirmar = confirm(
+    "ATENÇÃO!\n\n" +
+    "Ao excluir sua conta, seus dados e tudo que você criou serão apagados.\n\n" +
+    "Essa ação NÃO poderá ser desfeita.\n\n" +
+    "Deseja realmente excluir sua conta?"
+);
+
+if (!confirmar) {
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "https://litelab-backend-novo.onrender.com/excluirConta",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                usuario: nomeUsuario
+            })
+        }
+    );
+
+    const mensagem = await resposta.text();
+
+    if (resposta.ok) {
+
+        alert(
+            "Sua conta e todos os seus dados foram excluídos com sucesso."
+        );
+
+        // Remove o usuário salvo no navegador
+        localStorage.removeItem("nomeUsuario");
+
+        // Volta para a página inicial
+        window.location.href = "index.html";
+
+    } else {
+
+        alert(
+            "Não foi possível excluir a conta.\n\n" +
+            mensagem
+        );
+    }
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao excluir conta:",
+        erro
+    );
+
+    alert(
+        "Não foi possível conectar ao servidor.\n\n" +
+        "Tente novamente."
+    );
+}
+}
   </script>
 
 

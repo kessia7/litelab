@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LiteLAB - Calendário do Clube</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#204951;
+}
+
+/*=========================
+        LOGO
+=========================*/
+
+.topo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 0 20px;
+}
+
+.topo img{
+    width:150px;
+}
+
+/*=========================
+      MENU LATERAL
+=========================*/
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-240px;
+    width:220px;
+    height:100vh;
+    background:#08645f;
+    transition:.4s;
+    z-index:1000;
+}
+
+.sidebar.abrir{
+    left:0;
+}
+
+.btn-menu{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:10px;
+    background:#00b7ab;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+    z-index:1100;
+    transition:left .4s;
+}
+
+/* menu */
+  
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+#menu li {
+    margin-bottom: 10px;
+}
+
+#menu a {
+    display: block;
+    background-color: #008B8B;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* BOTÃO DO MENU */
+.cabecalho button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 12px;
+    border-radius: 8px;
+
+    background-color: white;
+    color: black;
+    border: none;
+
+    cursor: pointer;
+    font-family: Cambria, Georgia, serif;
+    font-size: 16px;
+
+    z-index: 1000;
+}
+
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+
+    z-index: 2000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+.cabecalho button:hover {
+    background-color: #008B8B;
+    color: white;
+}
+
+/* CABEÇALHO */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+/*=========================
+        CONTEÚDO
+=========================*/
+
+main{
+    margin-left:0;
+    padding:20px 40px;
+}
+
+h1{
+    color:white;
+    font-size:42px;
+    margin-bottom:25px;
+}
+/*=========================
+        BOTÕES
+=========================*/
+
+.acoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.acoes button{
+    background:#0a7d76;
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.acoes button:hover{
+    background:#00b7ab;
+}
+
+/*=========================
+        CARD
+=========================*/
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.card h2{
+    color:#08645f;
+    margin-bottom:15px;
+}
+
+/*=========================
+        TABELA
+=========================*/
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+th{
+    background:#08645f;
+    color:white;
+    text-align:center;
+    font-size:18px;
+}
+
+th,td{
+    padding:18px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    vertical-align:middle;
+}
+
+th:first-child,
+td:first-child{
+    width:60%;
+}
+
+th:last-child,
+td:last-child{
+    width:40%;
+}
+
+td{
+    color:#222;
+    font-size:17px;
+}
+
+tbody tr:hover{
+    background:#f5f5f5;
+}
+/*=========================
+        TOAST
+=========================*/
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#08645f;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <img src="logo.png" alt="Logo LITELAB" class="logo">
+    </header>
+    <div class="cabecalho">
+        <button onclick="toggleMenu()">☰ Menu</button>
+
+    </div>
+    
+    <ul id="menu" class="menu">
+        <li><a href="cadastrolivros.html">Cadastro dos livros</a></li>
+        <li><a href="clubecriado.html">Clubes criados</a></li>
+        <li><a href="../partlaisla/index.html">Página principal</a></li>
+        <li><a href="../partlaisla/estatisticas.html">Estatísticas</a></li>
+        <li><a href="../partlaisla/perfil.html">Perfil</a></li>
+        <li><a href="../partlaisla/cadastrolivros.html">Cadastro de livros</a></li>
+        <li><a href="../partemaria/index.html">Resenhas</a></li>
+        <li><a href="../partemaria/nt.html">Notificações</a></li>
+        <li><a href="../partemaria/rl.html">Ranking</a></li>
+        <li><a href="../partemaria/vendas.html">Vendas</a></li>
+        <li><a href="../index.html">Biblioteca</a></li>
+
+    </ul>
+
+      <script>
+          const menu = document.getElementById("menu");
+          
+          function toggleMenu() {
+            menu.classList.toggle("ativo");
+          }
+          
+      
+          document.addEventListener("click", function(event) {
+            const clicouDentroMenu = menu.contains(event.target);
+            const clicouNoBotao = event.target.closest("button");
+          
+            if (!clicouDentroMenu && !clicouNoBotao) {
+              menu.classList.remove("ativo");
+            }
+          });
+          </script>
+
+
+
+
+<main>
+
+<h1>Calendário do Clube</h1>
+
+<div class="acoes">
+
+<button onclick="criar()">Criar Evento</button>
+
+<button onclick="editar()">Editar Evento</button>
+<button onclick="excluir()">Excluir Evento</button>
+
+<button onclick="mostrar()">Mostrar/Ocultar</button>
+
+
+
+</div>
+
+<div class="card" id="cal">
+
+<h2>Eventos do Clube</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Evento</th>
+<th>Data</th>
+</tr>
+
+</thead>
+
+<tbody id="tb">
+    
+    <tr>
+        <td>Feira de Livros</td>
+        <td>18/08/2026</td>
+    </tr>
+    
+    <tr>
+        <td>Reunião dos Membros</td>
+        <td>25/08/2026</td>
+    </tr>
+    
+    </tbody>
+    
+    </table>
+    
+    </div>
+    
+    </main>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+
+    
+    //==============================
+    // TOAST
+    //==============================
+    
+    function msg(texto){
+    
+        const toast=document.getElementById("toast");
+    
+        toast.innerHTML=texto;
+    
+        toast.style.display="block";
+    
+        setTimeout(function(){
+    
+            toast.style.display="none";
+    
+        },2000);
+    
+    }
+    
+    //==============================
+    // CRIAR EVENTO
+    //==============================
+    const parametros = new URLSearchParams(window.location.search);
+const clubeId = parametros.get("id");
+
+console.log("CLUBE:", clubeId);
+async function carregarEventos() {
+
+const resposta = await fetch(
+    "http://192.168.0.165:8081/eventos?clube_id=" + clubeId
+);
+
+const eventos = await resposta.json();
+
+const tabela = document.getElementById("tb");
+
+tabela.innerHTML = "";
+eventos.forEach(evento => {
+
+const linha = document.createElement("tr");
+
+linha.dataset.id = evento.id;
+
+const partes = evento.data_evento.split("-");
+
+const dataFormatada =
+    partes[2] + "/" +
+    partes[1] + "/" +
+    partes[0];
+
+linha.innerHTML = `
+    <td>${evento.nome_evento}</td>
+    <td>${dataFormatada}</td>
+`;
+
+tabela.appendChild(linha);
+});
+}
+
+carregarEventos();
+async function criar(){
+
+let evento = prompt("Nome do evento:");
+let data = prompt("Data do evento (DD/MM/AAAA):");
+
+if(data){
+
+    const partes = data.split("/");
+
+    if(partes.length === 3){
+        data = partes[2] + "-" + partes[1] + "-" + partes[0];
+    }
+}
+
+if(!evento || !data){
+    return;
+}
+
+const resposta = await fetch(
+    "http://192.168.0.165:8081/criarEvento",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            clube_id: String(clubeId),
+            nome_evento: evento,
+            data_evento: data
+        })
+    }
+);
+
+const resultado = await resposta.text();
+
+msg(resultado);
+
+carregarEventos();
+}
+    
+    //==============================
+    // EDITAR EVENTO
+    //==============================
+    
+    async function editar(){
+
+if(tb.rows.length == 0){
+
+    msg("Nenhum evento.");
+    return;
+
+}
+
+let escolha = prompt(
+    "Digite o número do evento que deseja editar:\n\n" +
+    Array.from(tb.rows).map((linha, i) =>
+        (i + 1) + " - " + linha.cells[0].innerHTML +
+        " (" + linha.cells[1].innerHTML + ")"
+    ).join("\n")
+);
+
+if(!escolha){
+    return;
+}
+
+let indice = parseInt(escolha) - 1;
+
+if(
+    isNaN(indice) ||
+    indice < 0 ||
+    indice >= tb.rows.length
+){
+
+    msg("Evento inválido.");
+    return;
+
+}
+
+let linha = tb.rows[indice];
+
+let id = linha.dataset.id;
+
+let evento = prompt(
+    "Novo nome do evento:",
+    linha.cells[0].innerHTML
+);
+
+let data = prompt(
+    "Nova data (DD/MM/AAAA):",
+    linha.cells[1].innerHTML
+);
+
+if(!evento || !data){
+    return;
+}
+
+const partes = data.split("/");
+
+if(partes.length !== 3){
+
+    msg("Use a data no formato DD/MM/AAAA.");
+    return;
+
+}
+
+const dataBanco =
+    partes[2] + "-" +
+    partes[1] + "-" +
+    partes[0];
+
+const resposta = await fetch(
+    "http://192.168.0.165:8081/editarEvento",
+    {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            id: String(id),
+            nome_evento: evento,
+            data_evento: dataBanco
+        })
+    }
+);
+
+const resultado = await resposta.text();
+
+msg(resultado);
+
+carregarEventos();
+}
+async function excluir(){
+
+if(tb.rows.length == 0){
+
+    msg("Nenhum evento.");
+    return;
+
+}
+
+let escolha = prompt(
+    "Digite o número do evento que deseja excluir:\n\n" +
+    Array.from(tb.rows).map((linha, i) =>
+        (i + 1) + " - " + linha.cells[0].innerHTML +
+        " (" + linha.cells[1].innerHTML + ")"
+    ).join("\n")
+);
+
+if(!escolha){
+    return;
+}
+
+let indice = parseInt(escolha) - 1;
+
+if(
+    isNaN(indice) ||
+    indice < 0 ||
+    indice >= tb.rows.length
+){
+
+    msg("Evento inválido.");
+    return;
+
+}
+
+let linha = tb.rows[indice];
+
+let id = linha.dataset.id;
+
+let confirmar = confirm(
+    "Tem certeza que deseja excluir o evento \"" +
+    linha.cells[0].innerHTML +
+    "\"?"
+);
+
+if(!confirmar){
+    return;
+}
+
+const resposta = await fetch(
+    "http://192.168.0.165:8081/excluirEvento",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: String(id)
+        })
+    }
+);
+
+const resultado = await resposta.text();
+
+msg(resultado);
+
+carregarEventos();
+}
+    //==============================
+    // EXCLUIR EVENTO
+    //==============================
+    
+    
+   
+    
+    //==============================
+    // MOSTRAR / OCULTAR
+    //==============================
+    
+    let visivel=true;
+    
+    function mostrar(){
+    
+        visivel=!visivel;
+    
+        document.getElementById("cal").style.display=visivel ? "block" : "none";
+    
+    }
+    
+  
+    
+    </script>
+    
+    </body>
+    
+    </html>
+    

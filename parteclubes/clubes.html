@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+
+
+
+<head>
+
+    <meta charset = "UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
+    <meta name = "viewport" content = "width=device-width, initial scale=1.0">
+    <meta name = "description" content = "clubes de livrps">
+    <meta name = "keywords" content = "html, biblioteca, clubes">
+    <meta name = "author" content = "Anna Helena">
+    <link rel = "stylesheet" href = "cssdosclubes.css">
+
+    <title> CLUBES </title>
+
+</head>
+
+<body> 
+
+    <div class="cabecalho">
+        <button onclick="toggleMenu()">☰ Menu</button>
+        <img src="imagens/logo.png" alt="Logo LiteLAB" class="logo">
+    
+    </div>
+    
+    <ul id="menu" class="menu">
+        <li><a href="../partlaisla/index.html">Página principal</a></li>
+        <li><a href="../partlaisla/perfil.html">Perfil</a></li>
+        <li><a href="../partemaria/nt.html">Notificações</a></li>
+        <li><a href="../index.html">Biblioteca</a></li>
+        <li><a href="../partlaisla/estatisticas.html">Estatísticas</a></li>
+        <li><a href="../partemaria/vendas.html">Vendas</a></li>
+        <li><a href="../parteclubes/clubecriado.html">Clubes criados</a></li>
+        <li><a href="../partlaisla/cadastrolivros.html">Cadastro dos livros</a></li>
+        <li><a href="../partemaria/index.html">Resenhas</a></li>
+        <li><a href="../partemaria/rl.html">Ranking</a></li>
+    </ul>
+    
+      <script>
+          const menu = document.getElementById("menu");
+          
+          function toggleMenu() {
+            menu.classList.toggle("ativo");
+          }
+          
+      
+          document.addEventListener("click", function(event) {
+            const clicouDentroMenu = menu.contains(event.target);
+            const clicouNoBotao = event.target.closest("button");
+          
+            if (!clicouDentroMenu && !clicouNoBotao) {
+              menu.classList.remove("ativo");
+            }
+          });
+          </script>
+    
+    <h1 class = "titulo">
+        Clubes de Leitura
+    </h1>
+
+    <div class = "pesquisa">
+      <input
+        type = "text"
+        id = "pesquisa"
+        placeholder = "Pesquisar livro ou clube"
+        onkeyup = "pesquisarClube()">
+      </div>
+    
+      <div class="clubes" id="listaClubes">
+    
+    
+    </div>
+    
+    <div>
+    <a href = "criarclube.html">
+    <button class = "criar"> 
+         + 
+    </button>
+    </a>
+    </div>
+
+
+
+    <script>
+
+async function entrarClube(id) {
+
+const usuario = localStorage.getItem("nomeUsuario");
+
+if (!usuario) {
+    console.error("Usuário não encontrado.");
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/entrarClube",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                clube_id: String(id),
+                usuario: usuario
+            })
+        }
+    );
+
+    const resultado = await resposta.text();
+
+    console.log(resultado);
+
+    window.location.href =
+        "entrarnoclube.html?id=" + id;
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao entrar no clube:",
+        erro
+    );
+
+}
+}  
+        function pesquisarClube(){
+        
+        let texto = document
+            .getElementById("pesquisa")
+            .value
+            .toLowerCase();
+        
+        let cards = document.querySelectorAll(".card");
+        
+        cards.forEach(card => {
+        
+        let titulo = card.querySelector("h2")
+            .textContent
+            .toLowerCase();
+        
+        if(titulo.includes(texto)){
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+        
+            });
+        }
+        
+        </script>
+
+<script>
+
+    async function carregarClubes() {
+    
+        const lista = document.getElementById("listaClubes");
+    
+        try {
+    
+            const resposta = await fetch("http://192.168.0.165:8081/clubes");
+            const clubes = await resposta.json();
+    
+            lista.innerHTML = "";
+    
+            clubes.forEach(clube => {
+    
+                lista.innerHTML += `
+                    <div class="card">
+    
+                        <div class="titulo-card">
+                            <h2>📚 ${clube.nome}</h2>
+    
+                           <button class="button2" onclick="abrirCalendario(${clube.id})">
+    Calendário
+</button>
+                        </div>
+    
+                        <p>Presidente: ${clube.presidente}</p>
+    
+                        <p>Máximo de ${clube.max_membros} membros</p>
+    
+                        <p>${clube.descricao}</p>
+    
+                        <p>Gênero: ${clube.genero_principal}</p>
+    
+                      <button onclick="entrarClube(${clube.id})" class="button2">
+    Entrar no Clube
+</button>
+                    </div>
+                `;
+            });
+    
+        } catch (erro) {
+    
+            console.error("Erro ao carregar clubes:", erro);
+    
+        }
+    }
+    
+    carregarClubes();
+    function abrirCalendario(id) {
+    window.location.href =
+        "../partemaria/calendario.html?id=" + id;
+}
+    
+    </script>
+    
+</body>

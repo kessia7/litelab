@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LiteLAB - Vendas</title>
+
+    <style>
+
+      /*menu*/
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+#menu li {
+    margin-bottom: 10px;
+}
+
+#menu a {
+    display: block;
+    background-color: #008B8B;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* BOTÃO DO MENU */
+.cabecalho button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 12px;
+    border-radius: 8px;
+
+    background-color: white;
+    color: black;
+    border: none;
+
+    cursor: pointer;
+    font-family: Cambria, Georgia, serif;
+    font-size: 16px;
+
+    z-index: 1000;
+}
+
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+
+    z-index: 2000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+.cabecalho button:hover {
+    background-color: #008B8B;
+    color: white;
+}
+
+/* CABEÇALHO */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+        body {
+            font-family: Cambria, Georgia, serif;
+            background: rgb(32, 73, 81) ;
+            color: #075d59;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+        .logo-topo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 0 20px;
+}
+
+ .logo-topo img{
+    width: 20px;
+    height:auto;
+}
+
+
+       
+        /* =====================================================
+           MENU LATERAL
+        ===================================================== */
+
+  
+        .header-ranking{
+     width:100%;
+    height:130px;
+    background:rgb(32,73,81);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+
+
+.botao-menu-ranking{
+    position:absolute;
+    top:20px;
+    left:19px;
+    padding:7px 10px;
+    border:none;
+    border-radius:9px;
+    background:#f8f9fa;
+    font-size:18px;
+    cursor:pointer;
+    z-index:3000;
+}
+
+.botao-menu-ranking:hover{
+    background:#08b6aa;
+    color:white;
+}
+
+.topbar-ranking{
+    width:100%;
+    height:45px;
+    background:#08645f;
+    display:flex;
+    align-items:center;
+    padding:0 13px;
+    color:white;
+    font-size:13px;
+}
+
+.breadcrumb-ranking{
+    display:flex;
+    align-items:center;
+    gap:1px;
+}
+
+.layout-ranking{
+    display:flex;
+    width:100%;
+    min-height:calc(100vh - 175px);
+}
+
+.sidebar-ranking{
+    width:175px;
+    background:#08645f;
+    padding:20px 15px;
+    flex-shrink:0;
+}
+
+
+
+.conteudo-ranking{
+    flex:1;
+    min-width:0;
+    padding:30px 40px 60px;
+}
+/* =====================================================
+DECORAÇÃO DO MENU
+===================================================== */
+
+.decoracao {
+
+position: absolute;
+
+bottom: 30px;
+
+left: 18px;
+
+width: 140px;
+
+height: 140px;
+
+border-radius: 50%;
+
+background:
+    repeating-radial-gradient(
+        circle,
+        transparent 0px,
+        transparent 7px,
+        rgba(255,255,255,0.08) 8px,
+        transparent 9px
+    );
+
+opacity: 0.9;
+
+}
+
+
+.decoracao::before {
+
+content: "";
+
+position: absolute;
+
+width: 65px;
+
+height: 65px;
+
+border-radius: 50%;
+
+border: 1px solid rgba(255,255,255,0.08);
+
+left: 37px;
+
+top: 37px;
+
+}
+
+
+.decoracao::after {
+
+position: absolute;
+
+left: 58px;
+
+top: 55px;
+
+color: rgba(255,255,255,0.18);
+
+font-size: 22px;
+
+}
+
+
+
+        /* DECORAÇÃO */
+
+      
+        .circulo {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 1px solid white;
+
+            border-radius: 50%;
+        }
+
+        .c1 {
+            width: 30px;
+            height: 30px;
+        }
+
+        .c2 {
+            width: 60px;
+            height: 60px;
+        }
+
+        .c3 {
+            width: 90px;
+            height: 90px;
+        }
+
+        .c4 {
+            width: 120px;
+            height: 120px;
+        }
+
+        .c5 {
+            width: 150px;
+            height: 150px;
+        }
+
+
+         /* =====================================================
+           ÁREA PRINCIPAL
+        ===================================================== */
+
+        .conteudo {
+            margin-left: 20px;
+
+min-height: 100vh;
+padding: 20px;
+    flex: 1;
+    padding: 27px 24px 50px 24px;
+    
+}
+
+        .topo {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+
+        .topo h1 {
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            color: white;
+        }
+
+
+
+        /* =========================
+           BARRA DE PESQUISA
+        ========================= */
+
+        .barra-pesquisa {
+            display: flex;
+
+            gap: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        .campo-pesquisa {
+            flex: 1;
+
+            height: 43px;
+
+            background: white;
+
+            border: 1px solid #d4dddd;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 13px;
+        }
+
+        .campo-pesquisa span {
+            font-size: 18px;
+
+            color: #8da3aa;
+
+            margin-right: 12px;
+        }
+
+        .campo-pesquisa input {
+            width: 100%;
+
+            border: 0;
+
+            outline: 0;
+
+            font-size: 14px;
+
+            color: #075d59;
+        }
+
+        .filtro {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .filtro span {
+            color: #718991;
+        }
+
+        .filtro select {
+            width: 170px;
+
+            height: 43px;
+
+            background: white;
+
+            border: 1px solid #008b83;
+
+            border-radius: 9px;
+
+            padding: 0 12px;
+
+            color: #183c3b;
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .livros-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(240px, 1fr));
+
+            gap: 20px;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card-livro {
+            background: white;
+
+            border: 1px solid #c8eeee;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 2px 5px rgba(0, 100, 100, .1);
+
+            transition: .2s;
+        }
+
+        .card-livro:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px rgba(0, 100, 100, .13);
+        }
+
+
+        /* IMAGEM */
+
+        .imagem-container {
+            height: 176px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #dfeaea;
+        }
+
+        .imagem-container img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* TAG */
+
+        .tag {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            padding: 4px 10px;
+
+            border-radius: 9px;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .tag.Novo {
+            background: #00b950;
+        }
+
+        .tag.Seminovo {
+            background: #1167e8;
+        }
+
+        .tag.Usado {
+            background: #ff7500;
+        }
+
+
+        /* FAVORITO */
+
+        .favorito {
+            position: absolute;
+
+            top: 12px;
+            right: 12px;
+
+            width: 30px;
+            height: 30px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #9aa9af;
+
+            font-size: 17px;
+        }
+
+        .favorito.ativo {
+            color: #e33c68;
+        }
+
+
+        /* INFORMAÇÕES */
+
+        .info-livro {
+            padding: 16px;
+        }
+
+        .nome-livro {
+            color: #00665f;
+
+            font-family: monospace;
+
+            font-size: 14px;
+
+            margin-bottom: 6px;
+        }
+
+        .autor,
+        .vendedor {
+            color: #8797a2;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+        .preco-antigo {
+            font-size: 12px;
+
+            color: #9ca5aa;
+
+            text-decoration: line-through;
+
+            min-height: 15px;
+        }
+
+        .preco {
+            color: #008c83;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin: 2px 0 14px;
+        }
+
+
+        /* CARRINHO */
+
+        .btn-carrinho {
+            width: 100%;
+
+            height: 37px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: #00877e;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+        .btn-carrinho:hover,
+        .botao-publicar,
+        .titulo-pagina button,
+        .finalizar {
+            background: #006f68;
+        }
+
+
+        /* =========================
+           MEUS ANÚNCIOS
+        ========================= */
+
+        .pagina-escondida {
+            display: none;
+        }
+
+        .titulo-pagina {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .titulo-pagina h1 {
+            font-size: 25px;
+
+            color: #00665f;
+        }
+
+        .titulo-pagina button {
+            border: 0;
+
+            border-radius: 9px;
+
+            padding: 11px 17px;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+
+        /* SEM LIVROS */
+
+        .sem-livros {
+            grid-column: 1 / -1;
+
+            background: white;
+
+            padding: 60px 20px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            color: #829396;
+        }
+
+        .sem-livros .icone {
+            font-size: 40px;
+
+            margin-bottom: 15px;
+
+            color: #00a49b;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 45, 43, .55);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 5000;
+        }
+
+        .modal.aberto {
+            display: flex;
+        }
+
+        .modal-caixa {
+            background: white;
+
+            width: min(650px, 92%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            position: relative;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, .25);
+        }
+
+        .modal-caixa h2 {
+            color: #006b64;
+
+            margin-bottom: 6px;
+        }
+
+        .subtitulo {
+            color: #8b9ca2;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        .fechar {
+            position: absolute;
+
+            right: 20px;
+            top: 18px;
+
+            border: 0;
+
+            background: #edf5f5;
+
+            color: #47716f;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            font-size: 18px;
+        }
+
+
+        /* FORMULÁRIO */
+
+        .linha-form {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .campo {
+            display: flex;
+
+            flex-direction: column;
+
+            margin-bottom: 16px;
+        }
+
+        .campo label {
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #24635f;
+
+            margin-bottom: 7px;
+        }
+
+        .campo input,
+        .campo select {
+            width: 100%;
+
+            height: 42px;
+
+            border: 1px solid #d3e0e0;
+
+            border-radius: 8px;
+
+            padding: 0 12px;
+
+            outline: 0;
+
+            color: #315553;
+        }
+
+        .campo input:focus,
+        .campo select:focus {
+            border-color: #00a69d;
+        }
+
+        .campo small {
+            color: #94a3a8;
+
+            font-size: 11px;
+
+            margin-top: 5px;
+        }
+
+        .botao-publicar {
+            width: 100%;
+
+            height: 45px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           CARRINHO LATERAL
+        ========================= */
+
+        .carrinho {
+            position: fixed;
+
+            top: 0;
+
+            right: -420px;
+
+            width: 400px;
+
+            height: 100vh;
+
+            background: white;
+
+            z-index: 200;
+
+            box-shadow:
+                -8px 0 30px rgba(0, 0, 0, .15);
+
+            padding: 25px;
+
+            transition: .3s;
+
+            overflow-y: auto;
+        }
+
+        .carrinho.aberto {
+            right: 0;
+        }
+
+        .carrinho-topo {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #e5eeee;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .carrinho-topo h2 {
+            color: #006b64;
+
+            font-size: 19px;
+        }
+        .carrinho-topo h2 {
+            color: #006b64;
+
+            font-size: 19px;
+        }
+
+        .carrinho-topo button {
+            border: 0;
+
+            background: transparent;
+
+            font-size: 20px;
+        }
+
+        .item-carrinho {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #edf1f1;
+        }
+
+        .item-carrinho img {
+            width: 65px;
+            height: 75px;
+
+            object-fit: cover;
+
+            border-radius: 7px;
+        }
+
+        .item-carrinho-info {
+            flex: 1;
+        }
+
+        .item-carrinho-info h3 {
+            font-size: 13px;
+
+            margin-bottom: 6px;
+        }
+
+        .item-carrinho-info strong {
+            color: #00877e;
+        }
+
+        .remover {
+            border: 0;
+
+            background: transparent;
+
+            color: #d45c6c;
+        }
+
+        .total-carrinho {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 20px;
+        }
+
+        .total-carrinho strong {
+            color: #00877e;
+
+            font-size: 19px;
+        }
+
+        .finalizar {
+            width: 100%;
+
+            height: 44px;
+
+            border: 0;
+
+            border-radius: 9px;
+
+            color: white;
+
+            font-weight: bold;
+
+            margin-top: 18px;
+        }
+
+        .fundo-carrinho {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, .35);
+
+            z-index: 150;
+        }
+
+        .fundo-carrinho.aberto {
+            display: block;
+        }
+
+
+        .sidebar-ranking nav {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.sidebar-ranking nav .menu-btn {
+    width: 100%;
+    min-height: 42px;
+    border: none;
+    border-radius: 14px;
+    background: #087b74;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sidebar-ranking nav .menu-btn:hover {
+    background: #08b6aa;
+    transform: translateX(3px);
+}
+
+.sidebar-ranking nav .menu-btn.ativo {
+    background: #08b6aa;
+}
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 1050px) {
+
+            .livros-grid {
+                grid-template-columns:
+                    repeat(2, minmax(240px, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                padding-bottom: 15px;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .menu {
+                flex-direction: row;
+
+                overflow-x: auto;
+
+                padding-left: 10px;
+            }
+
+           
+            .decoracao {
+                display: none;
+            }
+
+            .conteudo {
+                margin-left: 0;
+
+                padding: 15px;
+            }
+
+            .barra-pesquisa {
+                flex-direction: column;
+            }
+
+            .filtro select {
+                flex: 1;
+            }
+
+            .livros-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .linha-form {
+                grid-template-columns: 1fr;
+            }
+
+            .carrinho {
+                width: 90%;
+            }
+
+
+    
+        }
+
+
+
+        .logo-ranking {
+    width: 160px;
+    height: auto;
+
+}
+
+    </style>
+
+</head>
+
+
+<body>
+ 
+ 
+
+    <div class="cabecalho">
+        <button onclick="toggleMenu()">☰ Menu</button>
+        <img src="logo.png" alt="Logo LiteLAB" class="logo-ranking">
+        </div>
+        
+        <ul id="menu" class="menu"> 
+         <li><a href="../partlaisla/index.html">Página Inicial</a></li>
+          <li><a href="../partlaisla/perfil.html">Perfil</a></li>
+          <li><a href="../partemaria/nt.html">Notificações</a></li>
+          <li><a href="../index.html">Biblioteca</a></li>
+          <li><a href="../partlaisla/estatisticas.html">Estatísticas</a></li>
+          <li><a href="../partemaria/vendas.html">Vendas</a></li>
+          <li><a href="../parteclubes/clubes.html">Clubes</a></li>
+          <li><a href="../parteclubes/clubecriado.html">Clubes criados</a></li>
+          <li><a href="../partlaisla/cadastrolivros.html">Cadastro dos livros</a></li>
+          <li><a href="../partemaria/index.html">Resenhas</a></li>
+          <li><a href="../partemaria/rl.html">Ranking</a></li>
+        
+        </ul>
+        
+
+        <script>
+            const menu = document.getElementById("menu");
+            
+            function toggleMenu() {
+              menu.classList.toggle("ativo");
+            }
+            
+        
+            document.addEventListener("click", function(event) {
+              const clicouDentroMenu = menu.contains(event.target);
+              const clicouNoBotao = event.target.closest("button");
+            
+              if (!clicouDentroMenu && !clicouNoBotao) {
+                menu.classList.remove("ativo");
+              }
+            });
+            </script>
+        
+        
+        <div class="topbar-ranking">
+            <div class="breadcrumb-ranking">
+                <span class="seta">←</span>
+                <span>LiteLAB</span>
+                <span class="separador">/</span>
+                <strong>Vendas</strong>
+            </div>
+        </div>
+        
+        <div class="layout-ranking">
+        
+            <aside class="sidebar-ranking">
+        
+                <nav>
+        
+                    <button class="menu-btn ativo"
+                        onclick="mostrarPagina('vendas')">
+                        ▣ Livros à Venda
+                    </button>
+        
+                    <button class="menu-btn "
+                        onclick="mostrarPagina('anuncios')">
+                        ▤ Meus Anúncios
+                    </button>
+        
+            
+        
+                </nav>
+        
+                <div class="decoracao"></div>
+        
+            </aside>
+            
+            <main class="conteudo-ranking">
+        
+
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================= -->
+
+  
+
+
+        <!-- LIVROS À VENDA -->
+
+        <section id="paginaVendas">
+
+
+            <div class="barra-pesquisa">
+
+
+                <div class="campo-pesquisa">
+
+                    <span>⌕</span>
+
+                    <input
+                        id="pesquisa"
+                        type="text"
+                        placeholder="Buscar livros..."
+                        oninput="filtrarLivros()">
+
+                </div>
+
+
+                <div class="filtro">
+
+                    <span>⚱</span>
+
+                    <select
+                        id="condicao"
+                        onchange="filtrarLivros()">
+
+                        <option value="todos">
+                            Todas condições
+                        </option>
+
+                        <option value="Novo">
+                            Novo
+                        </option>
+
+                        <option value="Seminovo">
+                            Seminovo
+                        </option>
+
+                        <option value="Usado">
+                            Usado
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="livros-grid"
+                id="listaLivros">
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             MEUS ANÚNCIOS
+        ========================= -->
+
+        <section
+            id="paginaAnuncios"
+            class="pagina-escondida">
+
+
+            <div class="titulo-pagina">
+
+                <h1>
+                    Meus Anúncios
+                </h1>
+
+
+                <button
+                    onclick="abrirFormulario()">
+
+                    ＋ Novo anúncio
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="meusAnuncios"
+                class="livros-grid">
+            </div>
+
+
+</section>
+   
+</main>
+
+</div>
+
+
+    <!-- =========================
+         MODAL VENDER LIVRO
+    ========================= -->
+
+    <div
+        class="modal"
+        id="modalLivro">
+
+
+        <div class="modal-caixa">
+
+
+            <button
+                class="fechar"
+                onclick="fecharFormulario()">
+
+                ×
+
+            </button>
+
+
+            <h2>
+                ▣ Vender Livro
+            </h2>
+
+
+            <p class="subtitulo">
+
+                Cadastre seu livro para aparecer na página.
+
+            </p>
+
+
+            <form id="formLivro">
+
+
+                <div class="linha-form">
+
+
+                    <div class="campo">
+
+                        <label>
+                            Nome do livro
+                        </label>
+
+                        <input
+                            id="nomeLivro"
+                            type="text"
+                            placeholder="Ex: Harry Potter"
+                            required>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Autor
+                        </label>
+
+                        <input
+                            id="autorLivro"
+                            type="text"
+                            placeholder="Ex: J.K. Rowling"
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="linha-form">
+
+
+                    <div class="campo">
+
+                        <label>
+                            Preço
+                        </label>
+
+                        <input
+                            id="precoLivro"
+                            type="number"
+                            placeholder="29.90"
+                            min="0"
+                            step="0.01"
+                            required>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Condição
+                        </label>
+
+
+                        <select
+                            id="condicaoLivro"
+                            required>
+
+                            <option value="Novo">
+                                Novo
+                            </option>
+
+                            <option value="Seminovo">
+                                Seminovo
+                            </option>
+
+                            <option value="Usado">
+                                Usado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Nome do vendedor
+                    </label>
+
+                    <input
+                        id="vendedorLivro"
+                        type="text"
+                        placeholder="Ex: Minha Livraria"
+                        required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Preço antigo
+                    </label>
+
+                    <input
+                        id="precoAntigo"
+                        type="number"
+                        placeholder="39.90"
+                        min="0"
+                        step="0.01">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Imagem do livro
+                    </label>
+
+                    <input
+                        id="imagemLivro"
+                        type="file"
+                        accept="image/*">
+
+                    <small>
+                        Escolha uma foto do livro no seu computador.
+                    </small>
+
+                </div>
+
+
+                <button
+                    class="botao-publicar"
+                    type="submit">
+
+                    ＋ Publicar livro
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CARRINHO
+    ========================= -->
+
+    <div
+        class="carrinho"
+        id="carrinho">
+
+
+        <div class="carrinho-topo">
+
+            <h2>
+                🛒 Meu Carrinho
+            </h2>
+
+
+            <button
+                onclick="fecharCarrinho()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div id="itensCarrinho">
+        </div>
+
+
+        <div class="total-carrinho">
+
+            <span>
+                Total
+            </span>
+
+
+            <strong id="total">
+
+                R$ 0,00
+
+            </strong>
+
+        </div>
+
+
+        <button
+            class="finalizar"
+            onclick="finalizarCompra()">
+
+            Finalizar compra
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        class="fundo-carrinho"
+        id="fundoCarrinho"
+        onclick="fecharCarrinho()">
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           IMAGENS PADRÃO
+        ========================= */
+
+
+        function toggleMenu() {
+    document.getElementById("menu").classList.toggle("ativo");
+}
+
+        const imagens = [
+
+            "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=80",
+
+            "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=900&q=80",
+
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80",
+
+            "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80",
+
+            "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=900&q=80",
+
+            "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80"
+
+        ];
+
+
+        /* =========================
+           LIVROS INICIAIS
+        ========================= */
+
+        const padrao = [
+
+            {
+                id: 1,
+                nome: "A Revolução dos Bichos",
+                autor: "George Orwell",
+                vendedor: "Livraria Central",
+                preco: 25.90,
+                antigo: 39.90,
+                condicao: "Seminovo",
+                imagem: imagens[0],
+                meu: false
+            },
+
+
+            {
+                id: 2,
+                nome: "Clean Code",
+                autor: "Robert C. Martin",
+                vendedor: "TechBooks",
+                preco: 89.90,
+                antigo: null,
+                condicao: "Novo",
+                imagem: imagens[1],
+                meu: false
+            },
+
+
+            {
+                id: 3,
+                nome: "O Alquimista",
+                autor: "Paulo Coelho",
+                vendedor: "Sebo da Esquina",
+                preco: 18.90,
+                antigo: 29.90,
+                condicao: "Usado",
+                imagem: imagens[2],
+                meu: false
+            },
+
+
+            {
+                id: 4,
+                nome: "Mindset",
+                autor: "Carol S. Dweck",
+                vendedor: "Livraria Moderna",
+                preco: 42.90,
+                antigo: null,
+                condicao: "Novo",
+                imagem: imagens[3],
+                meu: false
+            },
+
+
+            {
+                id: 5,
+                nome: "A Guerra dos Tronos",
+                autor: "George R. R. Martin",
+                vendedor: "Fantasia Shop",
+                preco: 49.90,
+                antigo: 79.90,
+                condicao: "Seminovo",
+                imagem: imagens[4],
+                meu: false
+            },
+
+
+            {
+                id: 6,
+                nome: "Pai Rico, Pai Pobre",
+                autor: "Robert Kiyosaki",
+                vendedor: "Finanças Books",
+                preco: 35.90,
+                antigo: null,
+                condicao: "Novo",
+                imagem: imagens[5],
+                meu: false
+            }
+
+        ];
+
+
+        /* =========================
+           SALVAR / CARREGAR
+        ========================= */
+
+        let livros =
+            JSON.parse(
+                localStorage.getItem("liteLabLivros") || "null"
+            ) || padrao;
+
+
+        let carrinho = [];
+
+
+        function salvar() {
+
+            localStorage.setItem(
+                "liteLabLivros",
+                JSON.stringify(livros)
+            );
+
+        }
+
+
+        /* =========================
+           DINHEIRO
+        ========================= */
+
+        function dinheiro(valor) {
+
+            return Number(valor).toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        /* =========================
+           PROTEGER TEXTO
+        ========================= */
+
+        function esc(texto) {
+
+            return String(texto).replace(
+                /[&<>"']/g,
+
+                function (m) {
+
+                    return {
+
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#039;"
+
+                    }[m];
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        function card(livro) {
+
+            return `
+
+                <article class="card-livro">
+
+
+                    <div class="imagem-container">
+
+                        <img
+                            src="${livro.imagem}"
+                            alt="${esc(livro.nome)}">
+
+
+                        <span
+                            class="tag ${livro.condicao}">
+
+                            ${livro.condicao}
+
+                        </span>
+<button
+                            class="favorito"
+                            onclick="favoritar(this)">
+
+                            ♡
+
+                        </button>
+
+
+                    </div>
+
+
+                    <div class="info-livro">
+
+
+                        <h3 class="nome-livro">
+
+                            ${esc(livro.nome)}
+
+                        </h3>
+
+
+                        <p class="autor">
+
+                            ${esc(livro.autor)}
+
+                        </p>
+
+
+                        <p class="vendedor">
+
+                            Vendedor:
+                            ${esc(livro.vendedor)}
+
+                        </p>
+
+
+                        <div class="preco-antigo">
+
+                            ${
+                                livro.antigo
+                                ? dinheiro(livro.antigo)
+                                : "&nbsp;"
+                            }
+
+                        </div>
+
+
+                        <div class="preco">
+
+                            ${dinheiro(livro.preco)}
+
+                        </div>
+
+
+                        <button
+                            class="btn-carrinho"
+                            onclick="adicionarCarrinho(${livro.id})">
+
+                            🛒 Adicionar ao Carrinho
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =========================
+           MOSTRAR LIVROS
+        ========================= */
+
+        function mostrarLivros(lista = livros) {
+
+            const area =
+                document.getElementById("listaLivros");
+
+
+            if (lista.length === 0) {
+
+                area.innerHTML = `
+
+                    <div class="sem-livros">
+
+                        <div class="icone">
+                            📚
+                        </div>
+
+                        <h3>
+                            Nenhum livro encontrado
+                        </h3>
+
+                        <p>
+                            Tente outra pesquisa ou condição.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            area.innerHTML =
+                lista.map(card).join("");
+
+        }
+
+
+        /* =========================
+           FILTRO
+        ========================= */
+
+        function filtrarLivros() {
+
+            const pesquisa =
+                document
+                    .getElementById("pesquisa")
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+
+            const condicao =
+                document
+                    .getElementById("condicao")
+                    .value;
+
+
+            const resultado =
+                livros.filter(function (livro) {
+
+
+                    const encontrouNome =
+                        livro.nome
+                            .toLowerCase()
+                            .includes(pesquisa);
+
+
+                    const encontrouAutor =
+                        livro.autor
+                            .toLowerCase()
+                            .includes(pesquisa);
+
+
+                    const encontrouCondicao =
+                        condicao === "todos" ||
+                        livro.condicao === condicao;
+
+
+                    return (
+
+                        (encontrouNome ||
+                        encontrouAutor)
+
+                        &&
+
+                        encontrouCondicao
+
+                    );
+
+                });
+
+
+            mostrarLivros(resultado);
+
+        }
+
+
+        /* =========================
+           FAVORITO
+        ========================= */
+
+        function favoritar(botao) {
+
+            botao.classList.toggle("ativo");
+
+
+            if (
+                botao.classList.contains("ativo")
+            ) {
+
+                botao.textContent = "♥";
+
+            } else {
+
+                botao.textContent = "♡";
+
+            }
+
+        }
+
+
+        /* =========================
+           TROCAR PÁGINA
+        ========================= */
+
+        function mostrarPagina(pagina) {
+
+            const vendas =
+                document.getElementById(
+                    "paginaVendas"
+                );
+
+
+            const anuncios =
+                document.getElementById(
+                    "paginaAnuncios"
+                );
+
+
+            const botoes =
+                document.querySelectorAll(
+                    ".menu-btn"
+                );
+
+
+            vendas.style.display =
+                pagina === "vendas"
+                    ? "block"
+                    : "none";
+
+
+            anuncios.style.display =
+                pagina === "anuncios"
+                    ? "block"
+                    : "none";
+
+
+            botoes.forEach(
+                function (botao, index) {
+
+                    botao.classList.remove(
+                        "ativo"
+                    );
+
+
+                    if (
+                        pagina === "vendas" &&
+                        index === 0
+                    ) {
+
+                        botao.classList.add(
+                            "ativo"
+                        );
+
+                    }
+
+
+                    if (
+                        pagina === "anuncios" &&
+                        index === 1
+                    ) {
+
+                        botao.classList.add(
+                            "ativo"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            if (pagina === "anuncios") {
+
+                mostrarAnuncios();
+
+            } else {
+
+                filtrarLivros();
+
+            }
+
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        function abrirFormulario() {
+
+            document
+                .getElementById("modalLivro")
+                .classList.add("aberto");
+
+        }
+
+
+        function fecharFormulario() {
+
+            document
+                .getElementById("modalLivro")
+                .classList.remove("aberto");
+
+        }
+
+
+        /* =========================
+           CADASTRAR LIVRO
+        ========================= */
+
+        document
+            .getElementById("formLivro")
+            .addEventListener(
+                "submit",
+                function (evento) {
+
+
+                    evento.preventDefault();
+
+
+                    const arquivo =
+                        document
+                            .getElementById(
+                                "imagemLivro"
+                            )
+                            .files[0];
+
+
+                    function criarLivro(imagem) {
+
+
+                        const novoLivro = {
+
+                            id: Date.now(),
+
+                            nome:
+                                document
+                                    .getElementById(
+                                        "nomeLivro"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            autor:
+                                document
+                                    .getElementById(
+                                        "autorLivro"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            vendedor:
+                                document
+                                    .getElementById(
+                                        "vendedorLivro"
+                                    )
+                                    .value
+                                    .trim(),
+
+                            preco:
+                                Number(
+                                    document
+                                        .getElementById(
+                                            "precoLivro"
+                                        )
+                                        .value
+                                ),
+
+                            antigo:
+                                document
+                                    .getElementById(
+                                        "precoAntigo"
+                                    )
+                                    .value
+                                    ? Number(
+                                        document
+                                            .getElementById(
+                                                "precoAntigo"
+                                            )
+                                            .value
+                                    )
+                                    : null,
+
+                            condicao:
+                                document
+                                    .getElementById(
+                                        "condicaoLivro"
+                                    )
+                                    .value,
+
+                            imagem:
+                                imagem || imagens[0],
+
+                            meu: true
+
+                        };
+
+
+                        livros.unshift(
+                            novoLivro
+                        );
+
+
+                        salvar();
+
+
+                        document
+                            .getElementById(
+                                "formLivro"
+                            )
+                            .reset();
+
+
+                        fecharFormulario();
+
+
+                        mostrarPagina(
+                            "vendas"
+                        );
+
+
+                        alert(
+                            "Livro publicado com sucesso!"
+                        );
+
+                    }
+
+
+                    if (arquivo) {
+
+
+                        const leitor =
+                            new FileReader();
+
+
+                        leitor.onload =
+                            function () {
+
+                                criarLivro(
+                                    leitor.result
+                                );
+
+                            };
+
+
+                        leitor.readAsDataURL(
+                            arquivo
+                        );
+
+
+                    } else {
+
+                        criarLivro(null);
+
+                    }
+
+
+                }
+            );
+
+
+        /* =========================
+           MEUS ANÚNCIOS
+        ========================= */
+
+        function mostrarAnuncios() {
+
+            const meusLivros =
+                livros.filter(
+                    function (livro) {
+
+                        return livro.meu === true;
+
+                    }
+                );
+
+
+            const area =
+                document.getElementById(
+                    "meusAnuncios"
+                );
+
+
+            if (meusLivros.length === 0) {
+
+                area.innerHTML = `
+
+                    <div class="sem-livros">
+
+                        <div class="icone">
+                            📚
+                        </div>
+
+                        <h3>
+                            Você ainda não possui anúncios
+                        </h3>
+
+                        <p>
+                            Clique em "Vender Livro"
+                            para cadastrar.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            area.innerHTML =
+                meusLivros.map(card).join("");
+
+        }
+
+
+        /* =========================
+           CARRINHO
+        ========================= */
+
+        function adicionarCarrinho(id) {
+
+            const livro =
+                livros.find(
+                    function (item) {
+
+                        return item.id === id;
+
+                    }
+                );
+
+
+            if (!livro) {
+                return;
+            }
+
+
+            carrinho.push(livro);
+
+
+            atualizarCarrinho();
+
+
+            abrirCarrinho();
+
+        }
+
+
+        function removerCarrinho(indice) {
+
+            carrinho.splice(
+                indice,
+                1
+            );
+
+
+            atualizarCarrinho();
+
+        }
+
+
+        function atualizarCarrinho() {
+
+            const area =
+                document.getElementById(
+                    "itensCarrinho"
+                );
+
+
+            if (carrinho.length === 0) {
+
+                area.innerHTML = `
+
+                    <div class="sem-livros">
+
+                        <div class="icone">
+                            🛒
+                        </div>
+
+                        <p>
+                            Seu carrinho está vazio.
+                        </p>
+
+                    </div>
+
+                `;
+
+            } else {
+
+
+                area.innerHTML =
+                    carrinho.map(
+                        function (livro, indice) {
+
+
+                            return `
+
+                                <div class="item-carrinho">
+
+
+                                    <img
+                                        src="${livro.imagem}"
+                                        alt="${esc(livro.nome)}">
+
+
+                                    <div
+                                        class="item-carrinho-info">
+
+
+                                        <h3>
+
+                                            ${esc(livro.nome)}
+
+                                        </h3>
+
+
+                                        <strong>
+
+                                            ${dinheiro(
+                                                livro.preco
+                                            )}
+
+                                        </strong>
+
+
+                                    </div>
+
+
+                                    <button
+                                        class="remover"
+                                        onclick="removerCarrinho(${indice})">
+
+                                        🗑
+
+                                    </button>
+
+
+                                </div>
+
+                            `;
+
+                        }
+                    ).join("");
+
+            }
+
+
+            const total =
+                carrinho.reduce(
+                    function (soma, livro) {
+
+                        return soma +
+                            Number(livro.preco);
+
+                    },
+                    0
+                );
+
+
+            document
+                .getElementById("total")
+                .textContent =
+                dinheiro(total);
+
+        }
+
+
+        /* =========================
+           ABRIR CARRINHO
+        ========================= */
+
+        function abrirCarrinho() {
+
+            document
+                .getElementById("carrinho")
+                .classList.add("aberto");
+
+
+            document
+                .getElementById("fundoCarrinho")
+                .classList.add("aberto");
+
+        }
+
+
+        /* =========================
+           FECHAR CARRINHO
+        ========================= */
+
+        function fecharCarrinho() {
+
+            document
+                .getElementById("carrinho")
+                .classList.remove("aberto");
+
+
+            document
+                .getElementById("fundoCarrinho")
+                .classList.remove("aberto");
+
+        }
+
+
+        /* =========================
+           FINALIZAR COMPRA
+        ========================= */
+
+        function finalizarCompra() {
+
+
+            if (carrinho.length === 0) {
+
+                alert(
+                    "Seu carrinho está vazio."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Compra iniciada! O pagamento pode ser conectado depois."
+            );
+
+        }
+
+
+        /* =========================
+           INICIAR SITE
+        ========================= */
+
+        mostrarLivros();
+
+        mostrarAnuncios();
+
+        atualizarCarrinho();
+
+    </script>
+
+
+</body>
+
+</html>

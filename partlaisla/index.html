@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="biblioteca virtual">
+
+  <meta name="keywords" content="biblioteca, livros, LiteLAB">
+
+  <meta name="author" content="laisla maria andreolo palharine">
+
+  <link rel="stylesheet" href="estilo.css">
+
+  <title>LiteLAB</title>
+
+  <style>
+#perfilMiniatura {
+    width: 65px !important;
+    height: 65px !important;
+    min-width: 65px !important;
+    min-height: 65px !important;
+
+    border-radius: 50% !important;
+    overflow: hidden !important;
+
+    border: 3px solid white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+
+    display: none;
+
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#perfilMiniatura:hover {
+    transform: scale(1.08);
+}
+
+#fotoMiniatura {
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 100% !important;
+    min-height: 100% !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+
+    border-radius: 50% !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    display: block !important;
+}
+    .botoes-login {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    </style>
+
+</head>
+
+<body>
+
+
+  <div id="mySidenav" class="sidenav">
+
+    <a href="#" id="about">Sobre </a>
+
+    <a href="#" id="projects">Projetos</a>
+
+    <a href="#" id="contact">Contatos</a>
+
+  </div>
+
+
+  <div class="cabecalho">
+
+    <button onclick="toggleMenu()">☰ Menu</button>
+
+    <img src="imagem/LOGO.png" alt="Logo LiteLAB" class="logo">
+
+  </div>
+
+
+  <ul id="menu" class="menu">
+
+    <li>
+      <a href="../partlaisla/perfil.html">Perfil</a>
+    </li>
+
+    <li>
+      <a href="../partemaria/nt.html">Notificações</a>
+    </li>
+
+    <li>
+      <a href="../index.html">Biblioteca</a>
+    </li>
+
+    <li>
+      <a href="../partlaisla/estatisticas.html">Estatísticas</a>
+    </li>
+
+    <li>
+      <a href="../partemaria/vendas.html">Vendas</a>
+    </li>
+
+    <li>
+      <a href="../parteclubes/clubes.html">Clubes</a>
+    </li>
+
+    <li>
+      <a href="../parteclubes/clubecriado.html">Clubes criados</a>
+    </li>
+
+    <li>
+      <a href="../partlaisla/cadastrolivros.html">Cadastro dos livros</a>
+    </li>
+
+    <li>
+      <a href="../partemaria/index.html">Resenhas</a>
+    </li>
+
+    <li>
+      <a href="../partemaria/rl.html">Ranking</a>
+    </li>
+
+  </ul>
+
+
+  <section>
+
+    <article class="container1">
+
+      <p>
+
+        A leitura é essencial para o desenvolvimento intelectual, social e
+        cultural, porém o avanço das tecnologias digitais tem contribuído
+        para a diminuição desse hábito, especialmente entre jovens e
+        adolescentes. Diante disso,o Litelab, funcionará com:<br>
+
+        Clubes do livro virtual;<br>
+
+        Cadastro de usuário;<br>
+
+        Cadastro de livros;<br>
+
+        Criar grupos do clube do livro;<br>
+
+        Video chamada;<br>
+
+        Quantidade de livro lidos;<br>
+
+        Venda de livros;<br>
+
+        Gêneros separados para melhor facilidade para encontrar livros
+
+      </p>
+
+
+      <p class="container1">
+
+        A biblioteca virtual desenvolvida no projeto <b>LiteLAB</b> é um espaço
+        digital colaborativo que busca incentivar o hábito da leitura de forma
+        interativa e acessível. Por meio dela, os usuários podem acessar livros
+        gratuitos, compartilhar resenhas, acompanhar seu progresso de leitura e
+        interagir com outros leitores, criando uma experiência mais dinâmica e
+        social. Dessa forma, a plataforma não apenas facilita o acesso à leitura,
+        mas também promove o pensamento crítico e a troca de conhecimentos entre
+        pessoas de diferentes realidades.
+
+      </p>
+
+    </article>
+
+  </section>
+
+
+  <div class="botoes-login" id="areaUsuario">
+
+    <button id="btnCadastro" onclick="abrirForm()">Cadastro</button>
+  
+    <button id="btnLogin" onclick="abrirLogin()">Login</button>
+  
+    <div id="perfilMiniatura" style="display: none;">
+      <img id="fotoMiniatura" src="imagem/avatar.png" alt="Perfil">
+    </div>
+  
+  </div>
+
+
+    <!-- CADASTRO -->
+
+    <div id="formCadastro" class="modal">
+
+      <div class="modal-content">
+
+        <form id="formUsuario">
+
+
+          <label>
+            Nome de usuário:
+          </label>
+
+          <input
+            type="text"
+            id="nome_usuario"
+          >
+
+          <br>
+
+
+          <label>
+            Nome:
+          </label>
+
+          <input
+            type="text"
+            id="nome_completo"
+          >
+
+          <br>
+
+
+          <label>
+            Email:
+          </label>
+
+          <input
+            type="email"
+            id="email"
+          >
+
+          <br>
+
+
+          <label>
+            Senha:
+          </label>
+
+          <input
+            type="password"
+            id="senha"
+          >
+
+          <br>
+          <br>
+
+
+          <button type="submit">
+            Cadastrar
+          </button>
+
+
+          <button
+            type="button"
+            onclick="fecharForm()"
+          >
+            Cancelar
+          </button>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginModal" class="modal">
+
+      <div class="modal-content">
+
+
+        <div class="imgcontainer">
+
+          <img
+            src="imagem/avatar.png"
+            alt="Avatar"
+            class="avatar"
+          >
+
+        </div>
+
+
+        <form id="formLogin">
+
+
+          <label>
+            Usuário:
+          </label>
+
+          <input
+            type="text"
+            id="loginUsuario"
+            required
+          >
+
+          <br>
+
+
+          <label>
+            Senha:
+          </label>
+
+          <input
+            type="password"
+            id="loginSenha"
+            required
+          >
+
+          <br>
+          <br>
+
+
+          <button type="submit">
+            Login
+          </button>
+
+
+          <button
+            type="button"
+            onclick="fecharLogin()"
+          >
+            Cancelar
+          </button>
+
+
+
+        </form>
+
+
+        <button
+          onclick="window.location.href='Recuperarsenha.html'"
+        >
+          Recuperar senha
+        </button>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <hr>
+
+
+  <h2>
+    Prévia de livros disponíveis
+  </h2>
+
+
+  <div class="carrossel-container">
+
+
+    <button
+      class="seta"
+      id="voltar"
+    >
+      &#10094;
+    </button>
+
+
+    <div
+      class="carrossel"
+      id="carrossel"
+    >
+
+
+      <img src="imagem/A Cidade e as Serras.jpg">
+
+      <img src="imagem/a mao e a luva.webp">
+
+      <img src="imagem/memorias postumas.jpg">
+
+      <img src="imagem/a metamorfose.jpg">
+
+      <img src="imagem/dom casmurro.jpg">
+
+      <img src="imagem/A Dama das Camélias.jpg">
+
+      <img src="imagem/A Moreninha.webp">
+
+      <img src="imagem/Iracema.jpg">
+
+      <img src="imagem/senhora.jpg">
+
+      <img src="imagem/A Escrava Isaura.jpg">
+
+      <img src="imagem/A Cartomante.jpg">
+
+      <img src="imagem/A Igreja do Diabo.jpg">
+
+      <img src="imagem/Pai Contra Mãe.jpg">
+
+      <img src="imagem/o espelho.jpg">
+
+      <img src="imagem/a mensagem.webp">
+
+      <img src="imagem/carolina.jpg">
+
+      <img src="imagem/o navio.jpg">
+
+      <img src="imagem/eterna magoa.jpg">
+
+      <img src="imagem/Espumas Flutuantes.jpg">
+
+      <img src="imagem/as primaveras.jpg">
+
+      <img src="imagem/Coriolano.jpg">
+
+      <img src="imagem/Hamlet.jpg">
+
+      <img src="imagem/Édipo-Rei.jpg">
+
+      <img src="imagem/Farsa de Inês Pereira.jpg">
+
+      <img src="imagem/Fausto (Goethe).jpg">
+
+      <img src="imagem/Schopenhauer.jpg">
+
+      <img src="imagem/El Arte de la Guerra.jpg">
+
+      <img src="imagem/os sertoes.jpg">
+
+      <img src="imagem/a desobediencia civil.jpg">
+
+      <img src="imagem/Utopia.jpg">
+
+      <img src="imagem/1984.png">
+
+      <img src="imagem/a-revolucao-dos-bichos-traducao-de-heitor-aquino-ferreira.jpg">
+
+
+    </div>
+
+
+    <button
+      class="seta"
+      id="avancar"
+    >
+      &#10095;
+    </button>
+
+
+  </div>
+
+
+  <div class="botao-biblioteca">
+
+    <a href="../index.html">
+
+      <button>
+        Acessar biblioteca
+      </button>
+
+    </a>
+
+  </div>
+
+
+  <hr>
+
+
+  <h2>
+    Solicitar livros
+  </h2>
+
+  <br>
+
+
+  <textarea
+    rows="10"
+    cols="90"
+  ></textarea>
+
+
+  <br>
+
+
+  <h2>
+    Sobre o nosso projeto
+  </h2>
+
+
+  <button class="accordion">
+    Resumo
+  </button>
+
+
+  <div class="panel">
+
+    <p>
+
+      O trabalho apresenta o desenvolvimento de um sistema digital voltado
+      ao incentivo da leitura,especialmente entre jovens e adultos.
+
+      Diante da diminuição do interesse por livros e do crescimento do
+      consumo de conteúdos rápidos, a proposta busca utilizar a tecnologia
+      como aliada para tornar a leitura mais atrativa e acessível.
+
+      A plataforma LiteLab pretende criar um ambiente interativo com recursos
+      como clubes de leitura virtuais, classificação de livros e
+      compartilhamento de experiências entre usuários.
+
+      Além disso, o sistema visa promover a interação entre leitores de
+      diferentes regiões, fortalecendo vínculos sociais e culturais.
+
+      O projeto também se justifica pela necessidade de ampliar o acesso
+      a conteúdos literários e estimular hábitos de leitura por meio de
+      soluções digitais inovadoras.
+
+    </p>
+
+  </div>
+
+
+  <button class="accordion">
+    Objetivos
+  </button>
+
+
+  <div class="panel">
+
+    <p>
+
+      Criação de um sistema digital de clube do livro, denominado LiteLAB
+      (Labirinto Literário), que incentive o hábito da leitura e promova
+      a interação entre leitores por meio de recursos tecnológicos.
+
+    </p>
+
+  </div>
+
+
+  <button class="accordion">
+    Justificativa
+  </button>
+
+
+  <div class="panel">
+
+    <p>
+
+      Este trabalho aborda a importância da leitura para o desenvolvimento
+      intelectual e social, destacando a diminuição desse hábito entre
+      jovens devido ao avanço das tecnologias digitais.
+
+      Como alternativa, são apresentados conceitos como leitura colaborativa
+      e gamificação, que incentivam o engajamento por meio da interação entre
+      leitores e do uso de metas e acompanhamento de progresso.
+
+      O projeto Litelab utiliza recursos tecnológicos para criar uma
+      plataforma digital interativa, com funcionalidades como clube do
+      livro, chat, videochamadas e biblioteca virtual.
+
+      A pesquisa realizada baseou-se em dados sobre o baixo índice de
+      leitura no Brasil e na análise de plataformas semelhantes.
+
+      Como resultado, espera-se estimular o hábito da leitura, promover
+      a interação social e criar uma comunidade colaborativa.
+
+      Conclui-se que a integração entre tecnologia e leitura pode contribuir
+      para tornar essa prática mais acessível, dinâmica e atrativa.
+
+    </p>
+
+  </div>
+
+
+  <script>
+
+
+    /* =========================
+       CADASTRO
+    ========================= */
+
+
+    document
+      .getElementById("formUsuario")
+      .addEventListener(
+        "submit",
+        async function(e) {
+
+
+          e.preventDefault();
+
+
+          const usuario = {
+
+            nome_usuario:
+              document
+                .getElementById("nome_usuario")
+                .value,
+
+            nome_completo:
+              document
+                .getElementById("nome_completo")
+                .value,
+
+            email:
+              document
+                .getElementById("email")
+                .value,
+
+            senha:
+              document
+                .getElementById("senha")
+                .value
+
+          };
+
+
+          try {
+
+
+            const resposta =
+              await fetch(
+              "http://192.168.0.165:8081/cadastrarUsuario",
+                {
+
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json"
+                  },
+
+                  body:
+                    JSON.stringify(usuario)
+
+                }
+              );
+
+
+            const mensagem =
+              await resposta.text();
+
+
+            alert(mensagem);
+
+
+            if (resposta.ok) {
+
+              document
+                .getElementById("formUsuario")
+                .reset();
+
+              fecharForm();
+
+            }
+
+
+          } catch (erro) {
+
+
+            console.error(erro);
+
+
+            alert(
+              "Não foi possível conectar ao servidor do LiteLAB."
+            );
+
+
+          }
+
+
+        }
+      );
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+
+    document.getElementById("formLogin").addEventListener("submit", async function(e) {
+
+e.preventDefault();
+
+const dadosLogin = {
+
+    usuario:
+        document.getElementById("loginUsuario").value,
+
+    senha:
+        document.getElementById("loginSenha").value
+};
+
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/login",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body:
+                JSON.stringify(dadosLogin)
+        }
+    );
+
+
+    const mensagem =
+        await resposta.text();
+
+
+    alert(mensagem);
+
+
+    if (
+        resposta.ok &&
+        mensagem.startsWith(
+            "Login realizado com sucesso!"
+        )
+    ) {
+
+
+        const nomeUsuario =
+            mensagem
+                .replace(
+                    "Login realizado com sucesso! Bem-vindo(a), ",
+                    ""
+                )
+                .replace("!", "")
+                .trim();
+
+
+        // Salva o usuário
+        localStorage.setItem(
+            "nomeUsuario",
+            nomeUsuario
+        );
+
+
+        console.log(
+            "USUÁRIO SALVO:",
+            nomeUsuario
+        );
+
+
+        // Fecha o formulário
+        document.getElementById(
+            "formLogin"
+        ).reset();
+
+
+        fecharLogin();
+
+
+        // Atualiza a página para mostrar a foto
+        carregarUsuarioNaPagina();
+
+    }
+
+} catch (erro) {
+
+    console.error(erro);
+
+    alert(
+        "Não foi possível conectar ao servidor do LiteLAB."
+    );
+
+}
+
+});
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+
+    function logout() {
+
+
+      localStorage.removeItem(
+        "nomeUsuario"
+      );
+
+
+      window.location.href =
+        "index.html";
+
+
+    }
+
+
+    /* =========================
+       MENU
+    ========================= */
+
+
+    function toggleMenu() {
+
+
+      document
+        .getElementById("menu")
+        .classList
+        .toggle("ativo");
+
+
+    }
+
+
+    /* =========================
+       CADASTRO
+    ========================= */
+
+
+    function abrirForm() {
+
+
+      document
+        .getElementById("formCadastro")
+        .style.display =
+        "block";
+
+
+    }
+
+
+    function fecharForm() {
+
+
+      document
+        .getElementById("formCadastro")
+        .style.display =
+        "none";
+
+
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+
+    function abrirLogin() {
+
+
+      document
+        .getElementById("loginModal")
+        .style.display =
+        "block";
+
+
+    }
+
+
+    function fecharLogin() {
+
+
+      document
+        .getElementById("loginModal")
+        .style.display =
+        "none";
+
+
+    }
+
+
+    /* =========================
+       FECHAR AO CLICAR FORA
+    ========================= */
+
+
+    window.onclick =
+      function(event) {
+
+
+        const form =
+          document.getElementById(
+            "formCadastro"
+          );
+
+
+        const login =
+          document.getElementById(
+            "loginModal"
+          );
+
+
+        if (
+          event.target === form
+        ) {
+
+          form.style.display =
+            "none";
+
+        }
+
+
+        if (
+          event.target === login
+        ) {
+
+          login.style.display =
+            "none";
+
+        }
+
+
+      };
+
+
+    /* =========================
+       ACCORDION
+    ========================= */
+
+
+    var acc =
+      document.getElementsByClassName(
+        "accordion"
+      );
+
+
+    var i;
+
+
+    for (
+      i = 0;
+      i < acc.length;
+      i++
+    ) {
+
+
+      acc[i].addEventListener(
+        "click",
+        function() {
+
+
+          this.classList.toggle(
+            "active"
+          );
+
+
+          var panel =
+            this.nextElementSibling;
+
+
+          if (
+            panel.style.display ===
+            "block"
+          ) {
+
+
+            panel.style.display =
+              "none";
+
+
+          } else {
+
+
+            panel.style.display =
+              "block";
+
+
+          }
+
+
+        }
+      );
+
+
+    }
+
+
+    /* =========================
+       FECHAR MENU
+    ========================= */
+
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+
+        const menu =
+          document.getElementById(
+            "menu"
+          );
+
+
+        const botaoMenu =
+          document.querySelector(
+            ".cabecalho button"
+          );
+
+
+        if (
+          !menu.contains(event.target) &&
+          !botaoMenu.contains(event.target)
+        ) {
+
+
+          menu.classList.remove(
+            "ativo"
+          );
+
+
+        }
+
+
+      }
+    );
+
+
+    /* =========================
+       CARROSSEL
+    ========================= */
+
+
+    const carrossel =
+      document.getElementById(
+        "carrossel"
+      );
+
+
+    document
+      .getElementById("avancar")
+      .onclick =
+      function() {
+
+
+        carrossel.scrollBy({
+
+          left: 250,
+
+          behavior: "smooth"
+
+        });
+
+
+      };
+
+
+    document
+      .getElementById("voltar")
+      .onclick =
+      function() {
+
+
+        carrossel.scrollBy({
+
+          left: -250,
+
+          behavior: "smooth"
+
+        });
+
+
+      };
+
+      async function carregarUsuarioNaPagina() {
+
+const nomeUsuario =
+    localStorage.getItem("nomeUsuario");
+
+// Se não estiver logado
+if (!nomeUsuario) {
+    return;
+}
+
+const btnCadastro =
+    document.getElementById("btnCadastro");
+
+const btnLogin =
+    document.getElementById("btnLogin");
+
+const perfilMiniatura =
+    document.getElementById("perfilMiniatura");
+
+const fotoMiniatura =
+    document.getElementById("fotoMiniatura");
+
+
+// Esconde Cadastro e Login
+btnCadastro.style.display = "none";
+btnLogin.style.display = "none";
+
+// Mostra a bolinha
+perfilMiniatura.style.display = "block";
+
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/perfil?usuario="
+        + encodeURIComponent(nomeUsuario)
+    );
+
+    if (!resposta.ok) {
+        throw new Error("Erro ao buscar perfil");
+    }
+
+    const dados = await resposta.json();
+
+
+    // Se o usuário possui foto
+    if (
+        dados.foto_perfil &&
+        dados.foto_perfil.trim() !== ""
+    ) {
+
+        fotoMiniatura.src =
+            dados.foto_perfil;
+
+    } else {
+
+        // Se ainda não possui foto
+        fotoMiniatura.src =
+            "imagem/avatar.png";
+    }
+
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao carregar foto do perfil:",
+        erro
+    );
+
+    fotoMiniatura.src =
+        "imagem/avatar.png";
+}
+
+
+// Ao clicar na foto → perfil
+perfilMiniatura.onclick = function() {
+
+    window.location.href =
+        "../partlaisla/perfil.html?usuario="
+        + encodeURIComponent(nomeUsuario);
+
+};
+
+}
+
+
+// Executa quando a página abre
+carregarUsuarioNaPagina();
+async function carregarLivrosDoBanco() {
+
+try {
+
+    const resposta = await fetch(
+        "https://litelab-backend-novo.onrender.com/livros"
+    );
+
+    const livros = await resposta.json();
+
+    const carrossel = document.getElementById("carrossel");
+
+    livros.forEach(livro => {
+
+        const imagem = document.createElement("img");
+
+        imagem.src = "../" + livro.capa;
+        imagem.alt = livro.titulo;
+
+        carrossel.appendChild(imagem);
+
+    });
+
+} catch (erro) {
+
+    console.error("Erro ao carregar livros:", erro);
+
+}
+
+}
+
+carregarLivrosDoBanco();
+  </script>
+
+
+  <footer>
+
+    <p>
+
+      © 2026 LiteLAB<br>
+
+      Terceiro ano A - Desenvolvimento de Sistemas
+
+    </p>
+
+  </footer>
+
+
+</body>
+
+</html>

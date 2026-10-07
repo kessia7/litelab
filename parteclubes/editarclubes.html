@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="biblioteca virtual">
+    <meta name="keywords" content="biblioteca, livros, LiteLAB">
+    <meta name="author" content="laisla maria andreolo palharine">
+
+    <link rel="stylesheet" href="cssdosclubes.css">
+
+    <title>LiteLAB</title>
+
+</head>
+
+<body>
+
+<div class="cabecalho">
+
+    <button onclick="toggleMenu()">☰ Menu</button>
+
+    <img
+        src="imagens/logo.png"
+        alt="Logo LiteLAB"
+        class="logo"
+    >
+
+</div>
+
+
+<ul id="menu" class="menu">
+
+    <li>
+        <a href="cadastrolivros.html">
+            Cadastro dos livros
+        </a>
+    </li>
+
+    <li>
+        <a href="index.html">
+            Página principal
+        </a>
+    </li>
+
+    <li>
+        <a href="clubecriado.html">
+            Clubes criados
+        </a>
+    </li>
+
+    <li>
+        <a href="../partemaria/index.html">
+            Resenhas
+        </a>
+    </li>
+
+    <li>
+        <a href="../partemaria/nt.html">
+            Notificações
+        </a>
+    </li>
+
+    <li>
+        <a href="../partemaria/rl.html">
+            Ranking
+        </a>
+    </li>
+
+    <li>
+        <a href="../partemaria/vendas.html">
+            Vendas
+        </a>
+    </li>
+
+    <li>
+        <a href="../partlaisla/index.html">
+            Página principal
+        </a>
+    </li>
+
+    <li>
+        <a href="../partlaisla/estatisticas.html">
+            Estatísticas
+        </a>
+    </li>
+
+    <li>
+        <a href="../partlaisla/perfil.html">
+            Perfil
+        </a>
+    </li>
+
+    <li>
+        <a href="../partlaisla/cadastrolivros.html">
+            Cadastro de livros
+        </a>
+    </li>
+
+</ul>
+
+
+<script>
+
+const menu =
+    document.getElementById("menu");
+
+
+function toggleMenu() {
+
+    menu.classList.toggle("ativo");
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const clicouDentroMenu =
+            menu.contains(event.target);
+
+        const clicouNoBotao =
+            event.target.closest("button");
+
+        if (
+            !clicouDentroMenu &&
+            !clicouNoBotao
+        ) {
+
+            menu.classList.remove("ativo");
+
+        }
+
+    }
+);
+
+</script>
+
+
+<br>
+
+
+<h2>Editar clube</h2>
+
+
+<article>
+
+<p>
+Bem-vindo à área dos clubes do livro!
+Aqui você pode participar de grupos de leitura,
+compartilhar suas opiniões, descobrir novas histórias
+e conversar com pessoas que também amam ler.
+Escolha um clube, acompanhe as leituras e faça parte
+dessa comunidade cheia de ideias e imaginação!
+</p>
+
+</article>
+
+
+<br>
+
+<hr>
+
+
+<form class="form" id="formEditar">
+
+
+    <label for="campo_nome">
+        Nome:
+    </label>
+
+    <input
+        id="campo_nome"
+        type="text"
+        placeholder="Digite o nome do seu clube"
+    >
+
+    <br>
+
+
+    <label for="campo_presidente">
+        Presidente do clube:
+    </label>
+
+    <input
+        id="campo_presidente"
+        type="text"
+        placeholder="Nome do presidente"
+    >
+
+    <br>
+
+
+    <label for="campo_max_membros">
+        Quantidade máx. de membros:
+    </label>
+
+    <input
+        id="campo_max_membros"
+        type="number"
+        placeholder="Digite a quantidade"
+    >
+
+    <br>
+
+
+    <label for="campo_descricao">
+        Descrição
+    </label>
+
+    <textarea
+        id="campo_descricao"
+        rows="4"
+        cols="50"
+        maxlength="500"
+        placeholder="Digite a descrição do clube"
+    ></textarea>
+
+
+    <h4>
+        Gênero de foco
+    </h4>
+
+
+    <select id="campo_genero_principal">
+
+        <option value="Fantasia">
+            Fantasia
+        </option>
+
+        <option value="Ficção Científica">
+            Ficção Científica
+        </option>
+
+        <option value="Suspense e Thriller">
+            Suspense e Thriller
+        </option>
+
+        <option value="Romance">
+            Romance
+        </option>
+
+        <option value="Terror">
+            Terror
+        </option>
+
+        <option value="Mistério">
+            Mistério
+        </option>
+
+        <option value="Distopia">
+            Distopia
+        </option>
+
+        <option value="Biografia e Autobiografia">
+            Biografia e Autobiografia
+        </option>
+
+        <option value="Autoajuda e Desenvolvimento Pessoal">
+            Autoajuda e Desenvolvimento Pessoal
+        </option>
+
+    </select>
+
+
+    <h4>
+        Gênero secundário (opcional)
+    </h4>
+
+
+    <select id="campo_genero_secundario">
+
+        <option value="Fantasia">
+            Fantasia
+        </option>
+
+        <option value="Ficção Científica">
+            Ficção Científica
+        </option>
+
+        <option value="Suspense e Thriller">
+            Suspense e Thriller
+        </option>
+
+        <option value="Romance">
+            Romance
+        </option>
+
+        <option value="Terror">
+            Terror
+        </option>
+
+        <option value="Mistério">
+            Mistério
+        </option>
+
+        <option value="Distopia">
+            Distopia
+        </option>
+
+        <option value="Biografia e Autobiografia">
+            Biografia e Autobiografia
+        </option>
+
+        <option value="Autoajuda e Desenvolvimento Pessoal">
+            Autoajuda e Desenvolvimento Pessoal
+        </option>
+
+    </select>
+
+
+    <h4>
+        Dias de reunião
+    </h4>
+
+
+    <select id="campo_dia_reuniao">
+
+        <option value="Segunda-feira">
+            Segunda
+        </option>
+
+        <option value="Terça-feira">
+            Terça-feira
+        </option>
+
+        <option value="Quarta-feira">
+            Quarta-feira
+        </option>
+
+        <option value="Quinta-feira">
+            Quinta-feira
+        </option>
+
+        <option value="Sexta-feira">
+            Sexta-feira
+        </option>
+
+        <option value="Sábado">
+            Sábado
+        </option>
+
+    </select>
+
+
+    <br>
+    <br>
+
+
+    <label for="campo_horario">
+        Horário das reuniões
+    </label>
+
+    <input
+        id="campo_horario"
+        type="time"
+    >
+
+
+    <h4>
+        Frequência de reuniões
+    </h4>
+
+
+    <select id="campo_frequencia">
+
+        <option value="Semanal">
+            Semanal
+        </option>
+
+        <option value="Quinzenal">
+            Quinzenal
+        </option>
+
+    </select>
+
+
+    <br>
+    <br>
+
+
+    <button
+        type="button"
+        onclick="salvarAlteracoes()"
+    >
+        Salvar alterações
+    </button>
+
+
+    <button
+        type="button"
+        onclick="excluirClube()"
+    >
+        Excluir
+    </button>
+
+
+</form>
+
+
+<footer class="container1">
+
+<p>
+© Direitos autorais(© 2026 LiteLAB)
+Terceiro ano A-Desenvolvimento de Sistemas<br>
+E-mail: 00001124254043sp@al.educacao.sp.gov.br
+</p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================================
+   PEGA O ID DO CLUBE NA URL
+========================================= */
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const clubeId =
+    parametros.get("id");
+
+
+/* =========================================
+   BUSCA OS DADOS DO CLUBE
+========================================= */
+
+async function carregarClube() {
+
+    if (!clubeId) {
+
+        alert(
+            "Não foi possível identificar o clube."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                "http://192.168.0.165:8081/buscarClube?id="
+                + clubeId
+            );
+
+
+        const clube =
+            await resposta.json();
+
+
+        if (!resposta.ok) {
+
+            alert(
+                clube
+            );
+
+            return;
+        }
+
+
+        /*
+         * Preenche os campos
+         */
+
+        document.getElementById(
+            "campo_nome"
+        ).value =
+            clube.nome || "";
+
+
+        document.getElementById(
+            "campo_presidente"
+        ).value =
+            clube.presidente || "";
+
+
+        document.getElementById(
+            "campo_max_membros"
+        ).value =
+            clube.max_membros || "";
+
+
+        document.getElementById(
+            "campo_descricao"
+        ).value =
+            clube.descricao || "";
+
+
+        document.getElementById(
+            "campo_genero_principal"
+        ).value =
+            clube.genero_principal || "";
+
+
+        document.getElementById(
+            "campo_genero_secundario"
+        ).value =
+            clube.genero_secundario || "";
+
+
+        document.getElementById(
+            "campo_dia_reuniao"
+        ).value =
+            clube.dia_reuniao || "";
+
+
+        document.getElementById(
+            "campo_horario"
+        ).value =
+            clube.horario_reuniao || "";
+
+
+        document.getElementById(
+            "campo_frequencia"
+        ).value =
+            clube.frequencia || "";
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível carregar os dados do clube."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SALVAR ALTERAÇÕES
+========================================= */
+
+async function salvarAlteracoes() {
+
+    const usuario =
+        localStorage.getItem(
+            "nomeUsuario"
+        );
+
+
+    if (!usuario) {
+
+        alert(
+            "Usuário não identificado."
+        );
+
+        return;
+    }
+
+
+    if (!clubeId) {
+
+        alert(
+            "Clube não identificado."
+        );
+
+        return;
+    }
+
+
+    const dados = {
+
+        clube_id:
+            clubeId,
+
+        nome:
+            document.getElementById(
+                "campo_nome"
+            ).value,
+
+        presidente:
+            document.getElementById(
+                "campo_presidente"
+            ).value,
+
+        max_membros:
+            document.getElementById(
+                "campo_max_membros"
+            ).value,
+
+        descricao:
+            document.getElementById(
+                "campo_descricao"
+            ).value,
+
+        genero_principal:
+            document.getElementById(
+                "campo_genero_principal"
+            ).value,
+
+        genero_secundario:
+            document.getElementById(
+                "campo_genero_secundario"
+            ).value,
+
+        dia_reuniao:
+            document.getElementById(
+                "campo_dia_reuniao"
+            ).value,
+
+        horario_reuniao:
+            document.getElementById(
+                "campo_horario"
+            ).value,
+
+        frequencia:
+            document.getElementById(
+                "campo_frequencia"
+            ).value,
+
+        usuario:
+            usuario
+
+    };
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                "http://192.168.0.165:8081/atualizarClube",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(dados)
+
+                }
+            );
+
+
+        const resultado =
+            await resposta.text();
+
+
+        if (!resposta.ok) {
+
+            alert(resultado);
+
+            return;
+        }
+
+
+        alert(
+            "Clube atualizado com sucesso!"
+        );
+
+
+        window.location.href =
+            "clubecriado.html";
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível conectar ao servidor."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   EXCLUIR CLUBE
+========================================= */
+
+async function excluirClube() {
+
+    const usuario =
+        localStorage.getItem(
+            "nomeUsuario"
+        );
+
+
+    if (!usuario) {
+
+        alert(
+            "Usuário não identificado."
+        );
+
+        return;
+    }
+
+
+    if (!clubeId) {
+
+        alert(
+            "Não foi possível identificar o clube."
+        );
+
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "Tem certeza que deseja excluir este clube?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+    }
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                "http://192.168.0.165:8081/excluirClube",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            clube_id:
+                                clubeId,
+
+                            usuario:
+                                usuario
+
+                        })
+
+                }
+            );
+
+
+        const resultado =
+            await resposta.text();
+
+
+        if (!resposta.ok) {
+
+            alert(resultado);
+
+            return;
+        }
+
+
+        alert(
+            "Clube excluído com sucesso!"
+        );
+
+
+        window.location.href =
+            "clubeexcluido.html";
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao excluir clube:",
+            erro
+        );
+
+
+        alert(
+            "Não foi possível conectar ao servidor."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   CARREGA O CLUBE ASSIM QUE A PÁGINA ABRIR
+========================================= */
+
+carregarClube();
+
+</script>
+
+
+</body>
+
+</html>

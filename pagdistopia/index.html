@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de livros">
+    <meta name="keywords" content="html, css, livros">
+    <meta name="author" content="Amanda Porto Batista">
+
+    <link rel="stylesheet" href="estrutura.css">
+
+    <title>LITELAB</title>
+
+    <style>
+
+        /* =========================
+           BARRA DE PESQUISA
+        ========================= */
+
+        .barra-pesquisa {
+            width: 100%;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .barra-pesquisa input {
+            width: 40%;
+            height: 7px;
+            padding: 10px;
+        }
+
+        /* =========================
+           PESQUISA SEM RESULTADO
+        ========================= */
+
+        .mensagem-pesquisa {
+            width: 100%;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 18px;
+        }
+
+        /* =========================
+           LIVROS OCULTOS
+        ========================= */
+
+        .livro-card.oculto {
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+<body class="body">
+
+
+    <!-- =========================
+         MENU
+    ========================= -->
+
+    <div class="cabecalho">
+
+        <button onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+    </div>
+
+
+    <ul id="menu" class="menu">
+
+        <li>
+            <a href="../index.html">
+                Página Inicial
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/perfil.html">
+                Perfil
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/nt.html">
+                Notificações
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                Biblioteca
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/vendas.html">
+                Vendas
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubes.html">
+                Clubes
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubecriado.html">
+                Clubes criados
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/cadastrolivros.html">
+                Cadastro dos livros
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/index.html">
+                Resenhas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/rl.html">
+                Ranking
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- =========================
+         SCRIPT DO MENU
+    ========================= -->
+
+    <script>
+
+        const menu =
+            document.getElementById("menu");
+
+        const botaoMenu =
+            document.querySelector(".cabecalho button");
+
+
+        function toggleMenu() {
+
+            menu.classList.toggle("ativo");
+
+
+            if (
+                menu.classList.contains("ativo")
+            ) {
+
+                botaoMenu.classList.add(
+                    "escondido"
+                );
+
+            } else {
+
+                botaoMenu.classList.remove(
+                    "escondido"
+                );
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const clicouDentroMenu =
+                    menu.contains(event.target);
+
+                const clicouNoBotao =
+                    event.target.closest(
+                        ".cabecalho button"
+                    );
+
+
+                if (
+                    !clicouDentroMenu &&
+                    !clicouNoBotao
+                ) {
+
+                    menu.classList.remove(
+                        "ativo"
+                    );
+
+                    botaoMenu.classList.remove(
+                        "escondido"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- =========================
+         LOGO
+    ========================= -->
+
+    <header class="header">
+
+        <img
+            src="imagem/logo.png"
+            alt="Logo LITELAB"
+            class="logo"
+        >
+
+    </header>
+
+
+    <!-- =========================
+         GÊNEROS
+    ========================= -->
+
+    <section class="generos">
+
+        <a
+            href="../pagromance/index.html"
+            class="box"
+        >
+            Romance
+        </a>
+
+        <a
+            href="../pagconto/index.html"
+            class="box"
+        >
+            Conto
+        </a>
+
+        <a
+            href="../pagdistopia/index.html"
+            class="box"
+        >
+            Distopia
+        </a>
+
+        <a
+            href="../pagcrônica/index.html"
+            class="box"
+        >
+            Crônica
+        </a>
+
+        <a
+            href="../pagteatro/index.html"
+            class="box"
+        >
+            Teatro
+        </a>
+
+        <a
+            href="../pagestrangeira/index.html"
+            class="box"
+        >
+            Literatura estrangeira
+        </a>
+
+        <a
+            href="../pagfilosofia/index.html"
+            class="box"
+        >
+            Filosofia
+        </a>
+
+        <a
+            href="../pagpoesia/index.html"
+            class="box"
+        >
+            Poesia
+        </a>
+
+    </section>
+
+
+    <br>
+
+    <hr>
+
+
+    <!-- =========================
+         BARRA DE PESQUISA
+    ========================= -->
+
+    <div class="barra-pesquisa">
+
+        <input
+            style="width: 40%; height:7px;"
+            type="text"
+            id="pesquisa"
+            placeholder="pesquisa por autor(a), titúlo"
+            onkeyup="buscarLivro()"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- =========================
+         TÍTULO
+    ========================= -->
+
+    <div class="pesquisa-area">
+
+        <h2 class="titulo-genero">
+            DISTOPIA(2)
+        </h2>
+
+    </div>
+
+
+    <!-- =========================
+         LIVROS
+    ========================= -->
+
+    <div
+        class="livros"
+        id="listaLivros"
+    >
+
+
+        <!-- =========================
+             LIVRO 1
+        ========================= -->
+
+        <div
+            class="livro-card"
+            data-pesquisa="a revolucao dos bichos george orwell"
+        >
+
+            <a
+                href="pdf/livro a revolucao dos bixos.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/distopia1.png"
+                    class="livro"
+                    alt="A Revolução dos Bichos"
+                >
+
+            </a>
+
+            <span class="favorito">
+                ☆
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             LIVRO 2
+        ========================= -->
+
+        <div
+            class="livro-card"
+            data-pesquisa="1984 george orwell"
+        >
+
+            <a
+                href="pdf/livro 1984.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/distopia2.png"
+                    class="livro"
+                    alt="1984"
+                >
+
+            </a>
+
+            <span class="favorito">
+                ☆
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         SCRIPT DA PESQUISA
+    ========================= -->
+
+    <script>
+
+        function buscarLivro() {
+
+            const campo =
+                document.getElementById(
+                    "pesquisa"
+                );
+
+
+            const texto =
+                campo.value
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(
+                        /[\u0300-\u036f]/g,
+                        ""
+                    )
+                    .trim();
+
+
+            const livros =
+                document.querySelectorAll(
+                    "#listaLivros .livro-card"
+                );
+
+
+            let encontrou = false;
+
+
+            livros.forEach(
+                function(livro) {
+
+                    const dados =
+                        livro
+                            .getAttribute(
+                                "data-pesquisa"
+                            )
+                            .toLowerCase()
+                            .normalize("NFD")
+                            .replace(
+                                /[\u0300-\u036f]/g,
+                                ""
+                            );
+
+
+                    if (
+                        texto === "" ||
+                        dados.includes(texto)
+                    ) {
+
+                        livro.classList.remove(
+                            "oculto"
+                        );
+
+                        encontrou = true;
+
+                    } else {
+
+                        livro.classList.add(
+                            "oculto"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            let mensagem =
+                document.getElementById(
+                    "mensagemPesquisa"
+                );
+
+
+            if (!mensagem) {
+
+                mensagem =
+                    document.createElement(
+                        "p"
+                    );
+
+                mensagem.id =
+                    "mensagemPesquisa";
+
+                mensagem.className =
+                    "mensagem-pesquisa";
+
+
+                document
+                    .getElementById(
+                        "listaLivros"
+                    )
+                    .parentNode
+                    .insertBefore(
+                        mensagem,
+                        document.getElementById(
+                            "listaLivros"
+                        )
+                    );
+
+            }
+
+
+            if (
+                texto !== "" &&
+                !encontrou
+            ) {
+
+                mensagem.textContent =
+                    "Nenhum livro encontrado.";
+
+            } else {
+
+                mensagem.textContent = "";
+
+            }
+
+        }
+
+    </script>
+
+
+    <!-- =========================
+         SISTEMA DE FAVORITOS
+    ========================= -->
+
+    <script>
+
+        const favoritos =
+            document.querySelectorAll(
+                ".favorito"
+            );
+
+        const usuario =
+            localStorage.getItem(
+                "nomeUsuario"
+            );
+
+
+        /* =========================
+           CARREGAR FAVORITOS
+        ========================= */
+
+        if (usuario) {
+
+            fetch(
+                "http://192.168.0.165:8081/favoritos?usuario="
+                + encodeURIComponent(usuario)
+            )
+
+            .then(
+                resposta => {
+
+                    if (!resposta.ok) {
+
+                        throw new Error(
+                            "Erro ao buscar favoritos"
+                        );
+
+                    }
+
+                    return resposta.json();
+
+                }
+            )
+
+            .then(
+                livrosFavoritos => {
+
+                    favoritos.forEach(
+                        estrela => {
+
+                            const card =
+                                estrela.closest(
+                                    ".livro-card"
+                                );
+
+
+                            const link =
+                                card.querySelector(
+                                    "a"
+                                );
+
+
+                            const caminhoPDF =
+                                link.getAttribute(
+                                    "href"
+                                );
+
+
+                            const livroNome =
+                                caminhoPDF
+                                    .split("/")
+                                    .pop()
+                                    .replace(
+                                        ".pdf",
+                                        ""
+                                    );
+
+
+                            const encontrado =
+                                livrosFavoritos.some(
+                                    livro =>
+                                        livro.livro_nome ===
+                                        livroNome
+                                );
+
+
+                            if (encontrado) {
+
+                                estrela.textContent =
+                                    "★";
+
+                                estrela.classList.add(
+                                    "ativo"
+                                );
+
+                                estrela.style.color =
+                                    "gold";
+
+                            }
+
+                        }
+                    );
+
+                }
+            )
+
+            .catch(
+                erro => {
+
+                    console.error(
+                        "Erro ao carregar favoritos:",
+                        erro
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           CLICAR NA ESTRELA
+        ========================= */
+
+        favoritos.forEach(
+            estrela => {
+
+                estrela.addEventListener(
+                    "click",
+                    async function() {
+
+
+                        const card =
+                            this.closest(
+                                ".livro-card"
+                            );
+
+
+                        const link =
+                            card.querySelector(
+                                "a"
+                            );
+
+
+                        const imagem =
+                            card.querySelector(
+                                "img"
+                            );
+
+
+                        const caminhoPDF =
+                            link.getAttribute(
+                                "href"
+                            );
+
+
+                        const livroNome =
+                            caminhoPDF
+                                .split("/")
+                                .pop()
+                                .replace(
+                                    ".pdf",
+                                    ""
+                                );
+
+
+                        const usuario =
+                            localStorage.getItem(
+                                "nomeUsuario"
+                            );
+
+
+                        /* =========================
+                           VERIFICAR LOGIN
+                        ========================= */
+
+                        if (!usuario) {
+
+                            alert(
+                                "Você precisa estar logado para favoritar um livro."
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =========================
+                           DESFAVORITAR
+                        ========================= */
+
+                        if (
+                            this.classList.contains(
+                                "ativo"
+                            )
+                        ) {
+
+                            this.classList.remove(
+                                "ativo"
+                            );
+
+                            this.textContent =
+                                "☆";
+
+                            this.style.color =
+                                "";
+
+
+                            try {
+
+                                const resposta =
+                                    await fetch(
+                                        "http://192.168.0.165:8081/desfavoritar",
+                                        {
+
+                                            method:
+                                                "POST",
+
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json"
+                                            },
+
+                                            body:
+                                                JSON.stringify({
+
+                                                    usuario:
+                                                        usuario,
+
+                                                    livro_nome:
+                                                        livroNome
+
+                                                })
+
+                                        }
+                                    );
+
+
+                                const mensagem =
+                                    await resposta.text();
+
+
+                                console.log(
+                                    "RESPOSTA DESFAVORITAR:",
+                                    mensagem
+                                );
+
+
+                                if (
+                                    !resposta.ok
+                                ) {
+
+                                    throw new Error(
+                                        mensagem
+                                    );
+
+                                }
+
+
+                            } catch (erro) {
+
+                                console.error(
+                                    "Erro ao remover favorito:",
+                                    erro
+                                );
+
+
+                                this.classList.add(
+                                    "ativo"
+                                );
+
+                                this.textContent =
+                                    "★";
+
+                                this.style.color =
+                                    "gold";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        /* =========================
+                           FAVORITAR
+                        ========================= */
+
+                        this.classList.add(
+                            "ativo"
+                        );
+
+                        this.textContent =
+                            "★";
+
+                        this.style.color =
+                            "gold";
+
+
+                        try {
+
+                            const resposta =
+                                await fetch(
+                                    "http://192.168.0.165:8081/favoritar",
+                                    {
+
+                                        method:
+                                            "POST",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify({
+
+                                                usuario:
+                                                    usuario,
+
+                                                livro_nome:
+                                                    livroNome,
+
+                                                livro_imagem:
+                                                    imagem.src
+
+                                            })
+
+                                    }
+                                );
+
+
+                            const mensagem =
+                                await resposta.text();
+
+
+                            console.log(
+                                "RESPOSTA FAVORITAR:",
+                                mensagem
+                            );
+
+
+                            if (
+                                !resposta.ok
+                            ) {
+
+                                throw new Error(
+                                    mensagem
+                                );
+
+                            }
+
+
+                        } catch (erro) {
+
+                            console.error(
+                                "Erro ao salvar favorito:",
+                                erro
+                            );
+
+
+                            this.classList.remove(
+                                "ativo"
+                            );
+
+                            this.textContent =
+                                "☆";
+
+                            this.style.color =
+                                "";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

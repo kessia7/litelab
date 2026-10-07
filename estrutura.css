@@ -1,0 +1,348 @@
+
+
+.dectexto{
+    color: white;
+    font-size: 40px;
+    margin: 0;
+}
+
+/* menu */
+  
+ #menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+#menu li {
+    margin-bottom: 10px;
+}
+
+#menu a {
+    display: block;
+    background-color: #008B8B;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* BOTÃO DO MENU */
+
+
+
+.cabecalho button {
+    position: absolute;
+  
+    top: 20px;
+    left: 20px;
+  
+    padding: 8px 12px;
+  
+    border-radius: 8px;
+    border: none;
+  
+    background-color: white;
+    color: black;
+  
+    cursor: pointer;
+  
+    font-family: Cambria, Georgia, serif;
+    font-size: 16px;
+    z-index: 1000;
+  }
+  
+  
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+
+    z-index: 2000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+.cabecalho button:hover {
+    background-color: #008B8B;
+    color: white;
+}
+
+/* CABEÇALHO */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(32,73,81);
+    font-family: Cambria, Georgia, serif;
+}
+
+.header {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent; 
+    position: relative;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+ 
+    .generos{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap; /* se não couber, quebra a linha */
+        margin-top: 35px;
+    }
+    
+    .generos .box{
+        display: inline-block;
+    
+        background-color: rgb(16, 50, 54);
+        color: white;
+    
+        padding: 13px 20px;
+        border-radius: 4px;
+    
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 13px;
+    
+        white-space: nowrap;
+        transition: 0.3s;
+    }
+    
+    .generos .box:hover{
+        background: white;
+        color: rgb(12,76,85);
+    }
+    
+    /* quando passa o mouse */
+    .box:hover {
+        background-color: white;
+        color: rgb(12, 76, 85);
+    }
+  
+    
+    #pesquisa {
+        width: 200px;
+        padding: 12px;
+        border-radius: 45px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+    }
+    .input-container {
+        position: relative;
+        width: 200px;
+    }
+    
+
+
+/* caixa da barra */
+.input-container {
+    position: relative;
+    width: 240px; /*  largura grande igual da imagem */
+}
+
+/* input */
+.input-container input {
+    width: 100%;
+    height: 45px; /*  altura certinha */
+    border-radius: 30px; /* bem arredondado */
+    border: none;
+    outline: none;
+    background-color: #242b2d; /*  cinza escuro */
+    color: white;
+    font-size: 16px;
+    padding: 0 20px 0 45px; /* espaço da lupa */
+}
+
+/* placeholder (texto dentro) */
+.input-container input::placeholder {
+    color: #9aa0a6;
+}
+.barra-pesquisa {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%; 
+   height: 10%;
+ 
+}
+
+
+
+/* ícone */
+.icone {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #9aa0a6;
+}
+   
+    .subtitulo {
+        color: white;
+        font-size: 30px;
+        margin-top: 5px;
+        text-align: center;
+    }
+
+
+    .card-genero {
+        background-color: #0a0a0a;
+        border-radius: 15px;
+        padding: 20px;
+        width: 220px;
+        height: 300px;
+        position: relative;
+        text-align: center;
+        border: 2px solid #ff2ca0;
+    }
+    
+    /* imagens dos livros */
+    .livros-preview {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .livros-preview img {
+        width: 60px;
+        height: 90px;
+        border-radius: 8px;
+    }
+    
+    /* quantidade +5 */
+    .quantidade {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    
+    /* nome do gênero */
+    .nome-genero {
+        color: #ff2ca0;
+        margin-top: 30px;
+        font-size: 20px;
+    }
+
+    .carrossel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    /* janela que esconde as outras imagens */
+    .janela {
+        width: 2000px;
+        overflow: hidden;
+    }
+    
+    /* linha das imagens */
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    
+    .slides img {
+        width: 250px;
+        height: 250px;
+        margin: 20px;
+        border-radius: 20px;
+    }
+    
+    .slides2 {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        transition: transform 0.4s ease;
+    }
+    
+    .slides2 .livro-card {
+        flex: 0 0 250px;
+    }
+    
+    .janela {
+        overflow: hidden;
+        width: 100%;
+    }
+    /* botões */
+    .btn {
+        background-color:  rgb(12, 76, 85);
+        border: none;
+        color: white;
+        font-size: 30px;
+        padding: 17px;
+        cursor: pointer;
+    }
+
+    .home-btn{   
+         position: fixed;   
+      top: 10px; 
+   left: 10px;  
+     background: white; 
+     color: rgb(12, 76, 85);  
+     padding: 10px 12px; 
+    border-radius: 50%;  
+    text-decoration: none;   
+     z-index: 9999; 
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);}.home-btn:hover{    
+       background: rgb(12, 76, 85);    color: white;}
+
+    

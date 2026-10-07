@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+
+
+
+<head>
+
+    <meta charset = "UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
+    <meta name = "viewport" content = "width=device-width, initial scale=1.0">
+    <meta name = "description" content = "clubes de livrps">
+    <meta name = "keywords" content = "html, biblioteca, clubes">
+    <meta name = "author" content = "Anna Helena">
+    <link rel = "stylesheet" href = "cssdosclubes.css">
+
+    <title> CLUBE </title>
+
+    <body>
+
+        <div class = "topo">
+
+
+        <h2 id="nomeClube">📚 Carregando...</h2>
+
+        <button class="button2" onclick="sairDoClube()">
+            Sair
+        </button>
+        </div>
+        <div id="infoClube"></div>
+        
+        <div class = "chat" id = "chat">
+        
+        
+        
+        </div>
+        
+        <div class = "area-enviar">
+        
+            <input
+                type = "text"
+                id = "mensagem"
+                placeholder = "Digite sua mensagem">
+        
+            <button onclick = "enviarMensagem()">
+                Enviar
+            </button>
+        
+        </div>
+        
+        <script>
+        
+        async function enviarMensagem() {
+    const campo = document.getElementById("mensagem");
+    const texto = campo.value.trim();
+
+    if (texto === "") {
+        return;
+    }
+
+    const parametros = new URLSearchParams(window.location.search);
+    const clubeId = parametros.get("id");
+
+    const usuario = localStorage.getItem("nomeUsuario");
+
+    if (!clubeId || !usuario) {
+        console.error("Clube ou usuário não encontrado.");
+        return;
+    }
+
+    try {
+        const resposta = await fetch(
+            "http://192.168.0.165:8081/enviarMensagem",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    clube_id: String(clubeId),
+                    usuario: usuario,
+                    mensagem: texto
+                })
+            }
+        );
+
+        const resultado = await resposta.text();
+
+        console.log(resultado);
+
+        campo.value = "";
+
+        await carregarMensagens();
+
+    } catch (erro) {
+        console.error("Erro ao enviar mensagem:", erro);
+    }
+}
+        async function carregarMensagens() {
+    const parametros = new URLSearchParams(window.location.search);
+    const clubeId = parametros.get("id");
+
+    if (!clubeId) return;
+
+    try {
+        const resposta = await fetch(
+            "http://192.168.0.165:8081/mensagens?id=" + clubeId
+        );
+
+        const mensagens = await resposta.json();
+
+        const chat = document.getElementById("chat");
+        chat.innerHTML = "";
+
+        mensagens.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "mensagem";
+
+            const usuarioDiv = document.createElement("div");
+            usuarioDiv.className = "usuario";
+            usuarioDiv.textContent = item.usuario;
+
+            div.appendChild(usuarioDiv);
+            div.appendChild(
+                document.createTextNode(item.mensagem)
+            );
+
+            chat.appendChild(div);
+        });
+
+        chat.scrollTop = chat.scrollHeight;
+
+    } catch (erro) {
+        console.error("Erro ao carregar mensagens:", erro);
+    }
+}
+carregarMensagens();
+setInterval(carregarMensagens, 2000);
+        
+        </script>
+
+<script>
+
+    async function carregarClube() {
+    
+        const parametros = new URLSearchParams(window.location.search);
+        const id = parametros.get("id");
+    
+        if (!id) {
+            return;
+        }
+    
+        const resposta = await fetch("http://192.168.0.165:8081/clubes");
+        const clubes = await resposta.json();
+    
+        const clube = clubes.find(c => c.id == id);
+    
+        if (clube) {
+            document.getElementById("nomeClube").textContent = "📚 " + clube.nome;
+        }
+    }
+    
+    carregarClube();
+
+    async function sairDoClube() {
+
+const parametros = new URLSearchParams(window.location.search);
+const clubeId = parametros.get("id");
+
+const usuario = localStorage.getItem("nomeUsuario");
+
+if (!clubeId || !usuario) {
+    console.error("Clube ou usuário não encontrado.");
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/sairClube",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                clube_id: String(clubeId),
+                usuario: usuario
+            })
+        }
+    );
+
+    const resultado = await resposta.text();
+
+    console.log(resultado);
+
+    window.location.href = "clubes.html";
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao sair do clube:",
+        erro
+    );
+
+}
+}
+    
+    </script>
+        
+        </body>
+
+        </head>
+        </html>

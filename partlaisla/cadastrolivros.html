@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="biblioteca virtual">
+
+    <meta name="keywords"
+          content="biblioteca, livros, LiteLAB">
+
+    <meta name="author"
+          content="laisla maria andreolo palharine">
+
+    <link rel="stylesheet" href="estilo.css">
+
+    <title>LiteLAB</title>
+
+</head>
+
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <div class="cabecalho">
+
+        <button onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+        <img src="imagem/LOGO.png"
+             alt="Logo LiteLAB"
+             class="logo">
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <ul id="menu" class="menu">
+
+        <li>
+            <a href="../partlaisla/index.html">
+                Página principal
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/perfil.html">
+                Perfil
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/nt.html">
+                Notificações
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                Biblioteca
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/estatisticas.html">
+                Estatísticas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/vendas.html">
+                Vendas
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubes.html">
+                Clubes
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubecriado.html">
+                Clubes criados
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/index.html">
+                Resenhas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/rl.html">
+                Ranking
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- SCRIPT DO MENU -->
+
+    <script>
+
+        const menu =
+            document.getElementById("menu");
+
+
+        function toggleMenu() {
+
+            menu.classList.toggle("ativo");
+
+        }
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const clicouDentroMenu =
+                    menu.contains(event.target);
+
+                const clicouNoBotao =
+                    event.target.closest("button");
+
+
+                if (
+                    !clicouDentroMenu &&
+                    !clicouNoBotao
+                ) {
+
+                    menu.classList.remove("ativo");
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- CADASTRO DO LIVRO -->
+
+    <div class="container1">
+
+        <h2>
+            📚 Cadastro de livro
+        </h2>
+
+
+        <!-- NOME -->
+
+        <label for="campo_nome">
+            Nome:
+        </label>
+
+        <input
+            id="campo_nome"
+            type="text"
+            placeholder="Digite o nome do livro"
+        >
+
+        <br>
+
+
+        <!-- AUTOR -->
+
+        <label for="campo_autor">
+            Autor:
+        </label>
+
+        <input
+            id="campo_autor"
+            type="text"
+            placeholder="Digite o autor"
+        >
+
+        <br>
+
+
+        <!-- EDITORA -->
+
+        <label for="campo_editora">
+            Editora:
+        </label>
+
+        <input
+            id="campo_editora"
+            type="text"
+            placeholder="Digite a editora"
+        >
+
+        <br>
+
+
+        <!-- PÁGINAS -->
+
+        <label for="campo_paginas">
+            Quantidade de páginas:
+        </label>
+
+        <input
+            id="campo_paginas"
+            type="number"
+            min="0"
+            placeholder="Digite a quantidade de páginas"
+        >
+
+        <br>
+
+
+        <!-- GÊNERO -->
+
+        <h4>
+            Gênero
+        </h4>
+
+        <select id="campo_genero">
+
+            <option value="Romance">
+                Romance
+            </option>
+
+            <option value="Conto">
+                Conto
+            </option>
+
+            <option value="Poesia">
+                Poesia
+            </option>
+
+            <option value="Crônica">
+                Crônica
+            </option>
+
+            <option value="Teatro">
+                Teatro
+            </option>
+
+            <option value="Filosofia">
+                Filosofia
+            </option>
+
+            <option value="História">
+                História
+            </option>
+
+            <option value="Distopia">
+                Distopia
+            </option>
+
+            <option value="Literatura Estrangeira">
+                Literatura Estrangeira
+            </option>
+
+        </select>
+
+
+        <!-- STATUS -->
+
+        <h4>
+            Status da leitura
+        </h4>
+
+        <select id="campo_status">
+
+            <option value="concluido">
+                Já li
+            </option>
+
+            <option value="em_leitura">
+                Estou lendo
+            </option>
+
+        </select>
+
+
+        <br>
+        <br>
+
+
+        <!-- BOTÃO -->
+
+        <button
+            type="button"
+            onclick="cadastrarLivro()"
+        >
+            Cadastrar livro
+        </button>
+
+    </div>
+
+
+    <!-- SCRIPT DO CADASTRO -->
+
+    <script>
+
+        function cadastrarLivro() {
+
+
+            const nomeLivro =
+                document
+                .getElementById("campo_nome")
+                .value
+                .trim();
+
+
+            const autor =
+                document
+                .getElementById("campo_autor")
+                .value
+                .trim();
+
+
+            const editora =
+                document
+                .getElementById("campo_editora")
+                .value
+                .trim();
+
+
+            const paginas =
+                document
+                .getElementById("campo_paginas")
+                .value;
+
+
+            const genero =
+                document
+                .getElementById("campo_genero")
+                .value;
+
+
+            const status =
+                document
+                .getElementById("campo_status")
+                .value;
+
+
+            const nomeUsuario =
+                localStorage.getItem(
+                    "nomeUsuario"
+                );
+
+
+            /*
+             * VERIFICA SE EXISTE USUÁRIO LOGADO
+             */
+
+            if (!nomeUsuario) {
+
+                alert(
+                    "Usuário não encontrado. Faça login novamente."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * VERIFICA OS CAMPOS
+             */
+
+            if (
+                nomeLivro === "" ||
+                autor === "" ||
+                editora === "" ||
+                paginas === ""
+            ) {
+
+                alert(
+                    "Preencha todos os campos."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * VERIFICA PÁGINAS
+             */
+
+            const quantidadePaginas =
+                Number(paginas);
+
+
+            if (
+                isNaN(quantidadePaginas) ||
+                quantidadePaginas < 0
+            ) {
+
+                alert(
+                    "Digite uma quantidade de páginas válida."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * DADOS QUE SERÃO ENVIADOS
+             */
+
+            const dados = {
+
+                usuario: nomeUsuario,
+
+                livro_nome: nomeLivro,
+
+                autor: autor,
+
+                editora: editora,
+
+                paginas: paginas,
+
+                genero: genero,
+
+                status: status
+
+            };
+
+
+            console.log(
+                "Enviando cadastro:",
+                dados
+            );
+
+
+            /*
+             * ENVIA PARA O JAVA
+             */
+
+            fetch(
+                "http://192.168.0.165:8081/cadastrarLeitura",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(dados)
+
+                }
+            )
+
+
+            .then(
+                resposta => {
+
+                    return resposta.text();
+
+                }
+            )
+
+
+            .then(
+                resultado => {
+
+                    console.log(
+                        "Resposta do Java:",
+                        resultado
+                    );
+
+
+                    alert(resultado);
+
+
+                    /*
+                     * LIMPA OS CAMPOS
+                     * APÓS CADASTRAR
+                     */
+
+                    if (
+                        resultado.includes(
+                            "sucesso"
+                        )
+                    ) {
+
+                        document
+                        .getElementById(
+                            "campo_nome"
+                        )
+                        .value = "";
+
+                        document
+                        .getElementById(
+                            "campo_autor"
+                        )
+                        .value = "";
+
+                        document
+                        .getElementById(
+                            "campo_editora"
+                        )
+                        .value = "";
+
+                        document
+                        .getElementById(
+                            "campo_paginas"
+                        )
+                        .value = "";
+
+                    }
+
+                }
+            )
+
+
+            .catch(
+                erro => {
+
+                    console.error(
+                        "Erro ao cadastrar livro:",
+                        erro
+                    );
+
+
+                    alert(
+                        "Erro ao conectar com o servidor Java."
+                    );
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+
+<footer>
+
+    <p>
+
+        © Direitos autorais (© 2026 LiteLAB)
+
+        Terceiro ano A - Desenvolvimento de Sistemas
+
+        <br>
+
+        E-mail:
+        00001124254043sp@al.educacao.sp.gov.br
+
+    </p>
+
+</footer>
+
+
+</html>

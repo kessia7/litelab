@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Página de livros">
+    <meta name="keywords" content="html, css, livros">
+    <meta name="author" content="Amanda Porto Batista">
+
+    <link rel="stylesheet" href="estrutura.css">
+
+    <title>LITELAB</title>
+
+
+    <style>
+
+        /* ==========================================
+           BARRA DE PESQUISA
+        ========================================== */
+
+        .barra-pesquisa {
+            width: 100%;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .barra-pesquisa input {
+            width: 40%;
+            height: 7px;
+            padding: 10px;
+        }
+
+
+        /* ==========================================
+           LIVRO OCULTO DURANTE A PESQUISA
+        ========================================== */
+
+        .livro-card.oculto {
+            display: none;
+        }
+
+
+        /* ==========================================
+           MENSAGEM DE PESQUISA
+        ========================================== */
+
+        .mensagem-pesquisa {
+            width: 100%;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 18px;
+        }
+
+
+        /* ==========================================
+           GRUPOS DE CATEGORIA
+        ========================================== */
+
+        .grupo-categoria {
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="body">
+
+
+    <!-- ==========================================
+         MENU
+    ========================================== -->
+
+    <div class="cabecalho">
+
+        <button onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+    </div>
+
+
+    <ul id="menu" class="menu">
+
+        <li>
+            <a href="../index.html">
+                Página Inicial
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/perfil.html">
+                Perfil
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/nt.html">
+                Notificações
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                Biblioteca
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/vendas.html">
+                Vendas
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubes.html">
+                Clubes
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubecriado.html">
+                Clubes criados
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/cadastrolivros.html">
+                Cadastro dos livros
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/index.html">
+                Resenhas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/rl.html">
+                Ranking
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- ==========================================
+         SCRIPT DO MENU
+    ========================================== -->
+
+    <script>
+
+        const menu =
+            document.getElementById("menu");
+
+        const botaoMenu =
+            document.querySelector(".cabecalho button");
+
+
+        function toggleMenu() {
+
+            menu.classList.toggle("ativo");
+
+
+            if (
+                menu.classList.contains("ativo")
+            ) {
+
+                botaoMenu.classList.add(
+                    "escondido"
+                );
+
+            } else {
+
+                botaoMenu.classList.remove(
+                    "escondido"
+                );
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const clicouDentroMenu =
+                    menu.contains(event.target);
+
+                const clicouNoBotao =
+                    event.target.closest(
+                        ".cabecalho button"
+                    );
+
+
+                if (
+                    !clicouDentroMenu &&
+                    !clicouNoBotao
+                ) {
+
+                    menu.classList.remove(
+                        "ativo"
+                    );
+
+                    botaoMenu.classList.remove(
+                        "escondido"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- ==========================================
+         LOGO
+    ========================================== -->
+
+    <header class="header">
+
+        <img
+            src="imagem/logo.png"
+            alt="Logo LITELAB"
+            class="logo"
+        >
+
+    </header>
+
+
+    <!-- ==========================================
+         GÊNEROS
+    ========================================== -->
+
+    <section class="generos">
+
+        <a
+            href="../pagromance/index.html"
+            class="box"
+        >
+            Romance
+        </a>
+
+        <a
+            href="../pagconto/index.html"
+            class="box"
+        >
+            Conto
+        </a>
+
+        <a
+            href="../pagdistopia/index.html"
+            class="box"
+        >
+            Distopia
+        </a>
+
+        <a
+            href="../pagcrônica/index.html"
+            class="box"
+        >
+            Crônica
+        </a>
+
+        <a
+            href="../pagteatro/index.html"
+            class="box"
+        >
+            Teatro
+        </a>
+
+        <a
+            href="../pagestrangeira/index.html"
+            class="box"
+        >
+            Literatura estrangeira
+        </a>
+
+        <a
+            href="../pagfilosofia/index.html"
+            class="box"
+        >
+            Filosofia
+        </a>
+
+        <a
+            href="../pagpoesia/index.html"
+            class="box"
+        >
+            Poesia
+        </a>
+
+    </section>
+
+
+    <br>
+
+    <hr>
+
+
+    <!-- ==========================================
+         BARRA DE PESQUISA
+    ========================================== -->
+
+    <div class="barra-pesquisa">
+
+        <input
+            style="width: 40%; height:7px;"
+            type="text"
+            id="pesquisa"
+            placeholder="pesquisa por autor(a), titúlo"
+            onkeyup="buscarLivro()"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- ==========================================
+         MENSAGEM DE PESQUISA
+    ========================================== -->
+
+    <p
+        id="mensagemPesquisa"
+        class="mensagem-pesquisa"
+    ></p>
+
+
+    <!-- ==========================================
+         LITERATURA ESTRANGEIRA
+    ========================================== -->
+
+    <div class="grupo-categoria">
+
+        <h2 class="titulo-genero">
+            LITERATURA ESTRANGEIRA (15)
+        </h2>
+
+
+        <div class="livros">
+
+
+            <!-- LIVRO 1 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="livro romance"
+            >
+
+                <a
+                    href="pdf/livro "
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estangeira1.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 2 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="o crime do padre amaro"
+            >
+
+                <a
+                    href="pdf/livro o crime do padre amaro.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira2.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 3 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="os maias"
+            >
+
+                <a
+                    href="pdf/livro os maias.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira3.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 4 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="amor e perdição"
+            >
+
+                <a
+                    href="pdf/livro amor e perdição.pdf.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira4.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 5 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="iracema"
+            >
+
+                <a
+                    href="pdf/livro iracema2.pdf.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira5.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 6 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="o judeu"
+            >
+
+                <a
+                    href="pdf/livro o judeu.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira6.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 7 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="aventuras de dona redonda"
+            >
+
+                <a
+                    href="pdf/livro Aventuras de Dona Redonda.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira7.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 8 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="bruxa do monte cordova"
+            >
+
+                <a
+                    href="pdf/livro a Bruxa do Monte Cordova.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira8.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 9 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="principe com orelhas de burro"
+            >
+
+                <a
+                    href="pdf/livro o principe com orelhas de burro.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira9.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 10 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="viuva do inforcado"
+            >
+
+                <a
+                    href="pdf/livro a viuva do inforcado.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira10.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 11 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="cidade e as serras"
+            >
+
+                <a
+                    href="pdf/livro a cidade e as serras.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira11.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 12 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="amanha"
+            >
+
+                <a
+                    href="pdf/livro amanha.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira12.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 13 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="doido do canal"
+            >
+
+                <a
+                    href="pdf/livro  doid do canal.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira13.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 14 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="a ala"
+            >
+
+                <a
+                    href="pdf/livro a ala.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira14.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+
+            <!-- LIVRO 15 -->
+
+            <div
+                class="livro-card"
+                data-pesquisa="o bobo"
+            >
+
+                <a
+                    href="pdf/livro o bobo.pdf"
+                    target="_blank"
+                >
+
+                    <img
+                        src="imagem/estrangeira15.png"
+                        class="livro"
+                    >
+
+                </a>
+
+                <span class="favorito">☆</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ==========================================
+         CONTO
+    ========================================== -->
+
+    <h2 class="titulo-genero">
+        CONTO(2)
+    </h2>
+
+    <br>
+
+    <div class="livros">
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="domino"
+        >
+
+            <a
+                href="pdf/livro domino.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira16.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="a ruiva"
+        >
+
+            <a
+                href="pdf/livro a ruiva.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira17.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ==========================================
+         POESIA
+    ========================================== -->
+
+    <h2 class="titulo-genero">
+        POESIA(3)
+    </h2>
+
+    <br>
+
+    <div class="livros">
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="poesia ou dinheiro"
+        >
+
+            <a
+                href="pdf/livro poesia ou dinheiro.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira18.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="julio"
+        >
+
+            <a
+                href="pdf/livro julio.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira19.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="marquesa"
+        >
+
+            <a
+                href="pdf/livro marquesa.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira20.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ==========================================
+         TEATRO
+    ========================================== -->
+
+    <h2 class="titulo-genero">
+        TEATRO(9)
+    </h2>
+
+    <br>
+
+    <div class="livros">
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="espinho e flores"
+        >
+
+            <a
+                href="pdf/livro espinho e flores.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira21.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="flauta e a viola"
+        >
+
+            <a
+                href="pdf/livro a flauta e a viola.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira22.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="purgatorio e paraiso teatro"
+        >
+
+            <a
+                href="pdf/livro Purgatório e Paraíso teatro.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira23.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="como os anjoes se vingam"
+        >
+
+            <a
+                href="pdf/livro como os anjoes se vimgam.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira24.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="lobisomi"
+        >
+
+            <a
+                href="pdf/livro lobisomi.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira25.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="assassino de macario"
+        >
+
+            <a
+                href="pdf/livro o assassino de macario.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira26.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="ultimo acto"
+        >
+
+            <a
+                href="pdf/livro o ultimo acto.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/strangeira27.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="fale a verdade antes de mentir"
+        >
+
+            <a
+                href="pdf/livro fale a verdade antes de mentir.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/strangeira28.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="antes de começar"
+        >
+
+            <a
+                href="pdf/livro antes de começãr.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/strangeira29.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ==========================================
+         AVENTURA
+    ========================================== -->
+
+    <h2 class="titulo-genero">
+        AVENTURA(5)
+    </h2>
+
+    <br>
+
+    <div class="livros">
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="um"
+        >
+
+            <a
+                href="pdf/livro um.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira30.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="dois"
+        >
+
+            <a
+                href="pdf/livro dois.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira31.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="tres"
+        >
+
+            <a
+                href="pdf/livro tres.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira32.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="quatro"
+        >
+
+            <a
+                href="pdf/livro quatro.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira33.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+
+        <div
+            class="livro-card"
+            data-pesquisa="cinco"
+        >
+
+            <a
+                href="pdf/livro cinco.pdf"
+                target="_blank"
+            >
+
+                <img
+                    src="imagem/estrangeira34.png"
+                    class="livro"
+                >
+
+            </a>
+
+            <span class="favorito">☆</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         SCRIPT DA PESQUISA
+    ========================================== -->
+
+    <script>
+
+        function buscarLivro() {
+
+            const campo =
+                document.getElementById("pesquisa");
+
+
+            const texto =
+                campo.value
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(
+                        /[\u0300-\u036f]/g,
+                        ""
+                    )
+                    .trim();
+
+
+            const livros =
+                document.querySelectorAll(
+                    ".livro-card"
+                );
+
+
+            let encontrou = false;
+
+
+            livros.forEach(
+                function(livro) {
+
+                    const dados =
+                        livro
+                            .getAttribute(
+                                "data-pesquisa"
+                            );
+
+
+                    if (!dados) {
+                        return;
+                    }
+
+
+                    const dadosNormalizados =
+                        dados
+                            .toLowerCase()
+                            .normalize("NFD")
+                            .replace(
+                                /[\u0300-\u036f]/g,
+                                ""
+                            );
+
+
+                    if (
+                        texto === "" ||
+                        dadosNormalizados.includes(
+                            texto
+                        )
+                    ) {
+
+                        livro.classList.remove(
+                            "oculto"
+                        );
+
+                        encontrou = true;
+
+                    } else {
+
+                        livro.classList.add(
+                            "oculto"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            const mensagem =
+                document.getElementById(
+                    "mensagemPesquisa"
+                );
+
+
+            if (
+                texto !== "" &&
+                !encontrou
+            ) {
+
+                mensagem.textContent =
+                    "Nenhum livro encontrado.";
+
+            } else {
+
+                mensagem.textContent =
+                    "";
+
+            }
+
+        }
+
+    </script>
+
+
+    <!-- ==========================================
+         SISTEMA DE FAVORITOS
+    ========================================== -->
+
+    <script>
+
+        const favoritos =
+            document.querySelectorAll(
+                ".favorito"
+            );
+
+        const usuario =
+            localStorage.getItem(
+                "nomeUsuario"
+            );
+
+
+        /* ==========================================
+           CARREGAR FAVORITOS
+        ========================================== */
+
+        if (usuario) {
+
+            fetch(
+                "http://192.168.0.165:8081/favoritos?usuario="
+                + encodeURIComponent(usuario)
+            )
+
+            .then(
+                resposta => {
+
+                    if (!resposta.ok) {
+
+                        throw new Error(
+                            "Erro ao buscar favoritos"
+                        );
+
+                    }
+
+                    return resposta.json();
+
+                }
+            )
+
+            .then(
+                livrosFavoritos => {
+
+                    favoritos.forEach(
+                        estrela => {
+
+                            const card =
+                                estrela.closest(
+                                    ".livro-card"
+                                );
+
+
+                            const link =
+                                card.querySelector(
+                                    "a"
+                                );
+
+
+                            const caminhoPDF =
+                                link.getAttribute(
+                                    "href"
+                                );
+
+
+                            const livroNome =
+                                caminhoPDF
+                                    .split("/")
+                                    .pop()
+                                    .replace(
+                                        ".pdf",
+                                        ""
+                                    );
+
+
+                            const encontrado =
+                                livrosFavoritos.some(
+                                    livro =>
+                                        livro.livro_nome ===
+                                        livroNome
+                                );
+
+
+                            if (encontrado) {
+
+                                estrela.textContent =
+                                    "★";
+
+                                estrela.classList.add(
+                                    "ativo"
+                                );
+
+                                estrela.style.color =
+                                    "gold";
+
+                            }
+
+                        }
+                    );
+
+                }
+            )
+
+            .catch(
+                erro => {
+
+                    console.error(
+                        "Erro ao carregar favoritos:",
+                        erro
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           CLICAR NA ESTRELA
+        ========================================== */
+
+        favoritos.forEach(
+            estrela => {
+
+                estrela.addEventListener(
+                    "click",
+                    async function() {
+
+
+                        const card =
+                            this.closest(
+                                ".livro-card"
+                            );
+
+
+                        const link =
+                            card.querySelector(
+                                "a"
+                            );
+
+
+                        const imagem =
+                            card.querySelector(
+                                "img"
+                            );
+
+
+                        const caminhoPDF =
+                            link.getAttribute(
+                                "href"
+                            );
+
+
+                        const livroNome =
+                            caminhoPDF
+                                .split("/")
+                                .pop()
+                                .replace(
+                                    ".pdf",
+                                    ""
+                                );
+
+
+                        const usuario =
+                            localStorage.getItem(
+                                "nomeUsuario"
+                            );
+
+
+                        /* ==========================================
+                           VERIFICAR LOGIN
+                        ========================================== */
+
+                        if (!usuario) {
+
+                            alert(
+                                "Você precisa estar logado para favoritar um livro."
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* ==========================================
+                           DESFAVORITAR
+                        ========================================== */
+
+                        if (
+                            this.classList.contains(
+                                "ativo"
+                            )
+                        ) {
+
+                            this.classList.remove(
+                                "ativo"
+                            );
+
+                            this.textContent =
+                                "☆";
+
+                            this.style.color =
+                                "";
+
+
+                            try {
+
+                                const resposta =
+                                    await fetch(
+                                        "http://192.168.0.165:8081/desfavoritar",
+                                        {
+
+                                            method:
+                                                "POST",
+
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json"
+                                            },
+
+                                            body:
+                                                JSON.stringify({
+
+                                                    usuario:
+                                                        usuario,
+
+                                                    livro_nome:
+                                                        livroNome
+
+                                                })
+
+                                        }
+                                    );
+
+
+                                const mensagem =
+                                    await resposta.text();
+
+
+                                console.log(
+                                    "RESPOSTA DESFAVORITAR:",
+                                    mensagem
+                                );
+
+
+                                if (
+                                    !resposta.ok
+                                ) {
+
+                                    throw new Error(
+                                        mensagem
+                                    );
+
+                                }
+
+
+                            } catch (erro) {
+
+                                console.error(
+                                    "Erro ao remover favorito:",
+                                    erro
+                                );
+
+
+                                this.classList.add(
+                                    "ativo"
+                                );
+
+                                this.textContent =
+                                    "★";
+
+                                this.style.color =
+                                    "gold";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        /* ==========================================
+                           FAVORITAR
+                        ========================================== */
+
+                        this.classList.add(
+                            "ativo"
+                        );
+
+                        this.textContent =
+                            "★";
+
+                        this.style.color =
+                            "gold";
+
+
+                        try {
+
+                            const resposta =
+                                await fetch(
+                                    "http://192.168.0.165:8081/favoritar",
+                                    {
+
+                                        method:
+                                            "POST",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify({
+
+                                                usuario:
+                                                    usuario,
+
+                                                livro_nome:
+                                                    livroNome,
+
+                                                livro_imagem:
+                                                    imagem.src
+
+                                            })
+
+                                    }
+                                );
+
+
+                            const mensagem =
+                                await resposta.text();
+
+
+                            console.log(
+                                "RESPOSTA FAVORITAR:",
+                                mensagem
+                            );
+
+
+                            if (
+                                !resposta.ok
+                            ) {
+
+                                throw new Error(
+                                    mensagem
+                                );
+
+                            }
+
+
+                        } catch (erro) {
+
+                            console.error(
+                                "Erro ao salvar favorito:",
+                                erro
+                            );
+
+
+                            this.classList.remove(
+                                "ativo"
+                            );
+
+                            this.textContent =
+                                "☆";
+
+                            this.style.color =
+                                "";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

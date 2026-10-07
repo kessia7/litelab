@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <meta name="description" content="biblioteca virtual">
+        <meta name="keywords" content="biblioteca, livros, LiteLAB">
+        <meta name="author" content="laisla maria andreolo palharine">
+    
+        <link rel="stylesheet" href="estilo.css">
+        
+        <title>LiteLAB</title>
+ 
+
+        
+    </head>
+    <body>
+
+      <div class="cabecalho">
+        <button onclick="toggleMenu()">☰ Menu</button>
+        <img src="imagem/LOGO.png" alt="Logo LiteLAB" class="logo">
+        </div>
+    <ul id="menu" class="menu">
+      <li><a href="../index.html">Página Inicial</a></li>
+      <li><a href="../partlaisla/perfil.html">Perfil</a></li>
+      <li><a href="../partemaria/nt.html">Notificações</a></li>
+      <li><a href="../index.html">Biblioteca</a></li>
+      <li><a href="../partemaria/vendas.html">Vendas</a></li>
+      <li><a href="../parteclubes/clubes.html">Clubes</a></li>
+      <li><a href="../parteclubes/clubecriado.html">Clubes criados</a></li>
+      <li><a href="../partlaisla/cadastrolivros.html">Cadastro dos livros</a></li>
+      <li><a href="../partemaria/index.html">Resenhas</a></li>
+      <li><a href="../partemaria/rl.html">Ranking</a></li>
+    </ul>
+    
+    <script>
+        const menu = document.getElementById("menu");
+        
+        function toggleMenu() {
+          menu.classList.toggle("ativo");
+        }
+        
+    
+        document.addEventListener("click", function(event) {
+          const clicouDentroMenu = menu.contains(event.target);
+          const clicouNoBotao = event.target.closest("button");
+        
+          if (!clicouDentroMenu && !clicouNoBotao) {
+            menu.classList.remove("ativo");
+          }
+        });
+        </script>
+    
+
+
+
+ 
+        <div class="estatisticas">
+
+            <h2>📊 Estatísticas</h2>
+
+            <div class="cards-estatisticas">
+
+                <div class="card-estatistica">
+                    <div>
+                        <p>Em leitura</p>
+                        <span id="emLeitura">0</span>
+                    </div>
+                    📖
+                </div>
+
+                <div class="card-estatistica">
+                    <div>
+                        <p>Concluídos</p>
+                        <span id="concluidos">0</span>
+                    </div>
+                    ✅
+                </div>
+
+                <div class="card-estatistica">
+                    <div>
+                        <p>Páginas lidas</p>
+                        <span id="paginasLidas">0</span>
+                    </div>
+                    📚
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<h2></h2>
+
+<script>
+
+    const nomeUsuario = localStorage.getItem("nomeUsuario");
+    
+    if (nomeUsuario) {
+    
+        fetch(
+            "http://192.168.0.165:8081/estatisticas?usuario="
+            + encodeURIComponent(nomeUsuario)
+        )
+    
+        .then(resposta => {
+    
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar estatísticas");
+            }
+    
+            return resposta.json();
+        })
+    
+        .then(dados => {
+    
+            console.log("ESTATÍSTICAS:", dados);
+    
+            document.getElementById("emLeitura").textContent =
+                dados.em_leitura;
+    
+            document.getElementById("concluidos").textContent =
+                dados.concluidos;
+    
+            document.getElementById("paginasLidas").textContent =
+                dados.paginas_lidas;
+        })
+    
+        .catch(erro => {
+    
+            console.error(
+                "Erro ao carregar estatísticas:",
+                erro
+            );
+    
+        });
+    
+    }
+    
+    </script>
+</body>

@@ -1,0 +1,519 @@
+create table genero (
+      codigogeneroID int primary key,
+      nome_genero varchar(30)
+)
+
+
+CREATE TABLE usuario (
+    id_usuario SERIAL PRIMARY KEY,
+    nome_completo VARCHAR(100) NOT NULL,
+    nome_usuario VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    idade INT,
+    telefone VARCHAR(20),
+    cidade VARCHAR(100),
+    cep VARCHAR(10),
+    uf CHAR(2),
+    biografia TEXT,
+    foto TEXT,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+
+CREATE TABLE livro (
+    id_livro SERIAL PRIMARY KEY,
+    titulo VARCHAR(150) NOT NULL,
+    autor VARCHAR(100) NOT NULL,
+    editora VARCHAR(100),
+    paginas INT NOT NULL,
+    descricao TEXT,
+    imagem TEXT,
+    ano_publicacao INT,
+    quantidade INT DEFAULT 1,
+    pdf TEXT,
+
+    codigogeneroID INT NOT NULL,
+
+    CONSTRAINT fk_livro_genero
+        FOREIGN KEY (codigogeneroID)
+        REFERENCES genero(codigogeneroID)
+);
+
+
+CREATE TABLE biblioteca (
+    id_biblioteca SERIAL PRIMARY KEY,
+
+    id_livro INT NOT NULL,
+
+    disponivel BOOLEAN DEFAULT TRUE,
+
+    CONSTRAINT fk_biblioteca_livro
+        FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+
+CREATE TABLE emprestimo (
+    id_emprestimo SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_livro INT NOT NULL,
+
+    data_emprestimo DATE,
+
+    data_devolucao DATE,
+
+    status VARCHAR(20),
+
+    CONSTRAINT fk_emprestimo_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    CONSTRAINT fk_emprestimo_livro
+        FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+
+CREATE TABLE lidos (
+    id_lido SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_livro INT NOT NULL,
+
+    data_inicio DATE,
+
+    data_fim DATE,
+
+    paginas_lidas INT DEFAULT 0,
+
+    status VARCHAR(20),
+
+    CONSTRAINT fk_lidos_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    CONSTRAINT fk_lidos_livro
+        FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+CREATE TABLE clube (
+    id_clube SERIAL PRIMARY KEY,
+
+    nome_clube VARCHAR(80) NOT NULL,
+
+    descricao TEXT,
+
+    presidente INT NOT NULL,
+
+    max_membros INT NOT NULL,
+
+    genero_principal INT NOT NULL,
+
+    genero_secundario INT,
+
+    dia_reuniao VARCHAR(20),
+
+    horario TIME,
+
+    frequencia VARCHAR(30),
+
+    foto TEXT,
+
+    CONSTRAINT fk_clube_presidente
+        FOREIGN KEY (presidente)
+        REFERENCES usuario(id_usuario),
+
+    CONSTRAINT fk_clube_genero_principal
+        FOREIGN KEY (genero_principal)
+        REFERENCES genero(codigogeneroID),
+
+    CONSTRAINT fk_clube_genero_secundario
+        FOREIGN KEY (genero_secundario)
+        REFERENCES genero(codigogeneroID)
+);
+
+CREATE TABLE membro_clube (
+    id_usuario INT,
+    id_clube INT,
+    data_entrada DATE DEFAULT CURRENT_DATE,
+
+    PRIMARY KEY (id_usuario, id_clube),
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    FOREIGN KEY (id_clube)
+        REFERENCES clube(id_clube)
+);
+
+CREATE TABLE favorito (
+    id_usuario INT,
+    id_livro INT,
+
+    PRIMARY KEY (id_usuario, id_livro),
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+CREATE TABLE estatistica (
+    id_usuario INT PRIMARY KEY,
+
+    em_leitura INT DEFAULT 0,
+
+    concluidos INT DEFAULT 0,
+
+    paginas_lidas INT DEFAULT 0,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE avaliacao (
+    id_avaliacao SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_livro INT NOT NULL,
+
+    nota INT NOT NULL CHECK (nota >= 1 AND nota <= 5),
+
+    comentario TEXT,
+
+    data_avaliacao DATE DEFAULT CURRENT_DATE,
+
+    CONSTRAINT fk_avaliacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    CONSTRAINT fk_avaliacao_livro
+        FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+CREATE TABLE recuperacao_senha (
+    id_recuperacao SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    token VARCHAR(255) NOT NULL,
+
+    validade TIMESTAMP NOT NULL,
+
+    CONSTRAINT fk_recuperacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE solicitacao_livro (
+    id_solicitacao SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    descricao TEXT NOT NULL,
+
+    data_solicitacao DATE DEFAULT CURRENT_DATE,
+
+    status VARCHAR(20) DEFAULT 'Pendente',
+
+    CONSTRAINT fk_solicitacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE chat (
+    id_chat SERIAL PRIMARY KEY,
+
+    nome_chat VARCHAR(100),
+
+    tipo VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE participante_chat (
+    id_chat INT,
+
+    id_usuario INT,
+
+    PRIMARY KEY (id_chat, id_usuario),
+
+    CONSTRAINT fk_participante_chat
+        FOREIGN KEY (id_chat)
+        REFERENCES chat(id_chat),
+
+    CONSTRAINT fk_participante_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE mensagem (
+    id_mensagem SERIAL PRIMARY KEY,
+
+    id_chat INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    mensagem TEXT NOT NULL,
+
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_mensagem_chat
+        FOREIGN KEY (id_chat)
+        REFERENCES chat(id_chat),
+
+    CONSTRAINT fk_mensagem_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE notificacao (
+    id_notificacao SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    titulo VARCHAR(100) NOT NULL,
+
+    descricao TEXT,
+
+    lida BOOLEAN DEFAULT FALSE,
+
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_notificacao_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE venda (
+    id_venda SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_livro INT NOT NULL,
+
+    valor DECIMAL(10,2) NOT NULL,
+
+    condicao VARCHAR(30),
+
+    quantidade INT DEFAULT 1,
+
+    data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_venda_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    CONSTRAINT fk_venda_livro
+        FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+CREATE TABLE ranking (
+    id_ranking SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL UNIQUE,
+
+    pontos INT DEFAULT 0,
+
+    nivel VARCHAR(30),
+
+    posicao INT,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE resenha (
+    id_resenha SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_livro INT NOT NULL,
+
+    titulo VARCHAR(150),
+
+    texto TEXT NOT NULL,
+
+    curtidas INT DEFAULT 0,
+
+    data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    FOREIGN KEY (id_livro)
+        REFERENCES livro(id_livro)
+);
+
+CREATE TABLE curtida_resenha (
+
+    id_usuario INT,
+
+    id_resenha INT,
+
+    PRIMARY KEY(id_usuario,id_resenha),
+
+    FOREIGN KEY(id_usuario)
+        REFERENCES usuario(id_usuario),
+
+    FOREIGN KEY(id_resenha)
+        REFERENCES resenha(id_resenha)
+);
+
+CREATE TABLE comentario_resenha (
+
+    id_comentario SERIAL PRIMARY KEY,
+
+    id_resenha INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    comentario TEXT NOT NULL,
+
+    data_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(id_resenha)
+        REFERENCES resenha(id_resenha),
+
+    FOREIGN KEY(id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE convite_clube (
+
+    id_convite SERIAL PRIMARY KEY,
+
+    id_clube INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    status VARCHAR(20) DEFAULT 'Pendente',
+
+    data_convite TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(id_clube)
+        REFERENCES clube(id_clube),
+
+    FOREIGN KEY(id_usuario)
+        REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE evento (
+
+    id_evento SERIAL PRIMARY KEY,
+
+    id_clube INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    titulo VARCHAR(100) NOT NULL,
+
+    descricao TEXT,
+
+    local VARCHAR(150),
+
+    data_evento DATE NOT NULL,
+
+    horario TIME NOT NULL,
+
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_evento_clube
+        FOREIGN KEY(id_clube)
+        REFERENCES clube(id_clube),
+
+    CONSTRAINT fk_evento_usuario
+        FOREIGN KEY(id_usuario)
+        REFERENCES usuario(id_usuario)
+
+);
+
+CREATE TABLE lembrete (
+
+    id_lembrete SERIAL PRIMARY KEY,
+
+    id_evento INT NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    mensagem TEXT NOT NULL,
+
+    data_envio TIMESTAMP,
+
+    enviado BOOLEAN DEFAULT FALSE,
+
+    CONSTRAINT fk_lembrete_evento
+        FOREIGN KEY(id_evento)
+        REFERENCES evento(id_evento),
+
+    CONSTRAINT fk_lembrete_usuario
+        FOREIGN KEY(id_usuario)
+        REFERENCES usuario(id_usuario)
+
+);
+
+CREATE TABLE ranking (
+    id_ranking SERIAL PRIMARY KEY,
+    id_usuario INT NOT NULL,
+
+    pontos INT DEFAULT 0,
+    livros_lidos INT DEFAULT 0,
+    paginas_lidas INT DEFAULT 0,
+    nivel VARCHAR(50),
+
+    ultima_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE controle_leitura (
+    id_controle SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+    id_livro INT NOT NULL,
+
+    pagina_atual INT DEFAULT 0,
+    total_paginas INT,
+    porcentagem NUMERIC(5,2),
+
+    status VARCHAR(20) DEFAULT 'Lendo',
+
+    data_inicio DATE,
+    data_fim DATE
+);
+
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public';
+
+CREATE TABLE favoritos (
+    id_favorito SERIAL PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    id_livro INT NOT NULL,
+    data_favoritado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (usuario, id_livro)
+);
+
+INSERT INTO favoritos (usuario, id_livro)
+VALUES ('maria', 1);
+
+DELETE FROM favoritos
+WHERE usuario = 'maria'
+AND id_livro = 1;
+
+SELECT *
+FROM favoritos
+WHERE usuario = 'maria';
+
+CREATE TABLE senha_usuario (
+    id_senha SERIAL PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    data_alteracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

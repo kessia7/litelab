@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LiteLAB - Ranking de Leituras</title>
+
+    <style>
+
+.area-botao {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+
+.area-botao button{
+
+  padding: 8px 12px;
+
+  border-radius: 8px;
+  border: none;
+
+  background-color: white;
+  color: black;
+
+  cursor: pointer;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 16px;
+}
+
+
+.area-botao:hover {
+  background-color: #008B8B;
+  color: white;
+}
+
+
+/* =========================
+ MENU LATERAL
+========================= */
+
+#menu {
+  list-style: none;
+
+  margin: 0;
+  padding: 20px;
+
+  width: 220px;
+  height: 100vh;
+
+  position: fixed;
+
+  top: 0;
+  left: -300px;
+
+  background-color: #006161;
+
+  transition: left 0.3s ease;
+
+  z-index: 2000;
+}
+
+#menu.ativo {
+  left: 0;
+}
+
+#menu li {
+  margin-bottom: 10px;
+}
+
+#menu a {
+  display: block;
+
+  background-color: #008B8B;
+  color: white;
+
+  text-decoration: none;
+
+  padding: 12px;
+
+  border-radius: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Cambria, Georgia, serif;
+  
+}
+
+.header {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+        /* =====================================================
+           CONFIGURAÇÕES GERAIS
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: rgb(32, 73, 81) ;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .logo-topo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 0 20px;
+}
+
+.logo-topo img{
+    width: 150px;;
+    height:auto;
+}
+
+
+
+
+/* =====================================================
+           BARRA SUPERIOR
+        ===================================================== */
+
+        .topbar {
+
+height: 35px;
+
+background: #08645f;
+
+color: white;
+
+display: flex;
+
+align-items: center;
+
+padding: 0 22px;
+
+font-size: 13px;
+
+box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08);
+
+}
+
+
+.topbar a {
+
+color: white;
+
+text-decoration: none;
+
+transition: 0.2s;
+
+}
+
+
+.topbar a:hover {
+
+color: #72eee5;
+
+}
+
+
+.topbar i {
+
+margin-right: 8px;
+
+}
+
+
+.separador {
+
+margin: 0 9px;
+
+opacity: 0.5;
+
+}
+
+
+.topbar .pagina-atual {
+
+opacity: 0.8;
+
+}
+
+
+        /* =====================================================
+           MENU LATERAL
+        ===================================================== */
+
+        .sidebar {
+    width: 145px;
+    background: #08645f;
+    padding: 15px 12px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    z-index: 2;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    background: #087b74;
+    border-radius: 14px;
+    padding: 10px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.25s ease;
+}
+
+.menu a:hover {
+    background: #08b6aa;
+    transform: translateX(4px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.menu a.ativo {
+    background: #08b6aa;
+}
+
+
+
+/* =====================================================
+DECORAÇÃO DO MENU
+===================================================== */
+
+.decoracao {
+
+position: absolute;
+
+bottom: 30px;
+
+left: 18px;
+
+width: 140px;
+
+height: 140px;
+
+border-radius: 50%;
+
+background:
+    repeating-radial-gradient(
+        circle,
+        transparent 0px,
+        transparent 7px,
+        rgba(255,255,255,0.08) 8px,
+        transparent 9px
+    );
+
+opacity: 0.9;
+
+}
+
+
+.decoracao::before {
+
+content: "";
+
+position: absolute;
+
+width: 65px;
+
+height: 65px;
+
+border-radius: 50%;
+
+border: 1px solid rgba(255,255,255,0.08);
+
+left: 37px;
+
+top: 37px;
+
+}
+
+
+.decoracao::after {
+
+content: "✦";
+
+position: absolute;
+
+left: 58px;
+
+top: 55px;
+
+color: rgba(255,255,255,0.18);
+
+font-size: 22px;
+
+}
+
+
+
+        /* =====================================================
+           ÁREA PRINCIPAL
+        ===================================================== */
+
+        .conteudo {
+    flex: 1;
+    padding: 27px 24px 50px 24px;
+    margin-left: 0;
+}
+
+        .topo {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+
+        .topo h1 {
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           FILTROS
+        ===================================================== */
+
+        .filtros {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+
+        .filtro-btn {
+
+            background: white;
+
+            border: 1px solid #d9e1e1;
+
+            color: #385957;
+
+            border-radius: 10px;
+
+            padding: 8px 13px;
+
+            font-size: 13px;
+
+            transition: .2s;
+        }
+
+
+        .filtro-btn:hover {
+
+            border-color: #008e87;
+
+            color: #006f69;
+        }
+
+
+        .filtro-btn.ativo {
+
+            background: #007c75;
+
+            color: white;
+
+            border-color: #007c75;
+        }
+
+
+        /* =====================================================
+           CARDS DOS 3 PRIMEIROS
+        ===================================================== */
+
+        .podio {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 216px);
+
+            gap: 13px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .card-top {
+
+            height: 180px;
+
+            background: white;
+
+            border: 1px solid #d5dddd;
+
+            border-radius: 14px;
+
+            text-align: center;
+
+            padding: 15px;
+
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, .06);
+
+            transition: .2s;
+        }
+
+
+        .card-top:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, .08);
+        }
+
+
+        .card-top.primeiro {
+
+            border-color: #f0b900;
+        }
+
+
+        .card-top.terceiro {
+
+            border-color: #ff9a4b;
+        }
+
+
+        .medalha {
+
+            font-size: 26px;
+
+            height: 32px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .primeiro .medalha {
+
+            color: #efa900;
+        }
+
+
+        .segundo .medalha {
+
+            color: #9da7b6;
+        }
+
+
+        .terceiro .medalha {
+
+            color: #ff7a00;
+        }
+
+
+        .avatar {
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            background: #00867f;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: auto;
+
+            font-weight: bold;
+
+            font-size: 13px;
+        }
+
+
+        .nome {
+
+            margin-top: 8px;
+
+            color: #0c3e3c;
+
+            font-family: monospace;
+
+            font-size: 13px;
+        }
+
+
+        .cargo {
+
+            color: #8a9ba2;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+
+        .livros {
+
+            color: #006f69;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            margin-top: 8px;
+        }
+
+
+        /* =====================================================
+           TABELA
+        ===================================================== */
+
+        .tabela-container {
+
+            width: min(768px, 100%);
+
+            background: white;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            border: 1px solid #cde5e4;
+
+            box-shadow:
+                0 2px 5px rgba(0, 90, 90, .04);
+        }
+
+
+        .titulo-tabela {
+
+            height: 44px;
+
+            background: #00867f;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            padding-left: 20px;
+
+            font-family: monospace;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .cabecalho {
+
+            height: 43px;
+
+            display: grid;
+
+            grid-template-columns:
+                70px
+                1.9fr
+                82px
+                94px
+                94px
+                90px
+                75px;
+
+            align-items: center;
+
+            background: #f8fafb;
+
+            color: #63727b;
+
+            font-size: 11px;
+
+            border-bottom: 1px solid #edf0f0;
+        }
+
+
+        .cabecalho div {
+
+            padding-left: 15px;
+        }
+
+
+        .linha {
+
+            min-height: 61px;
+
+            display: grid;
+
+            grid-template-columns:
+                70px
+                1.9fr
+                82px
+                94px
+                94px
+                90px
+                75px;
+
+            align-items: center;
+
+            border-bottom: 1px solid #edf0f0;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: .15s;
+        }
+
+
+        .linha:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .linha:hover {
+
+            background: #f2fbfa;
+        }
+
+
+        .linha > div {
+
+            padding-left: 15px;
+        }
+
+
+        /* POSIÇÃO */
+
+        .posicao {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #55706e;
+        }
+
+
+        .medalha-tabela {
+
+            font-size: 24px;
+        }
+
+
+        .ouro {
+
+            color: #f1ad00;
+        }
+
+
+        .prata {
+
+            color: #99a5b6;
+        }
+
+
+        .bronze {
+
+            color: #ff7900;
+        }
+
+
+        /* LEITOR */
+
+        .leitor {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .avatar-tabela {
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            background: #00877f;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            flex-shrink: 0;
+        }
+
+
+        .nome-tabela {
+
+            font-weight: bold;
+
+            color: #164744;
+
+            font-size: 13px;
+        }
+
+
+        .cargo-tabela {
+
+            color: #94a2a9;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+
+        .numero {
+
+            color: #163e3c;
+
+            font-size: 12px;
+        }
+
+
+        .nota {
+
+            color: #006e68;
+
+            font-weight: bold;
+        }
+
+
+        .estrela {
+
+            color: #f0b400;
+
+            font-size: 14px;
+        }
+
+
+        .dias {
+
+            color: #536f70;
+
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 45, 43, .55);
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 100;
+        }
+
+
+        .modal.aberto {
+
+            display: flex;
+        }
+
+
+        .modal-caixa {
+
+            width: 400px;
+
+            max-width: 90%;
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, .25);
+
+            position: relative;
+        }
+
+
+        .fechar {
+
+            position: absolute;
+
+            right: 16px;
+
+            top: 14px;
+
+            border: none;
+
+            background: #edf4f4;
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            font-size: 18px;
+
+            color: #547371;
+        }
+
+
+        .modal-caixa h2 {
+
+            color: #006c66;
+
+            margin-bottom: 10px;
+        }
+
+
+        .modal-caixa p {
+
+            color: #718487;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 18px;
+        }
+
+
+        .modal-botao {
+
+            width: 100%;
+
+            height: 40px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #00847d;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #006e68;
+
+            color: white;
+
+            padding: 13px 18px;
+
+            border-radius: 9px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, .2);
+
+            transform: translateY(100px);
+
+            opacity: 0;
+
+            transition: .3s;
+
+            z-index: 300;
+
+            font-size: 13px;
+        }
+
+
+        .toast.mostrar {
+
+            transform: translateY(0);
+
+            opacity: 1;
+        }
+
+
+      /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+.sidebar {
+
+    position: relative;
+
+    width: 100%;
+
+    height: auto;
+
+}
+
+
+.menu {
+
+    flex-direction: row;
+
+    overflow-x: auto;
+
+    padding: 5px 10px 15px;
+}
+
+
+.menu-btn {
+
+    min-width: 170px;
+}
+
+
+.decoracao {
+
+    display: none;
+}
+
+
+.conteudo {
+
+    margin-left: 0;
+
+    padding: 20px;
+}
+
+
+.podio {
+
+    grid-template-columns:
+        repeat(3, 1fr);
+}
+
+
+.tabela-container {
+
+    overflow-x: auto;
+}
+
+
+.cabecalho-tabela,
+.linha {
+
+    min-width: 700px;
+}
+
+}
+
+
+@media (max-width: 600px) {
+
+.topo {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+}
+
+
+.podio {
+
+    grid-template-columns: 1fr;
+}
+
+
+.card-top {
+
+    width: 100%;
+}
+
+}
+
+/* =====================================================
+   RANKING - ESTRUTURA IGUAL À PÁGINA DE RESENHAS
+===================================================== */
+
+
+/* FUNDO GERAL */
+
+body {
+    background: rgb(32, 73, 81);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.header-ranking {
+    width: 100%;
+    height: 130px;
+
+    background: rgb(32, 73, 81);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/* LOGO */
+
+.logo-ranking {
+    width: 180px;
+    height: auto;
+    display: block;
+}
+
+
+/* BOTÃO MENU */
+
+.botao-menu-ranking {
+    position: absolute;
+
+    top: 1px;
+    left: 3px;
+
+    width: auto;
+    min-width: 70px;
+    height: 37px;
+
+    padding: 2px 7px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #f8f9fa;
+    color: #111;
+
+    font-family: Cambria, Georgia, serif;
+    font-size: 16px;
+
+    cursor: pointer;
+    z-index: 3000;
+
+    white-space: nowrap;
+}
+
+.botao-menu-ranking:hover {
+    background: #08b6aa;
+    color: white;
+}
+
+
+/* =====================================================
+   MENU QUE ABRE PELO BOTÃO
+===================================================== */
+
+.menu-flutuante {
+    list-style: none;
+
+    margin: 0;
+    padding: 20px;
+
+    width: 240px;
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+    left: -300px;
+
+    background: #006161;
+
+    transition: left .3s ease;
+
+    z-index: 5000;
+}
+
+.menu-flutuante.ativo {
+    left: 0;
+}
+
+.menu-flutuante li {
+    margin-bottom: 10px;
+}
+
+.menu-flutuante a {
+    display: block;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: #008B8B;
+
+    color: white;
+
+    text-decoration: none;
+}
+
+.menu-flutuante a:hover {
+    background: #08b6aa;
+}
+
+
+/* =====================================================
+   FAIXA VERDE DO BREADCRUMB
+===================================================== */
+
+.topbar-ranking {
+    width: 100%;
+    height: 45px;
+
+    background: #08645f;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 13px;
+
+    color: white;
+
+    font-size: 13px;
+}
+
+.breadcrumb-ranking {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.breadcrumb-ranking .seta {
+    font-size: 15px;
+}
+
+.breadcrumb-ranking .separador {
+    opacity: .4;
+}
+
+.breadcrumb-ranking strong {
+    font-weight: bold;
+}
+
+.breadcrumb-ranking span:last-child {
+    opacity: .85;
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.layout-ranking {
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+
+    min-height: calc(100vh - 252px);
+
+    background: rgb(32, 73, 81);
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar-ranking {
+    width: 175px;
+
+    flex-shrink: 0;
+
+    background: #08645f;
+
+    padding: 20px 15px;
+
+    min-height: calc(100vh - 252px);
+}
+
+
+/* MENU DA PÁGINA */
+
+.menu-ranking {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+/* BOTÕES */
+
+.menu-ranking .menu-btn {
+    width: 100%;
+
+    min-height: 42px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #087b74;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-align: left;
+
+    padding: 0 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.menu-ranking .menu-btn:hover {
+    background: #08b6aa;
+
+    transform: translateX(3px);
+}
+
+.menu-ranking .menu-btn.ativo {
+    background: #08b6aa;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.conteudo-ranking {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 30px 40px 60px 40px;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.topo-ranking {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.topo-ranking h1 {
+    color: white;
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros {
+    display: flex;
+
+    gap: 8px;
+}
+
+.filtro-btn {
+    background: #087b74;
+
+    border: 1px solid #087b74;
+
+    color: white;
+
+    border-radius: 10px;
+
+    padding: 10px 17px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.filtro-btn:hover {
+    background: #08b6aa;
+    border-color: #08b6aa;
+}
+
+.filtro-btn.ativo {
+    background: #08b6aa;
+
+    color: white;
+
+    border-color: #08b6aa;
+}
+
+
+/* =====================================================
+   PODIO
+===================================================== */
+
+.podio {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(180px, 216px));
+
+    gap: 16px;
+
+    margin-bottom: 28px;
+}
+
+
+/* CARDS */
+
+.card-top {
+    height: 180px;
+
+    background: #f8f9fa;
+
+    border: 1px solid #d5dddd;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    padding: 15px;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.06);
+
+    transition: .2s;
+
+    cursor: pointer;
+}
+
+.card-top:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.15);
+}
+
+.card-top.primeiro {
+    border-color: #f0b900;
+}
+
+.card-top.terceiro {
+    border-color: #ff9a4b;
+}
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.tabela-container {
+    width: 100%;
+
+    max-width: 1040px;
+
+    background: white;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid #cde5e4;
+
+    box-shadow:
+        0 2px 5px rgba(0,90,90,.04);
+}
+
+
+/* TÍTULO DA TABELA */
+
+.titulo-tabela {
+    height: 50px;
+
+    background: #00867f;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left: 20px;
+
+    font-family: monospace;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* IMPORTANTE:
+   Mudamos .cabecalho para .cabecalho-tabela
+   para não conflitar com o cabeçalho da página.
+*/
+
+.cabecalho-tabela {
+    height: 43px;
+
+    display: grid;
+
+    grid-template-columns:
+        70px
+        1.9fr
+        82px
+        94px
+        94px
+        90px
+        75px;
+
+    align-items: center;
+
+    background: #f8fafb;
+
+    color: #63727b;
+
+    font-size: 11px;
+
+    border-bottom: 1px solid #edf0f0;
+
+    background: transparent;
+}
+
+.cabecalho-tabela div {
+    padding-left: 15px;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar-ranking {
+        width: 190px;
+    }
+
+    .conteudo-ranking {
+        padding: 35px 25px;
+    }
+
+    .podio {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    .cabecalho-tabela,
+    .linha {
+        min-width: 700px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .header-ranking {
+        height: 150px;
+    }
+
+    .logo-ranking {
+        width: 180px;
+    }
+
+    .topbar-ranking {
+        height: auto;
+        min-height: 60px;
+
+        padding: 12px 15px;
+    }
+
+    .layout-ranking {
+        flex-direction: column;
+    }
+
+    .sidebar-ranking {
+        width: 100%;
+        min-height: auto;
+
+        padding: 12px;
+    }
+
+    .menu-ranking {
+        flex-direction: row;
+    }
+
+    .menu-ranking .menu-btn {
+        min-height: 50px;
+        font-size: 13px;
+    }
+
+    .conteudo-ranking {
+        padding: 25px 15px;
+    }
+
+    .topo-ranking {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .podio {
+        grid-template-columns: 1fr;
+    }
+
+    .card-top {
+        width: 100%;
+    }
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+    <header class="header-ranking">
+
+        <div class = "area-botao">
+        <button class="botao-menu-ranking" onclick="toggleMenu()"> ☰ Menu </button>
+        </div>
+    
+        <img
+            src="logo.png"
+            alt="Logo LITELAB"
+            class="logo-ranking">
+    
+    </header>
+    
+    
+    <ul id="menu" class="menu-flutuante">
+    
+        <li>
+            <a href="../partlaisla/index.html">
+                Página principal
+            </a>
+        </li>
+    
+        <li>
+            <a href="../partlaisla/perfil.html">
+                Perfil
+            </a>
+        </li>
+    
+        <li>
+            <a href="../partemaria/nt.html">
+                Notificações
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                Biblioteca
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/estatisticas.html">
+                Estatísticas
+            </a>
+        </li>
+    
+        <li>
+            <a href="../partemaria/vendas.html">
+                Vendas
+            </a>
+        </li>
+    
+        <li>
+            <a href="../parteclubes/clubes.html">
+                Clubes
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/cadastrolivros.html">
+                Cadastro de livros
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/index.html">
+                Resenhas
+            </a>
+        </li>
+    
+    
+    </ul>
+
+    <script>
+        const menu = document.getElementById("menu");
+        
+        function toggleMenu() {
+          menu.classList.toggle("ativo");
+        }
+        
+    
+        document.addEventListener("click", function(event) {
+          const clicouDentroMenu = menu.contains(event.target);
+          const clicouNoBotao = event.target.closest("button");
+        
+          if (!clicouDentroMenu && !clicouNoBotao) {
+            menu.classList.remove("ativo");
+          }
+        });
+        </script>
+
+
+<div class="topbar-ranking">
+    <div class="breadcrumb-ranking">
+        <span class="seta">←</span>
+        <span class="separador">|</span>
+        <strong>LiteLAB</strong>
+        <span class="separador">/</span>
+        <span>Ranking de Leituras</span>
+    </div>
+</div>
+
+
+<div class="layout-ranking">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar-ranking">
+
+        <nav class="menu-ranking">
+
+            <button
+                class="menu-btn ativo"
+                onclick="mostrarSecao('ranking')">
+
+                <span>🏆</span>
+                Ranking Geral
+
+            </button>
+
+
+            <button
+                class="menu-btn"
+                onclick="abrirConquistas()">
+
+                <span>🏆</span>
+                Conquistas
+
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo-ranking">
+
+        <section id="secaoRanking">
+
+            <div class="topo-ranking">
+
+                <h1>
+                    ✦ &nbsp; Ranking
+                </h1>
+
+                <div class="filtros">
+
+                    <button
+                        class="filtro-btn"
+                        onclick="mudarFiltro('mes', this)">
+                        Mês
+                    </button>
+
+                    <button
+                        class="filtro-btn"
+                        onclick="mudarFiltro('ano', this)">
+                        Ano
+                    </button>
+
+                    <button
+                        class="filtro-btn ativo"
+                        onclick="mudarFiltro('todos', this)">
+                        Todos
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PODIO -->
+
+            <div
+                class="podio"
+                id="podio">
+            </div>
+
+
+            <!-- TABELA -->
+
+            <div class="tabela-container">
+
+                <div class="titulo-tabela">
+                    Classificação Completa
+                </div>
+
+
+                <div class="cabecalho-tabela">
+
+                    <div>#</div>
+                    <div>Leitor</div>
+                    <div>Livros</div>
+                    <div>Páginas</div>
+                    <div>Resenhas</div>
+                    <div>Avg</div>
+                    <div>Dias</div>
+
+                </div>
+
+
+                <div id="tabelaRanking"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+MODAL
+====================================================== -->
+
+<div
+class="modal"
+id="modal">
+
+
+<div class="modal-caixa">
+
+
+<button
+    class="fechar"
+    onclick="fecharModal()">
+
+    ×
+
+</button>
+
+
+<div id="conteudoModal"></div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+class="toast"
+id="toast">
+
+</div>
+
+
+<!-- =====================================================
+JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+DADOS
+===================================================== */
+
+let leitores = [];
+let filtroAtual = "todos";
+
+
+async function carregarRanking() {
+
+    try {
+
+        const resposta = await fetch(
+            "http://192.168.0.165:8081/ranking"
+        );
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao carregar ranking."
+            );
+
+        }
+
+        const dados =
+            await resposta.json();
+
+
+        leitores = dados.map(
+            function (usuario) {
+
+                const nome =
+                    usuario.nome || "Usuário";
+
+
+                const iniciais =
+                    nome
+                        .split(" ")
+                        .filter(Boolean)
+                        .slice(0, 2)
+                        .map(
+                            function (parte) {
+                                return parte
+                                    .charAt(0)
+                                    .toUpperCase();
+                            }
+                        )
+                        .join("");
+
+
+                let cargo =
+                    "Leitor";
+
+
+                if (usuario.livros >= 50) {
+
+                    cargo =
+                        "Mestre Leitor";
+
+                } else if (usuario.livros >= 20) {
+
+                    cargo =
+                        "Leitor Ávido";
+
+                } else if (usuario.livros >= 10) {
+
+                    cargo =
+                        "Leitor Entusiasta";
+
+                } else if (usuario.livros >= 1) {
+
+                    cargo =
+                        "Leitor Regular";
+                }
+
+
+                return {
+
+                    nome: nome,
+
+                    cargo: cargo,
+
+                    iniciais:
+                        iniciais || "L",
+
+
+                    todos: {
+
+                        livros:
+                            usuario.livros || 0,
+
+                        paginas:
+                            usuario.paginas || 0,
+
+                        resenhas:
+                            usuario.resenhas || 0,
+
+                        avg:
+                            Number(
+                                usuario.avg || 0
+                            ).toFixed(1),
+
+                        dias: 0
+                    }
+
+                };
+
+            }
+        );
+
+
+        atualizar();
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar ranking:",
+            erro
+        );
+
+
+        document.getElementById(
+            "tabelaRanking"
+        ).innerHTML = `
+
+            <div style="
+                padding: 25px;
+                color: #b00020;
+                text-align: center;
+            ">
+
+                Não foi possível carregar
+                o ranking.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+
+
+/* =====================================================
+MEDALHAS
+===================================================== */
+
+function medalha(posicao) {
+
+if (posicao === 1) {
+
+    return `
+        <span class="medalha-tabela ouro">♜</span>
+    `;
+
+}
+
+
+if (posicao === 2) {
+
+    return `
+        <span class="medalha-tabela prata">♜</span>
+    `;
+
+}
+
+
+if (posicao === 3) {
+
+    return `
+        <span class="medalha-tabela bronze">♜</span>
+    `;
+
+}
+
+
+return `
+    <span class="posicao">
+        ${posicao}°
+    </span>
+`;
+
+}
+
+
+/* =====================================================
+ATUALIZAR PODIO
+===================================================== */
+
+function atualizarPodio() {
+
+const podio =
+    document.getElementById("podio");
+
+
+const primeiros =
+    leitores.slice(0, 3);
+
+
+podio.innerHTML =
+    primeiros.map(
+        function (leitor, index) {
+
+
+            const posicao =
+                index + 1;
+
+
+                const dados =
+                leitor.todos;
+
+            let classe = "segundo";
+
+
+            if (posicao === 1) {
+
+                classe = "primeiro";
+
+            }
+
+            if (posicao === 3) {
+
+                classe = "terceiro";
+
+            }
+
+
+            let simbolo = "♜";
+
+
+            return `
+
+                <div
+                    class="card-top ${classe}"
+                    onclick="abrirLeitor(${index})">
+
+
+                    <div class="medalha">
+
+                        ${simbolo}
+
+                    </div>
+
+
+                    <div class="avatar">
+
+                        ${leitor.iniciais}
+
+                    </div>
+
+
+                    <div class="nome">
+
+                        ${leitor.nome}
+
+                    </div>
+
+
+                    <div class="cargo">
+
+                        ${leitor.cargo}
+
+                    </div>
+
+
+                    <div class="livros">
+
+                        ${dados.livros} livros
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        }
+    ).join("");
+
+}
+
+
+/* =====================================================
+ATUALIZAR TABELA
+===================================================== */
+
+function atualizarTabela() {
+
+const tabela =
+    document.getElementById(
+        "tabelaRanking"
+    );
+
+
+tabela.innerHTML =
+    leitores.map(
+        function (leitor, index) {
+
+
+            const posicao =
+                index + 1;
+
+
+                const dados =
+                leitor.todos;
+
+            return `
+
+                <div
+                    class="linha"
+                    onclick="abrirLeitor(${index})">
+
+
+                    <div>
+
+                        ${medalha(posicao)}
+
+                    </div>
+
+
+                    <div class="leitor">
+
+
+                        <div
+                            class="avatar-tabela">
+
+                            ${leitor.iniciais}
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="nome-tabela">
+
+                                ${leitor.nome}
+
+                            </div>
+
+
+                            <div class="cargo-tabela">
+
+                                ${leitor.cargo}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="numero">
+
+                        ${dados.livros}
+
+                    </div>
+
+
+                    <div class="numero">
+
+                        ${dados.paginas.toLocaleString("pt-BR")}
+
+</div>
+
+
+<div class="numero">
+
+    ${dados.resenhas}
+
+</div>
+
+
+<div class="nota">
+
+    <span class="estrela">★</span>
+
+    ${dados.avg}
+
+</div>
+
+
+<div class="dias">
+
+    ♧ ${dados.dias}
+
+</div>
+
+
+</div>
+
+`;
+
+}
+).join("");
+
+}
+
+
+/* =====================================================
+ATUALIZAR TUDO
+===================================================== */
+
+function atualizar() {
+
+atualizarPodio();
+
+atualizarTabela();
+
+}
+
+
+/* =====================================================
+FILTROS MÊS / ANO / TODOS
+===================================================== */
+
+function mudarFiltro(
+filtro,
+botao
+) {
+
+
+filtroAtual = filtro;
+
+
+document
+.querySelectorAll(".filtro-btn")
+.forEach(
+function (item) {
+
+item.classList.remove(
+"ativo"
+);
+
+}
+);
+
+
+botao.classList.add("ativo");
+
+carregarRanking();
+
+
+mostrarToast(
+"Ranking atualizado!"
+);
+
+}
+
+
+/* =====================================================
+MENU
+===================================================== */
+
+function mostrarSecao(secao) {
+
+document
+    .querySelectorAll(".menu-ranking .menu-btn")
+    .forEach(function(botao) {
+
+        botao.classList.remove("ativo");
+
+    });
+
+document
+    .querySelector(".menu-ranking .menu-btn")
+    .classList.add("ativo");
+
+mostrarToast(
+    "Você está no Ranking Geral."
+);
+
+}
+
+
+/* =====================================================
+ABRIR PERFIL
+===================================================== */
+
+function abrirPerfil() {
+
+
+document
+.querySelectorAll(".menu-btn")
+.forEach(
+function (botao) {
+
+botao.classList.remove(
+"ativo"
+);
+
+}
+);
+
+
+document
+.querySelectorAll(".menu-btn")[2]
+.classList.add("ativo");
+
+
+document.getElementById(
+"conteudoModal"
+).innerHTML = `
+
+<h2>
+👤 Meu Perfil
+</h2>
+
+<p>
+<strong>Maria</strong><br><br>
+
+📚 Livros lidos: 24<br>
+📖 Páginas lidas: 6.840<br>
+⭐ Média das avaliações: 4,8<br>
+📝 Resenhas publicadas: 18
+</p>
+
+<button
+class="modal-botao"
+onclick="fecharModal()">
+
+Fechar
+
+</button>
+
+`;
+
+
+document
+.getElementById("modal")
+.classList.add("aberto");
+
+}
+
+
+/* =====================================================
+CONQUISTAS
+===================================================== */
+
+function abrirConquistas() {
+
+document
+    .querySelectorAll(".menu-ranking .menu-btn")
+    .forEach(function(botao) {
+
+        botao.classList.remove("ativo");
+
+    });
+
+
+document
+    .querySelectorAll(".menu-ranking .menu-btn")[1]
+    .classList.add("ativo");
+
+
+document.getElementById(
+    "conteudoModal"
+).innerHTML = `
+
+    <h2>
+        🏆 Conquistas
+    </h2>
+
+    <p>
+
+    🥇 <strong>Primeiro Livro</strong><br>
+    Você terminou seu primeiro livro.<br><br>
+
+    📚 <strong>Leitor Frequente</strong><br>
+    Leu mais de 20 livros.<br><br>
+
+    ⭐ <strong>Crítico Literário</strong><br>
+    Publicou mais de 10 resenhas.<br><br>
+
+    🔥 <strong>Leitura Constante</strong><br>
+    Manteve uma rotina de leitura.
+
+    </p>
+
+    <button
+        class="modal-botao"
+        onclick="fecharModal()">
+
+        Fechar
+
+    </button>
+
+`;
+
+
+document
+    .getElementById("modal")
+    .classList.add("aberto");
+
+}
+
+
+/* =====================================================
+ABRIR LEITOR
+===================================================== */
+
+function abrirLeitor(index) {
+
+
+const leitor =
+leitores[index];
+
+const dados =
+    leitor.todos;
+
+document.getElementById(
+"conteudoModal"
+).innerHTML = `
+
+<h2>
+📚 ${leitor.nome}
+</h2>
+
+<p>
+
+<strong>
+${leitor.cargo}
+</strong>
+
+<br><br>
+
+📚 Livros: ${dados.livros}<br>
+
+📖 Páginas:
+${dados.paginas.toLocaleString("pt-BR")}<br>
+
+📝 Resenhas:
+${dados.resenhas}<br>
+
+⭐ Média:
+${dados.avg}<br>
+
+♧ Dias de leitura:
+${dados.dias}
+
+</p>
+
+
+<button
+class="modal-botao"
+onclick="fecharModal()">
+
+Fechar perfil
+
+</button>
+
+`;
+
+
+document
+.getElementById("modal")
+.classList.add("aberto");
+
+}
+
+
+/* =====================================================
+FECHAR MODAL
+===================================================== */
+
+function fecharModal() {
+
+document
+.getElementById("modal")
+.classList.remove("aberto");
+
+}
+
+
+/* =====================================================
+TOAST
+===================================================== */
+
+function mostrarToast(mensagem) {
+
+
+const toast =
+document.getElementById("toast");
+
+
+toast.textContent =
+mensagem;
+
+
+toast.classList.add("mostrar");
+
+
+setTimeout(
+function () {
+
+toast.classList.remove(
+"mostrar"
+);
+
+},
+2200
+);
+
+}
+
+
+/* =====================================================
+FECHAR MODAL CLICANDO FORA
+===================================================== */
+
+document
+.getElementById("modal")
+.addEventListener(
+"click",
+function (evento) {
+
+if (
+evento.target === this
+) {
+
+fecharModal();
+
+}
+
+}
+);
+
+
+/* =====================================================
+INICIAR
+===================================================== */
+
+carregarRanking();
+
+</script>
+
+
+</body>
+
+</html>

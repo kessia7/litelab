@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LitelLAB | Resenhas</title>
+
+    <!-- FONTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ÍCONES -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <style>
+
+
+
+/* menu */
+  
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+#menu li {
+    margin-bottom: 10px;
+}
+
+#menu a {
+    display: block;
+    background-color: #008B8B;
+
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* BOTÃO DO MENU */
+.cabecalho button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 12px;
+    border-radius: 8px;
+
+
+    color: black;
+    border: none;
+
+    cursor: pointer;
+    font-family: Cambria, Georgia, serif;
+    font-size: 15px;
+
+    z-index: 1000;
+}
+
+#menu {
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    width: 220px;
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    height: 100vh;
+    background-color: #006161;
+
+    transition: left 0.3s ease;
+
+    z-index: 2000;
+}
+
+#menu.ativo {
+    left: 0;
+}
+
+.cabecalho button:hover {
+    background-color: #008B8B;
+
+}
+
+/* CABEÇALHO */
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+        /* =====================================================
+           CONFIGURAÇÕES GERAIS
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: rgb(32, 73, 81) ;
+
+            color: #073f3d;
+
+            min-height: 100vh;
+
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================================
+           BARRA SUPERIOR
+        ===================================================== */
+
+        .topbar {
+
+            height: 45px;
+
+            background: #08645f;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 22px;
+
+            font-size: 13px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .topbar a {
+
+            color: white;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        .topbar a:hover {
+
+            color: #72eee5;
+
+        }
+
+
+        .topbar i {
+
+            margin-right: 8px;
+
+        }
+
+
+        .separador {
+
+            margin: 0 9px;
+
+            opacity: 0.5;
+
+        }
+
+
+        .topbar .pagina-atual {
+
+            opacity: 0.8;
+
+        }
+
+
+
+        /* =====================================================
+           LAYOUT PRINCIPAL
+        ===================================================== */
+
+        .layout {
+
+            display: flex;
+
+            min-height: calc(100vh - 45px);
+
+        }
+
+
+
+
+        /* =====================================================
+           MENU LATERAL
+        ===================================================== */
+
+        .sidebar {
+
+            width: 175px;
+
+            background: #08645f;
+
+            padding: 15px 12px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .menu a {
+
+            text-decoration: none;
+
+            color: white;
+
+            background: #087b74;
+
+            border-radius: 14px;
+
+            padding: 14px 13px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.25s ease;
+
+        }
+
+
+        .menu a:hover {
+
+            background: #08b6aa;
+
+            transform: translateX(4px);
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.10);
+
+        }
+
+
+        .menu a.ativo {
+
+            background: #08b6aa;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.10);
+
+        }
+
+
+        .menu i {
+
+            width: 18px;
+
+            text-align: center;
+
+        }
+
+
+
+        /* =====================================================
+           DECORAÇÃO DO MENU
+        ===================================================== */
+
+        .decoracao {
+
+            position: absolute;
+
+            bottom: 30px;
+
+            left: 18px;
+
+            width: 140px;
+
+            height: 140px;
+
+            border-radius: 50%;
+
+            background:
+                repeating-radial-gradient(
+                    circle,
+                    transparent 0px,
+                    transparent 7px,
+                    rgba(255,255,255,0.08) 8px,
+                    transparent 9px
+                );
+
+            opacity: 0.9;
+
+        }
+
+
+        .decoracao::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            left: 37px;
+
+            top: 37px;
+
+        }
+
+
+        .decoracao::after {
+
+            content: "✦";
+
+            position: absolute;
+
+            left: 58px;
+
+            top: 55px;
+
+            color: rgba(255,255,255,0.18);
+
+            font-size: 22px;
+
+        }
+
+
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        main {
+
+            flex: 1;
+
+            padding: 34px 45px;
+
+            max-width: 1250px;
+
+        }
+
+
+        .titulo {
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 23px;
+
+            font-weight: 500;
+
+            color: white;
+
+            margin-bottom: 25px;
+
+            letter-spacing: 0.3px;
+
+        }
+
+
+        .titulo::before {
+
+            content: "✦";
+
+            color: #00a99d;
+
+            margin-right: 9px;
+
+        }
+
+
+
+        /* =====================================================
+           ÁREA DAS RESENHAS
+        ===================================================== */
+
+        .resenhas {
+
+            width: 700px;
+
+            max-width: 100%;
+
+        }
+
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border: 1px solid #b8ebe7;
+
+            border-radius: 15px;
+
+            padding: 22px 20px;
+
+            margin-bottom: 17px;
+
+            box-shadow:
+                0 4px 13px rgba(0, 75, 70, 0.05);
+
+            transition: 0.3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #70d9d2;
+
+            box-shadow:
+                0 12px 28px rgba(0, 95, 90, 0.12);
+
+        }
+
+
+        .card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 0;
+
+            height: 3px;
+
+            background: #00afa3;
+
+            transition: 0.35s ease;
+
+        }
+
+
+        .card:hover::before {
+
+            width: 100%;
+
+        }
+
+
+
+        /* =====================================================
+           CABEÇALHO DO CARD
+        ===================================================== */
+
+        .card-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+        }
+
+
+        .livro {
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            color: #006b68;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .autor {
+
+            font-size: 12px;
+
+            color: #385f5d;
+
+        }
+
+
+
+        /* =====================================================
+           AVALIAÇÃO
+        ===================================================== */
+
+        .avaliacao {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .estrelas {
+
+            color: #ffc400;
+
+            letter-spacing: 1px;
+
+            font-size: 16px;
+
+        }
+
+
+        .estrela-vazia {
+
+            color: #c4c4c4;
+
+        }
+
+
+        .nota {
+
+            font-size: 12px;
+
+            color: #004f4c;
+
+            font-weight: 500;
+
+        }
+
+
+
+        /* =====================================================
+           USUÁRIO
+        ===================================================== */
+
+        .usuario {
+
+            font-size: 11px;
+
+            color: #597674;
+
+            margin-top: 9px;
+
+            margin-bottom: 13px;
+
+        }
+
+
+
+        /* =====================================================
+           TEXTO DA RESENHA
+        ===================================================== */
+
+        .texto {
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            color: #174d4b;
+
+        }
+
+
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        .card-footer {
+
+            border-top: 1px solid #e2eeee;
+
+            margin-top: 16px;
+
+            padding-top: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 22px;
+
+            font-size: 12px;
+
+            color: #4d6967;
+
+        }
+
+
+        .acao {
+
+            border: none;
+
+            background: transparent;
+
+            color: #4d6967;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .acao:hover {
+
+            color: #00a99d;
+
+            transform: scale(1.05);
+
+        }
+
+
+        .acao.liked {
+
+            color: #00a99d;
+
+        }
+
+
+
+        /* =====================================================
+           BOTÃO FLUTUANTE
+        ===================================================== */
+
+        .nova-resenha {
+
+            position: fixed;
+
+            right: 35px;
+
+            bottom: 30px;
+
+            background: #08a99e;
+
+            color: white;
+
+            border: none;
+
+            padding: 15px 22px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 22px rgba(0, 120, 112, 0.25);
+
+            transition: 0.3s ease;
+
+            z-index: 5;
+
+        }
+
+
+        .nova-resenha:hover {
+
+            background: #007e77;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 28px rgba(0, 120, 112, 0.30);
+
+        }
+
+
+        .nova-resenha i {
+
+            margin-right: 7px;
+
+        }
+
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal-bg {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 40, 38, 0.48);
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 20;
+
+            backdrop-filter: blur(5px);
+
+        }
+
+
+        .modal-bg.aberto {
+
+            display: flex;
+
+        }
+
+
+        .modal {
+
+            background: white;
+
+            width: 470px;
+
+            max-width: 90%;
+
+            padding: 28px;
+
+            border-radius: 19px;
+
+            box-shadow:
+                0 20px 55px rgba(0,0,0,0.22);
+
+            animation: aparecer 0.3s ease;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.96);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        .modal h2 {
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 20px;
+
+            color: #075d59;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .campo {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #164e4b;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .campo input,
+        .campo textarea,
+        .campo select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #bde2df;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            color: #164e4b;
+
+            background: #fbfefe;
+
+            transition: 0.2s;
+
+        }
+
+
+        .campo textarea {
+
+            resize: vertical;
+
+            min-height: 100px;
+
+        }
+
+
+        .campo input:focus,
+        .campo textarea:focus,
+        .campo select:focus {
+
+            border-color: #00a99d;
+
+            box-shadow:
+                0 0 0 3px rgba(0,169,157,0.10);
+
+        }
+
+
+
+        /* =====================================================
+           BOTÕES DO MODAL
+        ===================================================== */
+
+        .modal-botoes {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 9px;
+
+margin-top: 21px;
+
+}
+
+
+.btn {
+
+border: none;
+
+padding: 11px 18px;
+
+border-radius: 10px;
+
+cursor: pointer;
+
+font-weight: 600;
+
+transition: 0.2s;
+
+}
+
+
+.cancelar {
+
+background: #edf5f4;
+
+color: #285452;
+
+}
+
+
+.cancelar:hover {
+
+background: #dceceb;
+
+}
+
+
+.salvar {
+
+background: #08a99e;
+
+color: white;
+
+}
+
+
+.salvar:hover {
+
+background: #007e77;
+
+transform: translateY(-1px);
+
+}
+
+
+
+/* =====================================================
+RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 800px) {
+
+.sidebar {
+
+    width: 70px;
+
+}
+
+
+.menu a {
+
+    justify-content: center;
+
+    font-size: 0;
+
+    padding: 15px 5px;
+
+}
+
+
+.menu i {
+
+    font-size: 17px;
+
+    margin: 0;
+
+}
+
+
+.decoracao {
+
+    display: none;
+
+}
+
+
+main {
+
+    padding: 25px 20px;
+
+}
+
+
+.resenhas {
+
+    width: 100%;
+
+}
+
+
+.nova-resenha {
+
+    right: 20px;
+
+    bottom: 20px;
+
+}
+
+}
+
+
+@media (max-width: 500px) {
+
+.topbar {
+
+    padding: 0 12px;
+
+    font-size: 11px;
+
+}
+
+
+main {
+
+    padding: 20px 12px;
+
+}
+
+
+.titulo {
+
+    font-size: 20px;
+
+}
+
+
+.card {
+
+    padding: 18px 15px;
+
+}
+
+
+.card-header {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.avaliacao {
+
+    align-self: flex-start;
+
+}
+
+
+.texto {
+
+    font-size: 12px;
+
+}
+
+
+.card-footer {
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.nova-resenha {
+
+    padding: 13px 17px;
+
+}
+
+}
+
+
+
+/* =====================================================
+   COMENTÁRIOS
+===================================================== */
+
+.comentarios-container {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f4fbfa;
+    border-radius: 12px;
+    border: 1px solid #d8eeee;
+}
+
+.comentario-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #d8eeee;
+}
+
+.comentario-item:last-child {
+    border-bottom: none;
+}
+
+.comentario-usuario {
+    font-weight: 600;
+    color: #087b7e;
+    font-size: 13px;
+}
+
+.comentario-texto {
+    margin-top: 4px;
+    color: #315957;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.comentario-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.comentario-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #bde2df;
+    border-radius: 9px;
+    outline: none;
+}
+
+.comentario-form button {
+    border: none;
+    background: #08a99e;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+    <header class="header">
+        <img src="logo.png" alt="Logo LITELAB" class="logo">
+    </header>
+    <div class="cabecalho">
+        <button onclick="toggleMenu()">☰ Menu</button>
+
+    </div>
+    
+    <ul id="menu" class="menu">
+        <li><a href="../partlaisla/index.html">Página principal</a></li>
+        <li><a href="../partlaisla/perfil.html">Perfil</a></li>
+        <li><a href="../partemaria/nt.html">Notificações</a></li>
+        <li><a href="../index.html">Biblioteca</a></li>
+        <li><a href="../partlaisla/estatisticas.html">Estatísticas</a></li>
+        <li><a href="../partemaria/vendas.html">Vendas</a></li>
+        <li><a href="../parteclubes/clubes.html">Clubes</a></li>
+        <li><a href="../partlaisla/cadastrolivros.html">Cadastro de livros</a></li>
+        <li><a href="../partemaria/rl.html">Ranking</a></li>
+    </ul>
+
+      <script>
+          const menu = document.getElementById("menu");
+          
+          function toggleMenu() {
+            menu.classList.toggle("ativo");
+          }
+          
+      
+          document.addEventListener("click", function(event) {
+            const clicouDentroMenu = menu.contains(event.target);
+            const clicouNoBotao = event.target.closest("button");
+          
+            if (!clicouDentroMenu && !clicouNoBotao) {
+              menu.classList.remove("ativo");
+            }
+          });
+          </script>
+
+
+<!-- =====================================================
+BARRA SUPERIOR
+===================================================== -->
+
+<header class="topbar">
+
+<a href="#">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</a>
+
+
+<span class="separador">|</span>
+
+
+<a href="#">
+LitelLAB
+</a>
+
+
+<span class="separador">
+/
+</span>
+
+
+<span class="pagina-atual">
+Resenhas
+</span>
+
+</header>
+
+
+
+<!-- =====================================================
+LAYOUT
+===================================================== -->
+
+<div class="layout">
+
+
+<!-- =================================================
+ MENU LATERAL
+================================================== -->
+
+<aside class="sidebar">
+
+
+<nav class="menu">
+
+
+    <a href="#" class="ativo">
+
+        <i class="fa-solid fa-book-open"></i>
+
+        <span>
+            Resenhas
+        </span>
+
+    </a>
+
+
+    <a href="#" onclick="abrirModal()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        <span>
+            Nova Resenha
+        </span>
+
+    </a>
+
+
+    <a href="#">
+
+        <i class="fa-solid fa-heart"></i>
+
+        <span>
+            Mais Curtidas
+        </span>
+
+    </a>
+
+
+</nav>
+
+
+<div class="decoracao"></div>
+
+
+</aside>
+
+
+
+<!-- =================================================
+ CONTEÚDO PRINCIPAL
+================================================== -->
+
+<main>
+
+
+<h1 class="titulo">
+    Resenhas
+</h1>
+
+
+<section class="resenhas" id="listaResenhas">
+
+
+
+</section>
+
+
+
+
+
+<!-- =====================================================
+BOTÃO NOVA RESENHA
+===================================================== -->
+
+<button
+class="nova-resenha"
+onclick="abrirModal()"
+>
+
+<i class="fa-solid fa-plus"></i>
+
+Nova resenha
+
+</button>
+
+
+
+<!-- =====================================================
+MODAL
+===================================================== -->
+
+<div
+class="modal-bg"
+id="modal"
+>
+
+
+<div class="modal">
+
+
+<h2>
+    ✦ Nova Resenha
+</h2>
+
+
+<div class="campo">
+
+
+    <label>
+        Nome do livro
+    </label>
+
+
+    <input
+        type="text"
+        id="nomeLivro"
+        placeholder="Digite o nome do livro"
+    >
+
+
+</div>
+
+
+
+<div class="campo">
+
+
+    <label>
+        Autor
+    </label>
+
+
+    <input
+        type="text"
+        id="nomeAutor"
+        placeholder="Digite o autor"
+    >
+
+
+</div>
+
+
+
+<div class="campo">
+
+
+    <label>
+        Sua nota
+    </label>
+
+
+    <select id="notaLivro">
+
+        <option value="5">
+            ★★★★★ — 5
+        </option>
+
+        <option value="4.5">
+            ★★★★☆ — 4.5
+        </option>
+
+        <option value="4">
+            ★★★★☆ — 4
+        </option>
+
+        <option value="3.5">
+            ★★★☆☆ — 3.5
+        </option>
+
+        <option value="3">
+            ★★★☆☆ — 3
+        </option>
+
+        <option value="2">
+            ★★☆☆☆ — 2
+        </option>
+
+        <option value="1">
+            ★☆☆☆☆ — 1
+        </option>
+
+    </select>
+
+
+</div>
+
+
+
+<div class="campo">
+
+
+    <label>
+        Sua resenha
+    </label>
+
+
+    <textarea
+        id="textoResenha"
+        placeholder="Escreva o que você achou do livro..."
+    ></textarea>
+
+
+</div>
+
+
+
+<div class="modal-botoes">
+
+
+    <button
+        class="btn cancelar"
+        onclick="fecharModal()"
+    >
+
+        Cancelar
+
+    </button>
+
+
+    <button
+        class="btn salvar"
+        onclick="adicionarResenha()"
+    >
+
+        Publicar
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+ABRIR MODAL
+===================================================== */
+
+function abrirModal() {
+
+document
+    .getElementById("modal")
+    .classList.add("aberto");
+
+}
+
+
+
+/* =====================================================
+FECHAR MODAL
+===================================================== */
+
+function fecharModal() {
+
+document
+    .getElementById("modal")
+    .classList.remove("aberto");
+
+}
+
+
+
+/* =====================================================
+FECHAR CLICANDO FORA DO MODAL
+===================================================== */
+
+document
+.getElementById("modal")
+.addEventListener("click", function(event) {
+
+    if (event.target === this) {
+
+        fecharModal();
+
+    }
+
+});
+
+
+
+/* =====================================================
+   CURTIR RESENHA
+===================================================== */
+
+async function curtir(botao) {
+
+const resenhaId =
+    botao.getAttribute("data-id");
+
+const usuario =
+    localStorage.getItem("nomeUsuario");
+
+if (!resenhaId) {
+
+    alert("ID da resenha não encontrado.");
+
+    return;
+}
+
+if (!usuario) {
+
+    alert("Usuário não identificado.");
+
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/curtirResenha",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                resenha_id: resenhaId,
+                usuario: usuario
+            })
+        }
+    );
+
+    const mensagem =
+        await resposta.text();
+
+    if (!resposta.ok) {
+
+        alert(mensagem);
+
+        return;
+    }
+
+    const numero =
+        botao.querySelector("span");
+
+    const coracao =
+        botao.querySelector("svg");
+
+    let quantidade =
+        parseInt(numero.textContent) || 0;
+
+    if (mensagem === "Resenha curtida!") {
+
+        quantidade++;
+
+        botao.classList.add("liked");
+
+        coracao.setAttribute(
+            "fill",
+            "#064f52"
+        );
+
+    } else if (
+        mensagem === "Curtida removida."
+    ) {
+
+        quantidade--;
+
+        if (quantidade < 0) {
+            quantidade = 0;
+        }
+
+        botao.classList.remove("liked");
+
+        coracao.setAttribute(
+            "fill",
+            "none"
+        );
+    }
+
+    numero.textContent =
+        quantidade;
+
+} catch (erro) {
+
+    console.error(erro);
+
+    alert(
+        "Não foi possível conectar ao servidor."
+    );
+}
+}
+/* =====================================================
+COMPARTILHAR
+===================================================== */
+
+function compartilhar() {
+
+
+if (navigator.share) {
+
+
+    navigator.share({
+
+        title: "LitelLAB - Resenha",
+
+        text: "Confira esta resenha no LitelLAB!"
+
+    });
+
+
+} else {
+
+
+    navigator.clipboard.writeText(
+        window.location.href
+    );
+
+
+    alert("Link copiado!");
+
+}
+
+}
+
+
+
+/* =====================================================
+ADICIONAR NOVA RESENHA
+===================================================== */
+
+async function adicionarResenha() {
+
+const livro =
+    document.getElementById("nomeLivro").value;
+
+const autor =
+    document.getElementById("nomeAutor").value;
+
+const nota =
+    document.getElementById("notaLivro").value;
+
+const texto =
+    document.getElementById("textoResenha").value;
+
+const usuario =
+    localStorage.getItem("nomeUsuario");
+
+if (
+    !livro ||
+    !autor ||
+    !nota ||
+    !texto
+) {
+
+    alert("Preencha todos os campos da resenha.");
+
+    return;
+}
+
+if (!usuario) {
+
+    alert("Usuário não identificado.");
+
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/cadastrarResenha",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                livro: livro,
+                autor: autor,
+                nota: nota,
+                texto: texto,
+                usuario: usuario
+            })
+        }
+    );
+
+    const mensagem =
+        await resposta.text();
+
+    if (!resposta.ok) {
+
+        alert(mensagem);
+
+        return;
+    }
+
+    alert(mensagem);
+
+    document.getElementById("nomeLivro").value = "";
+    document.getElementById("nomeAutor").value = "";
+    document.getElementById("notaLivro").value = "5";
+    document.getElementById("textoResenha").value = "";
+
+    fecharModal();
+
+} catch (erro) {
+
+    console.error(erro);
+
+    alert(
+        "Não foi possível conectar ao servidor."
+    );
+}
+}
+
+
+async function carregarResenhas() {
+
+const lista =
+    document.getElementById("listaResenhas");
+
+try {
+
+    const usuario =
+    localStorage.getItem("nomeUsuario");
+
+const resposta = await fetch(
+    "http://192.168.0.165:8081/resenhas?usuario="
+    + encodeURIComponent(usuario)
+);
+
+    if (!resposta.ok) {
+        throw new Error("Erro ao buscar resenhas.");
+    }
+
+    const resenhas =
+        await resposta.json();
+
+    lista.innerHTML = "";
+
+    if (resenhas.length === 0) {
+
+        lista.innerHTML = `
+            <p>Nenhuma resenha publicada ainda.</p>
+        `;
+
+        return;
+    }
+
+    resenhas.forEach(resenha => {
+
+        let estrelas = "";
+
+        const nota =
+            Number(resenha.nota);
+
+        for (let i = 1; i <= 5; i++) {
+
+            if (nota >= i) {
+                estrelas += "★";
+            } else {
+                estrelas += "☆";
+            }
+
+        }
+
+        lista.innerHTML += `
+
+         <div class="card"
+    style="
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 16px 22px;
+        margin: 0 auto 18px auto;
+        color: #064f52;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        width: 900px !important;
+        max-width: 900px !important;
+        box-sizing: border-box;
+    ">
+
+                <div class="card-header"
+                    style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                    ">
+
+                    <div class="livro">
+
+                        <h3
+                            style="
+                                margin: 0;
+                                color: #006568;
+                                font-size: 28px;
+                            "
+                        >
+                            ${resenha.livro}
+                        </h3>
+
+                        <p
+                            class="autor"
+                            style="
+                                margin-top: 6px;
+                                color: #087b7e;
+                            "
+                        >
+                            ${resenha.autor}
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="avaliacao"
+                        style="
+                            color: #00aeb3;
+                            font-size: 22px;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                        "
+                    >
+
+                        <span>
+                            ${estrelas}
+                        </span>
+
+                        <strong>
+                            ${resenha.nota}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="usuario"
+                    style="
+                        margin-top: 15px;
+                        color: #087b7e;
+                        font-size: 15px;
+                    "
+                >
+                    por ${resenha.usuario}
+                </div>
+
+
+                <div
+                    class="texto"
+                    style="
+                        margin-top: 10px;
+                        color: #164f52;
+                        font-size: 17px;
+                        line-height: 1.6;
+                    "
+                >
+                    ${resenha.texto}
+                </div>
+
+
+                <div
+                    class="card-footer"
+                    style="
+                        display: flex;
+                        align-items: center;
+                        gap: 28px;
+                        margin-top: 20 px;
+                        padding-top: 14px;
+                        border-top: 1px solid #d8eeee;
+                    "
+                >
+
+                    <!-- CURTIR -->
+
+             <button
+    data-id="${resenha.id}"
+    onclick="curtir(this)"
+    style="
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        color: #064f52;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+"
+>
+    <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="${resenha.curtido ? '#064f52' : 'none'}"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
+        ></path>
+    </svg>
+
+    <span>${resenha.curtidas}</span>
+</button>
+<!-- COMENTÁRIOS -->
+
+<button
+    data-id="${resenha.id}"
+    onclick="abrirComentarios(this)"
+    style="
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #087b7e;
+        font-size: 16px;
+    "
+>
+
+    <svg
+        width="25"
+        height="25"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M20 11.5C20 16.2 16.2 20 11.5 20C10.1 20 8.8 19.7 7.6 19.1L4 20L4.9 16.4C4.3 15.2 4 13.9 4 12.5C4 7.8 7.8 4 12.5 4C17.2 4 20 7.8 20 11.5Z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    </svg>
+
+    <span id="contador-comentarios-${resenha.id}">
+        0
+    </span>
+
+</button>
+${resenha.usuario === localStorage.getItem("nomeUsuario") ? `
+    <button 
+        onclick="excluirResenha(this)" 
+        data-id="${resenha.id}"
+        class="btn-excluir">
+        🗑️ Excluir
+    </button>
+` : ""}
+                    <!-- COMPARTILHAR -->
+
+                    <button
+                        onclick="compartilhar()"
+                        style="
+                            border: none;
+                            background: transparent;
+                            padding: 0;
+                            margin: 0;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            color: #087b7e;
+                            font-size: 16px;
+                        "
+                    >
+
+                        <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle
+                                cx="18"
+                                cy="5"
+                                r="2.5"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+
+                            <circle
+                                cx="6"
+                                cy="12"
+                                r="2.5"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+
+                            <circle
+                                cx="18"
+                                cy="19"
+                                r="2.5"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+
+                            <path
+                                d="M8.2 10.8L15.8 6.2"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M8.2 13.2L15.8 17.8"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                        <span>Compartilhar</span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+// Atualiza os contadores de comentários
+resenhas.forEach(resenha => {
+    atualizarContadorComentarios(resenha.id);
+});
+
+} catch (erro) {
+
+    console.error(erro);
+
+    lista.innerHTML = `
+        <p>
+            Não foi possível carregar as resenhas.
+        </p>
+    `;
+}
+}
+carregarResenhas();
+
+
+async function excluirResenha(botao) {
+    const id = botao.dataset.id;
+    const usuario = localStorage.getItem("nomeUsuario");
+    console.log("ID:", id);
+console.log("USUÁRIO:", usuario);
+
+    if (!confirm("Tem certeza que deseja excluir esta resenha?")) {
+        return;
+    }
+
+    try {
+        const resposta = await fetch("http://192.168.0.165:8081/excluirResenha", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                resenha_id: Number(id),
+                usuario: usuario
+            })
+        });
+        const resultado = await resposta.text();
+
+if (resposta.ok) {
+    alert(resultado);
+    carregarResenhas();
+} else {
+    alert(resultado || "Não foi possível excluir a resenha.");
+}
+    } catch (erro) {
+        console.error("Erro ao excluir resenha:", erro);
+        alert("Erro ao conectar com o servidor.");
+    }
+}
+async function atualizarContadorComentarios(resenhaId) {
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/listarComentarios?resenha_id="
+        + encodeURIComponent(resenhaId)
+    );
+
+    if (!resposta.ok) {
+        return;
+    }
+
+    const comentarios = await resposta.json();
+
+    const contador = document.getElementById(
+        "contador-comentarios-" + resenhaId
+    );
+
+    if (contador) {
+        contador.textContent = comentarios.length;
+    }
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao atualizar contador:",
+        erro
+    );
+
+}
+}
+
+async function abrirComentarios(botao) {
+
+const resenhaId = botao.dataset.id;
+
+const card = botao.closest(".card");
+
+let area = card.querySelector(".comentarios-container");
+
+if (area) {
+    area.remove();
+    return;
+}
+
+area = document.createElement("div");
+
+area.className = "comentarios-container";
+
+area.innerHTML = `
+    <strong style="color:#075d59;">
+        Comentários
+    </strong>
+
+    <div class="lista-comentarios">
+        Carregando comentários...
+    </div>
+
+    <div class="comentario-form">
+
+        <input
+            type="text"
+            placeholder="Escreva um comentário..."
+            class="campo-comentario"
+        >
+
+        <button
+            onclick="enviarComentario(this, '${resenhaId}')"
+        >
+            Comentar
+        </button>
+
+    </div>
+`;
+
+card.appendChild(area);
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/listarComentarios?resenha_id="
+        + encodeURIComponent(resenhaId)
+    );
+
+    if (!resposta.ok) {
+        throw new Error("Erro ao buscar comentários.");
+    }
+
+    const comentarios = await resposta.json();
+
+    // ATUALIZA O CONTADOR
+    const contador = document.getElementById(
+        "contador-comentarios-" + resenhaId
+    );
+
+    if (contador) {
+        contador.textContent = comentarios.length;
+    }
+
+    const lista =
+        area.querySelector(".lista-comentarios");
+
+    if (comentarios.length === 0) {
+
+        lista.innerHTML = `
+            <p style="font-size:13px;color:#597674;">
+                Ainda não há comentários.
+            </p>
+        `;
+
+        return;
+    }
+
+    lista.innerHTML = "";
+
+    comentarios.forEach(comentario => {
+
+        lista.innerHTML += `
+            <div class="comentario-item">
+
+                <div class="comentario-usuario">
+                    ${comentario.usuario}
+                </div>
+
+                <div class="comentario-texto">
+                    ${comentario.comentario}
+                </div>
+
+            </div>
+        `;
+
+    });
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao carregar comentários:",
+        erro
+    );
+
+    alert("Não foi possível carregar os comentários.");
+}
+}
+
+async function enviarComentario(botao, resenhaId) {
+
+const area =
+    botao.closest(".comentarios-container");
+
+const campo =
+    area.querySelector(".campo-comentario");
+
+const comentario =
+    campo.value.trim();
+
+const usuario =
+    localStorage.getItem("nomeUsuario");
+
+if (!comentario) {
+
+    alert("Escreva um comentário.");
+
+    return;
+}
+
+if (!usuario) {
+
+    alert("Usuário não identificado.");
+
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/cadastrarComentario",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                resenha_id: Number(resenhaId),
+                usuario: usuario,
+                comentario: comentario
+            })
+        }
+    );
+
+    const mensagem =
+        await resposta.text();
+
+    if (!resposta.ok) {
+
+        alert(mensagem);
+
+        return;
+    }
+
+    // Limpa o campo
+    campo.value = "";
+
+    // Busca novamente os comentários
+    const novaResposta = await fetch(
+        "http://192.168.0.165:8081/listarComentarios?resenha_id="
+        + encodeURIComponent(resenhaId)
+    );
+
+    const comentarios =
+        await novaResposta.json();
+
+    // Atualiza o contador
+    const contador =
+        document.getElementById(
+            "contador-comentarios-" + resenhaId
+        );
+
+    if (contador) {
+        contador.textContent = comentarios.length;
+    }
+
+    // Atualiza a lista
+    const lista =
+        area.querySelector(".lista-comentarios");
+
+    lista.innerHTML = "";
+
+    comentarios.forEach(comentario => {
+
+        lista.innerHTML += `
+            <div class="comentario-item">
+
+                <div class="comentario-usuario">
+                    ${comentario.usuario}
+                </div>
+
+                <div class="comentario-texto">
+                    ${comentario.comentario}
+                </div>
+
+            </div>
+        `;
+
+    });
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao enviar comentário:",
+        erro
+    );
+
+    alert(
+        "Não foi possível conectar ao servidor."
+    );
+}
+}
+
+    </script>
+
+
+</body>
+
+</html>

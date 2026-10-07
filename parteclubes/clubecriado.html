@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="biblioteca virtual"
+    >
+
+    <meta
+        name="keywords"
+        content="biblioteca, livros, LiteLAB"
+    >
+
+    <meta
+        name="author"
+        content="laisla maria andreolo palharine"
+    >
+
+    <link
+        rel="stylesheet"
+        href="cssdosclubes.css"
+    >
+
+    <title>Clubes Criados</title>
+
+</head>
+
+
+<body>
+
+
+    <div class="cabecalho">
+
+        <button onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+        <img
+            src="imagens/logo.png"
+            alt="Logo LiteLAB"
+            class="logo"
+        >
+
+    </div>
+
+
+    <ul id="menu" class="menu">
+
+        <li>
+            <a href="../partlaisla/index.html">
+                Página Inicial
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/perfil.html">
+                Perfil
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/nt.html">
+                Notificações
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                Biblioteca
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/estatisticas.html">
+                Estatísticas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/vendas.html">
+                Vendas
+            </a>
+        </li>
+
+        <li>
+            <a href="../parteclubes/clubes.html">
+                Clubes
+            </a>
+        </li>
+
+        <li>
+            <a href="../partlaisla/cadastrolivros.html">
+                Cadastro dos livros
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/index.html">
+                Resenhas
+            </a>
+        </li>
+
+        <li>
+            <a href="../partemaria/rl.html">
+                Ranking
+            </a>
+        </li>
+
+    </ul>
+
+
+    <script>
+
+        const menu =
+            document.getElementById("menu");
+
+
+        function toggleMenu() {
+
+            menu.classList.toggle("ativo");
+
+        }
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const clicouDentroMenu =
+                    menu.contains(event.target);
+
+                const clicouNoBotao =
+                    event.target.closest("button");
+
+
+                if (
+                    !clicouDentroMenu &&
+                    !clicouNoBotao
+                ) {
+
+                    menu.classList.remove("ativo");
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- CLUBES CRIADOS PELO USUÁRIO -->
+
+    <div
+        class="pagina-clube"
+        id="clubesCriados"
+    >
+
+        <p>
+            Carregando seus clubes...
+        </p>
+
+    </div>
+
+
+    <script>
+
+        async function carregarClubesCriados() {
+
+            const area =
+                document.getElementById(
+                    "clubesCriados"
+                );
+
+
+            const usuario =
+                localStorage.getItem(
+                    "nomeUsuario"
+                );
+
+
+            if (!usuario) {
+
+                area.innerHTML =
+                    "<p>Usuário não identificado.</p>";
+
+                return;
+
+            }
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "http://192.168.0.165:8081/clubes?usuario="
+                        + encodeURIComponent(usuario)
+                    );
+
+
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        "Erro ao buscar clubes."
+                    );
+
+                }
+
+
+                const clubes =
+                    await resposta.json();
+
+
+                if (clubes.length === 0) {
+
+                    area.innerHTML =
+                        "<p>Você ainda não criou nenhum clube.</p>";
+
+                    return;
+
+                }
+
+
+                area.innerHTML = "";
+
+
+                clubes.forEach(function(clube) {
+
+
+                    const div =
+                        document.createElement("div");
+
+
+                    div.className =
+                        "clube-info";
+
+
+                    div.innerHTML = `
+
+                        <img
+                            src="imagens/livro png.webp"
+                            alt="logo"
+                            class="logo-clube"
+                        >
+
+
+                        <div class="texto-clube">
+
+                            <h2>
+                                ${clube.nome}
+                            </h2>
+
+
+                            <p>
+                                ${clube.descricao || ""}
+                            </p>
+
+
+                            <div class="generos">
+
+                                <span>
+                                    ${clube.genero_principal}
+                                </span>
+
+
+                                ${
+                                    clube.genero_secundario
+                                    ?
+                                    `<span>
+                                        ${clube.genero_secundario}
+                                    </span>`
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="dados">
+
+                            <p>
+                                Presidente:
+                                ${clube.presidente}
+                            </p>
+
+
+                            <p>
+                                Máximo de membros:
+                                ${clube.max_membros}
+                            </p>
+
+
+                            <p>
+                                Reunião:
+                                ${clube.dia_reuniao}
+                                às
+                                ${clube.horario_reuniao}
+                            </p>
+
+
+                            <p>
+                                Frequência:
+                                ${clube.frequencia}
+                            </p>
+
+
+                            <button
+                                type="button"
+                                onclick="editarClube(${clube.id})"
+                            >
+                                Editar Clube
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    area.appendChild(div);
+
+                });
+
+
+            } catch (erro) {
+
+                console.error(erro);
+
+
+                area.innerHTML =
+                    "<p>Não foi possível carregar seus clubes.</p>";
+
+            }
+
+        }
+
+
+        function editarClube(id) {
+
+            window.location.href =
+                "editarclubes.html?id=" + id;
+
+        }
+
+
+        carregarClubesCriados();
+
+    </script>
+
+
+</body>
+
+</html>

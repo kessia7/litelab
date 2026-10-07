@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="biblioteca virtual"
+  >
+
+  <meta
+    name="keywords"
+    content="biblioteca, livros, LiteLAB"
+  >
+
+  <meta
+    name="author"
+    content="laisla maria andreolo palharine"
+  >
+
+  <link
+    rel="stylesheet"
+    href="estilo.css"
+  >
+
+  <title>LiteLAB</title>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       CABEÇALHO
+  ========================== -->
+
+  <div class="cabecalho">
+
+    <button onclick="toggleMenu()">
+      ☰ Menu
+    </button>
+
+    <img
+      src="imagem/LOGO.png"
+      alt="Logo LiteLAB"
+      class="logo"
+    >
+
+  </div>
+
+
+  <!-- =========================
+       MENU
+  ========================== -->
+
+  <ul
+    id="menu"
+    class="menu"
+  >
+
+    <li>
+      <a href="../partlaisla/index.html">
+        Página Inicial
+      </a>
+    </li>
+
+    <li>
+      <a href="../partemaria/nt.html">
+        Notificações
+      </a>
+    </li>
+
+    <li>
+      <a href="../index.html">
+        Biblioteca
+      </a>
+    </li>
+
+    <li>
+      <a href="../partlaisla/estatisticas.html">
+        Estatísticas
+      </a>
+    </li>
+
+    <li>
+      <a href="../partemaria/vendas.html">
+        Vendas
+      </a>
+    </li>
+
+    <li>
+      <a href="../parteclubes/clubes.html">
+        Clubes
+      </a>
+    </li>
+
+    <li>
+      <a href="../parteclubes/clubecriado.html">
+        Clubes criados
+      </a>
+    </li>
+
+    <li>
+      <a href="../partlaisla/cadastrolivros.html">
+        Cadastro dos livros
+      </a>
+    </li>
+
+    <li>
+      <a href="../partemaria/index.html">
+        Resenhas
+      </a>
+    </li>
+
+    <li>
+      <a href="../partemaria/rl.html">
+        Ranking
+      </a>
+    </li>
+
+  </ul>
+
+
+  <!-- =========================
+       SCRIPT DO MENU
+  ========================== -->
+
+  <script>
+
+    const menu =
+      document.getElementById("menu");
+
+
+    function toggleMenu() {
+
+      menu.classList.toggle("ativo");
+
+    }
+
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        const clicouDentroMenu =
+          menu.contains(event.target);
+
+        const clicouNoBotao =
+          event.target.closest("button");
+
+
+        if (
+          !clicouDentroMenu &&
+          !clicouNoBotao
+        ) {
+
+          menu.classList.remove("ativo");
+
+        }
+
+      }
+    );
+
+  </script>
+
+
+  <!-- =========================
+       CAPA DO PERFIL
+  ========================== -->
+
+  <div class="capa-perfil"></div>
+
+
+  <!-- =========================
+       CONTAINER DO PERFIL
+  ========================== -->
+
+  <div class="perfil-container">
+
+
+    <!-- =========================
+         DADOS DO PERFIL
+    ========================== -->
+
+    <div class="perfil-box">
+
+
+      <img
+        id="fotoPerfil"
+        src="imagem/avatar.png"
+        class="avatar"
+        alt="Foto de perfil"
+      >
+
+
+      <h3>
+        Editar Perfil
+      </h3>
+
+
+      <label>
+        Nome:
+      </label>
+
+
+      <p id="nomePerfil">
+        Carregando...
+      </p>
+
+
+      <br>
+
+
+      <label
+        for="uploadFoto"
+        class="btn-foto"
+      >
+        Escolher foto
+      </label>
+
+
+      <input
+        type="file"
+        id="uploadFoto"
+        accept="image/*"
+        hidden
+      >
+
+
+      <br>
+      <br>
+
+
+      <button onclick="logout()">
+        Logout
+    </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         LIVROS FAVORITOS
+    ========================== -->
+
+    <div class="favoritos">
+
+      <h2>
+        Livros Favoritos
+      </h2>
+
+
+      <div
+        class="livros"
+        id="listaFavoritos"
+      >
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+
+    <!-- =========================
+         ESTOU LENDO
+    ========================== -->
+
+    <div class="favoritos">
+
+      <h2>
+        📖 Estou lendo
+      </h2>
+
+
+      <div
+        class="livros"
+        id="listaEmLeitura"
+      >
+
+        <p>
+          Carregando livros...
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+
+    <!-- =========================
+         LIVROS CONCLUÍDOS
+    ========================== -->
+
+    <div class="favoritos">
+
+      <h2>
+        ✅ Livros que já li
+      </h2>
+
+
+      <div
+        class="livros"
+        id="listaConcluidos"
+      >
+
+        <p>
+          Carregando livros...
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+
+    <!-- =========================
+         CLUBES
+    ========================== -->
+
+    <div class="clubes">
+
+      <h2>
+        👥 Clubes que participo
+      </h2>
+
+      <ul id="listaClubes">
+      </ul>
+
+    </div>
+
+
+    <!-- =========================
+         BOTÃO ESTATÍSTICAS
+    ========================== -->
+
+    <a href="estatisticas.html">
+
+      <button class="botao-estatisticas">
+        Estatisticas
+      </button>
+
+    </a>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /* =========================
+       USUÁRIO LOGADO
+    ========================== */
+
+    const nomeUsuario =
+      localStorage.getItem(
+        "nomeUsuario"
+      );
+
+
+    console.log(
+      "USUÁRIO LOGADO:",
+      nomeUsuario
+    );
+
+
+
+    /* =========================
+       ELEMENTOS DO PERFIL
+    ========================== */
+
+    const nomePerfil =
+      document.getElementById(
+        "nomePerfil"
+      );
+
+
+    const fotoPerfil =
+      document.getElementById(
+        "fotoPerfil"
+      );
+
+
+    const listaFavoritos =
+      document.getElementById(
+        "listaFavoritos"
+      );
+
+
+    const listaEmLeitura =
+      document.getElementById(
+        "listaEmLeitura"
+      );
+
+
+    const listaConcluidos =
+      document.getElementById(
+        "listaConcluidos"
+      );
+
+
+
+    /* =========================
+       MOSTRAR NOME
+    ========================== */
+
+    if (nomeUsuario) {
+
+      nomePerfil.textContent =
+        nomeUsuario;
+
+    } else {
+
+      nomePerfil.textContent =
+        "Usuário não identificado";
+
+    }
+
+
+
+    /* =========================
+       CARREGAR PERFIL
+    ========================== */
+
+    if (nomeUsuario) {
+
+      fetch(
+        "http://192.168.0.165:8081/perfil?usuario="
+        + encodeURIComponent(nomeUsuario)
+      )
+
+      .then(resposta => {
+
+        if (!resposta.ok) {
+
+          throw new Error(
+            "Erro ao buscar perfil"
+          );
+
+        }
+
+        return resposta.json();
+
+      })
+
+      .then(dados => {
+
+        console.log(
+          "DADOS DO PERFIL:",
+          dados
+        );
+
+
+        if (dados.nome_usuario) {
+
+          nomePerfil.textContent =
+            dados.nome_usuario;
+
+        }
+
+
+        if (dados.foto_perfil) {
+
+          fotoPerfil.src =
+            dados.foto_perfil;
+
+        }
+
+      })
+
+      .catch(erro => {
+
+        console.error(
+          "Erro ao carregar perfil:",
+          erro
+        );
+
+      });
+
+    }
+
+
+
+    /* =========================
+       CARREGAR FAVORITOS
+    ========================== */
+
+    if (nomeUsuario) {
+
+      fetch(
+        "http://192.168.0.165:8081/favoritos?usuario="
+        + encodeURIComponent(nomeUsuario)
+      )
+
+      .then(resposta => {
+
+        if (!resposta.ok) {
+
+          throw new Error(
+            "Erro ao buscar favoritos"
+          );
+
+        }
+
+        return resposta.json();
+
+      })
+
+      .then(livros => {
+
+        console.log(
+          "FAVORITOS:",
+          livros
+        );
+
+
+        listaFavoritos.innerHTML = "";
+
+
+        if (livros.length === 0) {
+
+          listaFavoritos.innerHTML =
+            "<p>Você ainda não possui livros favoritos.</p>";
+
+          return;
+
+        }
+
+
+        livros.forEach(livro => {
+
+          const card =
+            document.createElement("div");
+
+
+          card.className =
+            "livro";
+
+
+          card.innerHTML = `
+
+            <img
+              src="${livro.livro_imagem}"
+              alt="${livro.livro_nome}"
+            >
+
+            <div class="info-livro">
+
+              <p>
+                ${livro.livro_nome}
+              </p>
+
+            </div>
+
+          `;
+
+
+          listaFavoritos.appendChild(
+            card
+          );
+
+        });
+
+      })
+
+      .catch(erro => {
+
+        console.error(
+          "Erro ao carregar favoritos:",
+          erro
+        );
+
+      });
+
+    }
+
+
+
+    /* =========================
+       CARREGAR LEITURAS
+    ========================== */
+
+    if (nomeUsuario) {
+
+      fetch(
+        "http://192.168.0.165:8081/leituras?usuario="
+        + encodeURIComponent(nomeUsuario)
+      )
+
+      .then(resposta => {
+
+        if (!resposta.ok) {
+
+          throw new Error(
+            "Erro ao buscar leituras"
+          );
+
+        }
+
+        return resposta.json();
+
+      })
+
+      .then(livros => {
+
+        console.log(
+          "LEITURAS:",
+          livros
+        );
+
+
+        /*
+         * SEPARA OS LIVROS
+         */
+
+        const emLeitura =
+          livros.filter(
+            livro =>
+              livro.status === "em_leitura"
+          );
+
+
+        const concluidos =
+          livros.filter(
+            livro =>
+              livro.status === "concluido"
+          );
+
+
+
+        /* =========================
+           ESTOU LENDO
+        ========================== */
+
+        listaEmLeitura.innerHTML =
+          "";
+
+
+        if (emLeitura.length === 0) {
+
+          listaEmLeitura.innerHTML =
+            "<p>Você não está lendo nenhum livro no momento.</p>";
+
+        } else {
+
+          emLeitura.forEach(
+            livro => {
+
+              const card =
+                criarCardLeitura(
+                  livro,
+                  false
+                );
+
+
+              listaEmLeitura.appendChild(
+                card
+              );
+
+            }
+          );
+
+        }
+
+
+
+        /* =========================
+           CONCLUÍDOS
+        ========================== */
+
+        listaConcluidos.innerHTML =
+          "";
+
+
+        if (concluidos.length === 0) {
+
+          listaConcluidos.innerHTML =
+            "<p>Você ainda não cadastrou livros concluídos.</p>";
+
+        } else {
+
+          concluidos.forEach(
+            livro => {
+
+              const card =
+                criarCardLeitura(
+                  livro,
+                  true
+                );
+
+
+              listaConcluidos.appendChild(
+                card
+              );
+
+            }
+          );
+
+        }
+
+      })
+
+      .catch(erro => {
+
+        console.error(
+          "Erro ao carregar leituras:",
+          erro
+        );
+
+
+        listaEmLeitura.innerHTML =
+          "<p>Não foi possível carregar os livros.</p>";
+
+
+        listaConcluidos.innerHTML =
+          "<p>Não foi possível carregar os livros.</p>";
+
+      });
+
+    }
+
+
+
+    function criarCardLeitura(livro, concluido) {
+    const card = document.createElement("div");
+    card.className = "livro livro-leitura";
+
+    const titulo = document.createElement("p");
+    titulo.textContent = livro.livro_nome;
+
+    card.appendChild(titulo);
+
+    return card;
+}
+    /* =========================
+       ESCOLHER E SALVAR FOTO
+    ========================== */
+
+    const uploadFoto =
+      document.getElementById(
+        "uploadFoto"
+      );
+
+
+    uploadFoto.addEventListener(
+      "change",
+      function() {
+
+        const arquivo =
+          this.files[0];
+
+
+        if (!arquivo) {
+
+          return;
+
+        }
+
+
+        const leitor =
+          new FileReader();
+
+
+        leitor.onload =
+          async function() {
+
+            const fotoBase64 =
+              leitor.result;
+
+
+            /*
+             * MOSTRA A FOTO IMEDIATAMENTE
+             */
+
+            fotoPerfil.src =
+              fotoBase64;
+
+
+            if (!nomeUsuario) {
+
+              alert(
+                "Usuário não identificado."
+              );
+
+              return;
+
+            }
+
+
+            try {
+
+              const resposta =
+                await fetch(
+                  "http://192.168.0.165:8081/salvarFoto",
+                  {
+
+                    method: "POST",
+
+                    headers: {
+
+                      "Content-Type":
+                        "application/json"
+
+                    },
+
+                    body:
+                      JSON.stringify({
+
+                        usuario:
+                          nomeUsuario,
+
+                        foto:
+                          fotoBase64
+
+                      })
+
+                  }
+                );
+
+
+              const mensagem =
+                await resposta.text();
+
+
+              console.log(
+                mensagem
+              );
+
+
+              if (resposta.ok) {
+
+                alert(
+                  "Foto de perfil salva!"
+                );
+
+              } else {
+
+                alert(
+                  mensagem
+                );
+
+              }
+
+
+            } catch (erro) {
+
+              console.error(
+                "Erro ao salvar foto:",
+                erro
+              );
+
+
+              alert(
+                "Não foi possível salvar a foto."
+              );
+
+            }
+
+          };
+
+
+        leitor.readAsDataURL(
+          arquivo
+        );
+
+      }
+    );
+
+    async function carregarClubesParticipados() {
+
+const nomeUsuario =
+    localStorage.getItem("nomeUsuario");
+
+if (!nomeUsuario) {
+    return;
+}
+
+try {
+
+    const resposta = await fetch(
+        "http://192.168.0.165:8081/clubesParticipados?usuario="
+        + encodeURIComponent(nomeUsuario)
+    );
+
+    const clubes = await resposta.json();
+
+    const lista =
+        document.getElementById("listaClubes");
+
+    lista.innerHTML = "";
+
+    clubes.forEach(clube => {
+
+        const item =
+            document.createElement("li");
+
+        item.textContent =
+            "📖 " + clube.nome;
+
+        lista.appendChild(item);
+    });
+
+} catch (erro) {
+
+    console.error(
+        "Erro ao carregar clubes:",
+        erro
+    );
+}
+}
+
+carregarClubesParticipados();
+
+function logout() {
+
+// Apaga o usuário que está logado
+localStorage.removeItem("nomeUsuario");
+
+// Volta para a página inicial
+window.location.href = "index.html";
+}
+
+  </script>
+
+
+</body>
+
+</html>

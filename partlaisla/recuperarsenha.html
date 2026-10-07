@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar senha - LiteLAB</title>
+    <link rel="stylesheet" href="estilo.css">
+    <title>LiteLAB</title>
+
+</head>
+
+<div class="cabecalho">
+  <button onclick="toggleMenu()">☰ Menu</button>
+  <img src="imagem/LOGO.png" alt="Logo LiteLAB" class="logo">
+  </div>
+<ul id="menu" class="menu">
+<li><a href="cadastrolivros.html">Cadastro dos livros</a></li>
+<li><a href="criarclube.html">Criar clubes</a></li>
+<li><a href="index.html">Página Inicial</a></li>
+<li><a href="clubecriado.html">Clubes criados</a></li>
+<li><a href="../partemaria/index.html">Resenhas</a></li>
+<li><a href="../partemaria/nt.html">Notificações</a></li>
+<li><a href="../partemaria/rl.html">Ranking</a></li>
+<li><a href="../partemaria/vendas.html">Vendas</a></li>
+<li><a href="../index.html">Biblioteca</a></li>
+</ul>
+
+<script>
+  const menu = document.getElementById("menu");
+  
+  function toggleMenu() {
+    menu.classList.toggle("ativo");
+  }
+  
+
+  document.addEventListener("click", function(event) {
+    const clicouDentroMenu = menu.contains(event.target);
+    const clicouNoBotao = event.target.closest("button");
+  
+    if (!clicouDentroMenu && !clicouNoBotao) {
+      menu.classList.remove("ativo");
+    }
+  });
+  </script>
+
+<body>
+
+<header>
+
+    <h2>Recuperação de senha</h2>
+</header>
+
+
+<div class="modal-content">
+
+  <form id="formRecuperarSenha">
+
+      <h2>Esqueceu sua senha?</h2>
+
+      <p>
+          Digite seu e-mail cadastrado e crie uma nova senha.
+      </p>
+
+
+      <label>E-mail:</label>
+
+      <input
+          type="email"
+          id="emailRecuperacao"
+          placeholder="Digite seu e-mail"
+          required
+      >
+
+
+      <br><br>
+
+
+      <label>Nova senha:</label>
+
+      <input
+          type="password"
+          id="novaSenha"
+          placeholder="Digite sua nova senha"
+          required
+      >
+
+
+      <br><br>
+
+
+      <label>Confirmar nova senha:</label>
+
+      <input
+          type="password"
+          id="confirmarSenha"
+          placeholder="Digite novamente sua senha"
+          required
+      >
+
+
+      <br><br>
+
+
+      <button type="submit">
+          Alterar senha
+      </button>
+
+
+      <button
+          type="button"
+          onclick="window.location.href='index.html'"
+      >
+          Voltar
+      </button>
+
+  </form>
+
+</div>
+
+<footer>
+    <p>
+        © 2026 LiteLAB<br>
+        Terceiro ano A - Desenvolvimento de Sistemas
+    </p>
+</footer>
+
+
+  
+
+<script>
+
+  document
+      .getElementById("formRecuperarSenha")
+      .addEventListener("submit", async function(event) {
+  
+          event.preventDefault();
+  
+  
+          const email =
+              document.getElementById(
+                  "emailRecuperacao"
+              ).value.trim();
+  
+  
+          const novaSenha =
+              document.getElementById(
+                  "novaSenha"
+              ).value;
+  
+  
+          const confirmarSenha =
+              document.getElementById(
+                  "confirmarSenha"
+              ).value;
+  
+  
+          // Confere as senhas
+          if (novaSenha !== confirmarSenha) {
+  
+              alert(
+                  "As senhas não são iguais."
+              );
+  
+              return;
+          }
+  
+  
+          // Tamanho mínimo
+          if (novaSenha.length < 6) {
+  
+              alert(
+                  "A senha deve ter pelo menos 6 caracteres."
+              );
+  
+              return;
+          }
+  
+  
+          try {
+  
+              const resposta = await fetch(
+                  "http://192.168.0.165:8081/recuperarSenha",
+                  {
+                      method: "POST",
+  
+                      headers: {
+                          "Content-Type":
+                              "application/json"
+                      },
+  
+                      body: JSON.stringify({
+  
+                          email: email,
+  
+                          novaSenha: novaSenha
+  
+                      })
+                  }
+              );
+  
+  
+              const mensagem =
+                  await resposta.text();
+  
+  
+              alert(mensagem);
+  
+  
+              if (resposta.ok) {
+  
+                  // Limpa os campos
+                  document
+                      .getElementById(
+                          "formRecuperarSenha"
+                      )
+                      .reset();
+  
+  
+                  // Volta para o login
+                  window.location.href =
+                      "index.html";
+              }
+  
+  
+          } catch (erro) {
+  
+              console.error(erro);
+  
+              alert(
+                  "Não foi possível conectar ao servidor do LiteLAB."
+              );
+          }
+  
+      });
+  
+  </script>
+</body>
+</html>

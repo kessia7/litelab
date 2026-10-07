@@ -1641,7 +1641,7 @@ if (!usuario) {
 try {
 
     const resposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/curtirResenha",
+        "https://://litelab-backend-novo.onrender.com/curtirResenha",
         {
             method: "POST",
 
@@ -1794,7 +1794,7 @@ if (!usuario) {
 try {
 
     const resposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/cadastrarResenha",
+        "https://://litelab-backend-novo.onrender.com/cadastrarResenha",
         {
             method: "POST",
 
@@ -1853,7 +1853,7 @@ try {
     localStorage.getItem("nomeUsuario");
 
 const resposta = await fetch(
-    "http://https://litelab-backend-novo.onrender.com/resenhas?usuario="
+    "https://://litelab-backend-novo.onrender.com/resenhas?usuario="
     + encodeURIComponent(usuario)
 );
 
@@ -2188,7 +2188,7 @@ console.log("USUÁRIO:", usuario);
     }
 
     try {
-        const resposta = await fetch("http://https://litelab-backend-novo.onrender.com/excluirResenha", {
+        const resposta = await fetch("https://://litelab-backend-novo.onrender.com/excluirResenha", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -2216,7 +2216,7 @@ async function atualizarContadorComentarios(resenhaId) {
 try {
 
     const resposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
+        "https://://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
         + encodeURIComponent(resenhaId)
     );
 
@@ -2292,7 +2292,7 @@ card.appendChild(area);
 try {
 
     const resposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
+        "https://://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
         + encodeURIComponent(resenhaId)
     );
 
@@ -2387,7 +2387,7 @@ if (!usuario) {
 try {
 
     const resposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/cadastrarComentario",
+        "https://://litelab-backend-novo.onrender.com/cadastrarComentario",
         {
             method: "POST",
 
@@ -2418,7 +2418,7 @@ try {
 
     // Busca novamente os comentários
     const novaResposta = await fetch(
-        "http://https://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
+        "https://://litelab-backend-novo.onrender.com/listarComentarios?resenha_id="
         + encodeURIComponent(resenhaId)
     );
 

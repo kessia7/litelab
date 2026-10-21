@@ -622,14 +622,16 @@
                         );
 
 
-                    imagem.src =
-                        livro.capa ||
-                        "logo.png";
+                        imagem.src = livro.capa || "logo.png";
 
+imagem.alt = livro.titulo || "Livro";
 
-                    imagem.alt =
-                        livro.titulo ||
-                        "Livro";
+// Se a capa falhar, mostra a logo como alternativa.
+imagem.onerror = function () {
+    imagem.onerror = null;
+    imagem.src = "logo.png";
+};
+
 
 
                     const titulo =

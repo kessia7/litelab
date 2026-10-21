@@ -451,11 +451,9 @@
         async function carregarLivros() {
 
             try {
-
-                const resposta =
-                    await fetch(
-                       "https://litelab-backend-novo.onrender.com/livros"
-                    );
+                const resposta = await fetch(
+                    fetch("https://litelab-backend-novo.onrender.com/livros")
+);
 
 
                 if (!resposta.ok) {

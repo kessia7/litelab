@@ -1499,8 +1499,6 @@ public class Servidor {
 
                 comando.executeUpdate();
 
-                comando.executeUpdate();
-
                 verificarConquistas(
                     conexao,
                     usuarioId

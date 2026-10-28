@@ -1131,29 +1131,40 @@ public class Servidor {
         String nomeUsuario =
             query.substring("usuario=".length());
 
-        String sql = """
-            SELECT
-                COUNT(*) FILTER (
-                    WHERE l.status = 'em_leitura'
-                ) AS em_leitura,
-
-                COUNT(*) FILTER (
-                    WHERE l.status = 'concluido'
-                ) AS concluidos,
-
-                COALESCE(
-                    SUM(l.paginas_lidas),
-                    0
-                ) AS paginas_lidas
-
-            FROM leituras l
-
-            INNER JOIN usuario u
-                ON l.usuario_id = u.id
-
-            WHERE u.nome_usuario = ?
-            """;
-
+            String sql = """
+                WITH leituras_usuario AS (
+                    SELECT
+                        l.status,
+                        l.paginas_lidas,
+                        LOWER(TRIM(l.livro_nome)) AS livro_chave
+                    FROM leituras l
+                    INNER JOIN usuario u
+                        ON l.usuario_id = u.id
+                    WHERE u.nome_usuario = ?
+                ),
+                livros_unicos AS (
+                    SELECT
+                        livro_chave,
+                        MAX(paginas_lidas) AS paginas_lidas
+                    FROM leituras_usuario
+                    GROUP BY livro_chave
+                )
+                SELECT
+                    (
+                        SELECT COUNT(*)
+                        FROM leituras_usuario
+                        WHERE status = 'em_leitura'
+                    ) AS em_leitura,
+                    (
+                        SELECT COUNT(*)
+                        FROM leituras_usuario
+                        WHERE status = 'concluido'
+                    ) AS concluidos,
+                    (
+                        SELECT COALESCE(SUM(paginas_lidas), 0)
+                        FROM livros_unicos
+                    ) AS paginas_lidas
+                """;
         try (
             Connection conexao = Conexao.conectar();
             PreparedStatement comando =

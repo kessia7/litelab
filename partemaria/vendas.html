@@ -1818,14 +1818,19 @@ padding: 20px;
                         </div>
 
 
-                        <button
-                            class="btn-carrinho"
-                            onclick="adicionarCarrinho(${livro.id})">
-
-                            🛒 Adicionar ao Carrinho
-
-                        </button>
-
+                    ${livro.meu ? `
+    <button
+        class="btn-excluir"
+        onclick="excluirAnuncio(${livro.id})">
+        🗑 Excluir anúncio
+    </button>
+` : `
+    <button
+        class="btn-carrinho"
+        onclick="adicionarCarrinho(${livro.id})">
+        🛒 Adicionar ao Carrinho
+    </button>
+`}
 
                     </div>
 
@@ -2280,7 +2285,30 @@ padding: 20px;
 
         }
 
+        function excluirAnuncio(id) {
+    const livro = livros.find(item => item.id === id);
 
+    if (!livro || livro.meu !== true) {
+        alert("Não foi possível excluir este anúncio.");
+        return;
+    }
+
+    const confirmar = confirm(
+        `Deseja realmente excluir o anúncio "${livro.nome}"?`
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    livros = livros.filter(item => item.id !== id);
+
+    salvar();
+    mostrarLivros();
+    mostrarAnuncios();
+
+    alert("Anúncio excluído com sucesso!");
+}
         /* =========================
            CARRINHO
         ========================= */
@@ -2388,9 +2416,7 @@ padding: 20px;
                                             )}
 
                                         </strong>
-
-
-                                    </div>
+                                    </div>  
 
 
                                     <button
@@ -2504,7 +2530,23 @@ padding: 20px;
         atualizarCarrinho();
 
     </script>
+<style>
+    .btn-excluir {
+    width: 100%;
+    height: 37px;
+    margin-top: 8px;
+    border: 1px solid #d45c6c;
+    border-radius: 10px;
+    background: white;
+    color: #c0394f;
+    font-weight: bold;
+    cursor: pointer;
+}
 
+.btn-excluir:hover {
+    background: #fff0f2;
+}
+</style>
 
 </body>
 

@@ -640,18 +640,40 @@
          * SEPARA OS LIVROS
          */
 
-        const emLeitura =
-          livros.filter(
-            livro =>
-              livro.status === "em_leitura"
-          );
+       // Remove livros repetidos dentro de cada categoria
+function removerDuplicados(lista) {
+    const unicos = new Map();
 
+    lista.forEach(livro => {
+        const nome = (livro.livro_nome || "")
+            .trim()
+            .toLocaleLowerCase();
 
-        const concluidos =
-          livros.filter(
-            livro =>
-              livro.status === "concluido"
-          );
+        const autor = (livro.autor || "")
+            .trim()
+            .toLocaleLowerCase();
+
+        const chave = `${nome}|${autor}`;
+
+        if (!unicos.has(chave)) {
+            unicos.set(chave, livro);
+        }
+    });
+
+    return [...unicos.values()];
+}
+
+const emLeitura = removerDuplicados(
+    livros.filter(
+        livro => livro.status === "em_leitura"
+    )
+);
+
+const concluidos = removerDuplicados(
+    livros.filter(
+        livro => livro.status === "concluido"
+    )
+);
 
 
 
